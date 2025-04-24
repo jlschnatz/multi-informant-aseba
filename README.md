@@ -12,7 +12,7 @@ Use this template if you would like to initiate a folder with the standard subfo
 - README.md
 
 In **1_Preregistration**, you will find three word files.
-1. *AsPredicted_preregistration.md*: This preregistration file covers eleven questions as used on [AsPredicted.org](https://aspredicted.org/) to capture the main parts of your study. 
+1. *AsPredicted_preregistration.md*: This preregistration file covers eleven questions (as used on [AsPredicted.org](https://aspredicted.org/)) to capture the main parts of your study. 
 2. *OSFpreregistration.md*: This preregistration file covers the questions of a preregistration performed on the OSF (as listed [here](https://help.osf.io/article/229-select-a-registration-template)) using the general preregistration format that leads to an extensive preregistration.
 3. *PRP-QUANT-preregistration.md*: This preregistration file was specifically design for studies of psychology and created in a joint collaboration of the APA, BPS, COS, DGPs, and ZPID (more info [here](https://www.psycharchives.org/en/item/088c79cb-237c-4545-a9e2-3616d6cc8453)). This is the most elaborative preregistration to date and fits every kind of study in the field of psychology.
 
