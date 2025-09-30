@@ -530,7 +530,6 @@ $ <eq4>
 
 with weights $cal(W)$ set as $w_("RMSEA") = w_("SRMR") = w_phi = w_gamma = 1/6$ and  $w_(overline(omega)) = 1/3$, reflecting their relative importance.
 
-#pagebreak()
 
 == Model Estimation
 
@@ -613,13 +612,12 @@ In cases where one or more factors are dropped from the model, we will rerun the
   [
   #include "resources/algorithm.typ"
   #text(size:10pt)[
-    #v(0.5em)
     #par(first-line-indent: 0em, [
     #align(left)[ _Note:_ \*Only drop the respective factor, if the reliability of only one of the two informants falls below the threshold. CI: Cross-Informant, IS: Informant-Specific; figure generated using the typst package #link("https://typst.app/universe/package/fletcher/")[_fletcher_].
     ]
   ])]
   ],
-  caption: [Diagnostic Algorithm for Identifying Issues with the Item Selection #v(0.5em)]
+  caption: [Diagnostic Algorithm for Identifying Issues with the Item Selection]
 ) <fig3>
 
 == Testing Hypotheses
