@@ -1,0 +1,938 @@
+File Manifest for ICPSR 34368
+
+Tolan, Patrick, Deborah Gorman-Smith, David Henry, and Michael Schoeny.
+Schools and Families Educating (SAFE) Children Study [Chicago, IL]: 1997-
+2008 . ICPSR34368-v1. Ann Arbor, MI: Inter-university Consortium for
+Political and Social Research [distributor], 2016-03-31.
+http://doi.org/10.3886/ICPSR34368.v1
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-descriptioncitation.pdf       -       -         -       2016-03-31  -
+
+    34368-related_literature.txt        -       -         -       daily       -
+
+    34368-manifest.txt                  -       -         -       daily       -
+
+    34368-User_guide.pdf                -       -         -       2016-03-31  0452bcae65e9d1dfb10bf2a65777ecb0
+
+
+DS0001 Data Overview
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0001-Codebook.pdf             -       -         -       2016-03-31  8aaa2b25d6d453fd23fe4844a8de01d2
+
+    34368-0001-Data.dta                 -       424       38      2016-03-31  637b9e52cb15ccf34938a1b62410d270
+
+    34368-0001-Data.rda                 -       424       38      2016-03-31  8d625eb0b3f74b67eda8eefcb0932757
+
+    34368-0001-Data.sav                 -       424       38      2016-03-31  572329ae67dfc3ab6b8c9389c461af2e
+
+    34368-0001-Data.stc                 -       424       38      2016-03-31  3d5bd0b50f8843655ea86a24a151926d
+
+    34368-0001-Data.tsv                 -       424       38      2016-03-31  d0ce4ca670eca5865890fd75d86db0c6
+
+    34368-0001-Data.txt                 116     424       38      2016-03-31  419daa4545debc0c1bc4a91fe5f5a6b9
+
+    34368-0001-Setup.dct                -       -         -       2016-03-31  fa31965051f84d81174553287162be0b
+
+    34368-0001-Setup.do                 -       -         -       2016-03-31  6ea9278356f2190f1a1a56484c362990
+
+    34368-0001-Setup.sas                -       -         -       2016-03-31  a472a6e5fd88b4ee658854af38db1015
+
+    34368-0001-Setup.sps                -       -         -       2016-03-31  81c32fa511bc848f159494a7368cd945
+
+    34368-0001-Supplemental_syntax.do   -       -         -       2016-03-31  c9692b1f9a7e9d2778e94ad9477e8b6f
+
+    34368-0001-Supplemental_syntax.sas  -       -         -       2016-03-31  fd976583ea40bdf7c5aa0f2ed3a5100a
+
+
+DS0002 Child - Wave 1
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0002-Codebook.pdf             -       -         -       2016-03-31  80b936e8fad19a596cfcd34b4fe32613
+
+    34368-0002-Data.dta                 -       424       50      2016-03-31  5da20459d23505be2b99ffa006780584
+
+    34368-0002-Data.rda                 -       424       50      2016-03-31  0d5a339d91a8d4ba758a0f3a240b731b
+
+    34368-0002-Data.sav                 -       424       50      2016-03-31  6064a86a381d01545122eec5e4bd5a56
+
+    34368-0002-Data.stc                 -       424       50      2016-03-31  43cc12504af9e43fc2bb1038f3a43ec8
+
+    34368-0002-Data.tsv                 -       424       50      2016-03-31  0507d2a3f5f29a6d76993bea99fab973
+
+    34368-0002-Data.txt                 133     424       50      2016-03-31  fc8ea51f2dcbd1ec91e9794c582128a8
+
+    34368-0002-Questionnaire.pdf        -       -         -       2016-03-31  f1f5f58d6c69157f00108f79a60f0a02
+
+    34368-0002-Setup.dct                -       -         -       2016-03-31  c0c3f1c01dbbd2356b680725cd515f10
+
+    34368-0002-Setup.do                 -       -         -       2016-03-31  7ed5b5f36476992c2b7aa3da76ecee8d
+
+    34368-0002-Setup.sas                -       -         -       2016-03-31  c7003e7d9729da1216e6b1a23ceaf420
+
+    34368-0002-Setup.sps                -       -         -       2016-03-31  7088c01e620c1037c5e00fbd7efd81d9
+
+    34368-0002-Supplemental_syntax.do   -       -         -       2016-03-31  88b2f1d1a45c7525378afd94446e6435
+
+    34368-0002-Supplemental_syntax.sas  -       -         -       2016-03-31  ce8b29b92b44178b729888387cd976d5
+
+
+DS0003 Child - Wave 2
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0003-Codebook.pdf             -       -         -       2016-03-31  93fb975e4058398afcbf83ee8608bd66
+
+    34368-0003-Data.dta                 -       424       50      2016-03-31  62bfb9b73fd790969e8ae96764df3465
+
+    34368-0003-Data.rda                 -       424       50      2016-03-31  beac4fab050c33d2310d33ba37fe54b0
+
+    34368-0003-Data.sav                 -       424       50      2016-03-31  39ef486be60c3c6d36c74dfa011e32e8
+
+    34368-0003-Data.stc                 -       424       50      2016-03-31  182da4e525a936ec4fdd8dedd0e07c3b
+
+    34368-0003-Data.tsv                 -       424       50      2016-03-31  8fefc2f9b7bd6df3c721fad10cd291ae
+
+    34368-0003-Data.txt                 133     424       50      2016-03-31  86fa039e8b0828e2231c246f5ad23390
+
+    34368-0003-Questionnaire.pdf        -       -         -       2016-03-31  e8975a38cdc6adf20f4274f5ba5c55ed
+
+    34368-0003-Setup.dct                -       -         -       2016-03-31  0c666ed88731e34854e4b68cab863c87
+
+    34368-0003-Setup.do                 -       -         -       2016-03-31  fc92abfabc026359aea7908825c322e2
+
+    34368-0003-Setup.sas                -       -         -       2016-03-31  53caf8253bd4dbddc975433990318076
+
+    34368-0003-Setup.sps                -       -         -       2016-03-31  5933f2e13657020349383d76990e1906
+
+    34368-0003-Supplemental_syntax.do   -       -         -       2016-03-31  999638e9869d5382c70b19b1542231a4
+
+    34368-0003-Supplemental_syntax.sas  -       -         -       2016-03-31  ef84c3b17bfe050d736f073fa4fc4532
+
+
+DS0004 Child - Wave 4
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0004-Codebook.pdf             -       -         -       2016-03-31  122212089dec86efdccd6bae294ca062
+
+    34368-0004-Data.dta                 -       424       50      2016-03-31  7bdb809c6ff915ee0cda5670adc06956
+
+    34368-0004-Data.rda                 -       424       50      2016-03-31  c02e3738b0129cd6cd7f672867033f97
+
+    34368-0004-Data.sav                 -       424       50      2016-03-31  d358bd08cd5564546dcf8f87ec8e2c52
+
+    34368-0004-Data.stc                 -       424       50      2016-03-31  063c3a1ba9e199cea80b281f7d9bc05b
+
+    34368-0004-Data.tsv                 -       424       50      2016-03-31  d8777bc7b98e8c851e3e6ce197314287
+
+    34368-0004-Data.txt                 133     424       50      2016-03-31  55de3ff282146fbc9611d46728f5daec
+
+    34368-0004-Questionnaire.pdf        -       -         -       2016-03-31  97b9bfa1465570472d022be26ee5599e
+
+    34368-0004-Setup.dct                -       -         -       2016-03-31  395b8ba7336c0fa2fe35201bb8cd04f5
+
+    34368-0004-Setup.do                 -       -         -       2016-03-31  c1b41f6398f5e3f35cf88c95690944e5
+
+    34368-0004-Setup.sas                -       -         -       2016-03-31  e5a98bd85aec9995bc45c9bbcb12c558
+
+    34368-0004-Setup.sps                -       -         -       2016-03-31  12c20e62ab03f35c376c6c2e1715b5a7
+
+    34368-0004-Supplemental_syntax.do   -       -         -       2016-03-31  4b16dd36480f31104a13336fa3c43a86
+
+    34368-0004-Supplemental_syntax.sas  -       -         -       2016-03-31  e2b976d7f24afaeb906ca98e2295718b
+
+
+DS0005 Child - Wave 5
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0005-Codebook.pdf             -       -         -       2016-03-31  f9f7b7c061f3c628b9ae75af744ca91f
+
+    34368-0005-Data.dta                 -       424       50      2016-03-31  e3de653b41a9a4cd1e9113c9fa5cb9d0
+
+    34368-0005-Data.rda                 -       424       50      2016-03-31  f59f726474d83dca90e054669c9c4036
+
+    34368-0005-Data.sav                 -       424       50      2016-03-31  0de76df659dec9198d0cf411223b29bf
+
+    34368-0005-Data.stc                 -       424       50      2016-03-31  682031754515955cc9885c898cacc93e
+
+    34368-0005-Data.tsv                 -       424       50      2016-03-31  def524da82022f8e2bb403e7e35362a0
+
+    34368-0005-Data.txt                 122     424       50      2016-03-31  626c1d99fb4cb2787fa67a107a3d9d13
+
+    34368-0005-Questionnaire.pdf        -       -         -       2016-03-31  29bba88b411f1393a1c82c1cd75a4a70
+
+    34368-0005-Setup.dct                -       -         -       2016-03-31  49463b5dea23e0860e73c74d515c12b9
+
+    34368-0005-Setup.do                 -       -         -       2016-03-31  1cb6f27b27d570f0d7933f50869ce9c1
+
+    34368-0005-Setup.sas                -       -         -       2016-03-31  94b62e0766b3d81fe395b9f0bddc8f0b
+
+    34368-0005-Setup.sps                -       -         -       2016-03-31  75a5bc00d7ccef2d2077bc95969814b9
+
+    34368-0005-Supplemental_syntax.do   -       -         -       2016-03-31  132e93b9bbc86c946fcb6f6b329e2078
+
+    34368-0005-Supplemental_syntax.sas  -       -         -       2016-03-31  d32a286f858371a550c9978bb47a33a1
+
+
+DS0006 Child - Wave 6
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0006-Codebook.pdf             -       -         -       2016-03-31  3ce2439865faa1e6408fa131c025887e
+
+    34368-0006-Data.dta                 -       424       377     2016-03-31  0bab3fca5dbcb0fe71a734fa6aca60ff
+
+    34368-0006-Data.rda                 -       424       377     2016-03-31  6181c802a7940b138f02adfc93c8ebf1
+
+    34368-0006-Data.sav                 -       424       377     2016-03-31  1cba4d5a9c72083711b7b1d732a9c0e0
+
+    34368-0006-Data.stc                 -       424       377     2016-03-31  a991abb70a14671a4466771e1f26e20e
+
+    34368-0006-Data.tsv                 -       424       377     2016-03-31  2ed83dc9399410bce82e640fa95cd5f0
+
+    34368-0006-Data.txt                 871     424       377     2016-03-31  6cbd1d43ea5e98217edb22e55c677f63
+
+    34368-0006-Questionnaire.pdf        -       -         -       2016-03-31  a7818ccebecf73eec3e04c363f999af0
+
+    34368-0006-Setup.dct                -       -         -       2016-03-31  c6c6a10114b41f0cfd28f09c0e1adbf5
+
+    34368-0006-Setup.do                 -       -         -       2016-03-31  b028efbd3c092882f336f4eaf5fc6a9d
+
+    34368-0006-Setup.sas                -       -         -       2016-03-31  c2fbb1f9e54868d86b57db47c65d2318
+
+    34368-0006-Setup.sps                -       -         -       2016-03-31  4be2259d26d046ee8f88c930724f7f5d
+
+    34368-0006-Supplemental_syntax.do   -       -         -       2016-03-31  816fa90a64548fe677e169cdadc85de5
+
+    34368-0006-Supplemental_syntax.sas  -       -         -       2016-03-31  9fdaec21460abdf415dd6fc9c1981c0c
+
+
+DS0007 Child - Wave 8
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0007-Codebook.pdf             -       -         -       2016-03-31  25187ea5328959af410a36b2182cdac0
+
+    34368-0007-Data.dta                 -       424       424     2016-03-31  518b32724af9731c6f03db3b00d72263
+
+    34368-0007-Data.rda                 -       424       424     2016-03-31  8f8f6a33132a01588c0a021781a1af0e
+
+    34368-0007-Data.sav                 -       424       424     2016-03-31  c45b817a2cecf36843d6c4e21c570abf
+
+    34368-0007-Data.stc                 -       424       424     2016-03-31  ff3e7fe0765e69bcd115bb23b3c7c15b
+
+    34368-0007-Data.tsv                 -       424       424     2016-03-31  7a6ebf835c648ff41f0702f7b2cf2485
+
+    34368-0007-Data.txt                 956     424       424     2016-03-31  5daba9c3a723caf91133a456542b39a3
+
+    34368-0007-Questionnaire.pdf        -       -         -       2016-03-31  793b0e20399ce28490096ea25962e5f5
+
+    34368-0007-Setup.dct                -       -         -       2016-03-31  66dbaf72dab9e51fd7d56d9e8add7b4b
+
+    34368-0007-Setup.do                 -       -         -       2016-03-31  5fcfab3e8eedb8054bac94252d0ecaac
+
+    34368-0007-Setup.sas                -       -         -       2016-03-31  2c83fbbf835633260ffa85d8c27ed06c
+
+    34368-0007-Setup.sps                -       -         -       2016-03-31  f0e3a3dd2dc6a1b83f6e391c708a1e86
+
+    34368-0007-Supplemental_syntax.do   -       -         -       2016-03-31  cb5cf58e58028305efaeae36f3fa6b16
+
+    34368-0007-Supplemental_syntax.sas  -       -         -       2016-03-31  08baa9073e904e9e099fa3d1eab6dc2d
+
+
+DS0008 Child - Wave 9
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0008-Codebook.pdf             -       -         -       2016-03-31  b5b69347da67d553e489e031918cfdd1
+
+    34368-0008-Data.dta                 -       424       424     2016-03-31  b8262ea30d94e8be12a0a5d0de85d0b3
+
+    34368-0008-Data.rda                 -       424       424     2016-03-31  e65ffee5571231f68e7ab1bc5eb9d17a
+
+    34368-0008-Data.sav                 -       424       424     2016-03-31  dffcd733afcc040ebf434faf9f0624d3
+
+    34368-0008-Data.stc                 -       424       424     2016-03-31  b5d0317e56fe4a12454d1ef415d446c9
+
+    34368-0008-Data.tsv                 -       424       424     2016-03-31  51069667ecd3dbf0abd9881e118415b1
+
+    34368-0008-Data.txt                 946     424       424     2016-03-31  f32e5945e667f35fb9c7e5f1daff5eea
+
+    34368-0008-Questionnaire.pdf        -       -         -       2016-03-31  e4142615e9288e7642b6640f9356dcfd
+
+    34368-0008-Setup.dct                -       -         -       2016-03-31  3c65b19402bd2830bb66c4535ef1a580
+
+    34368-0008-Setup.do                 -       -         -       2016-03-31  7d4dc87b1d5a6832c16a23916293e756
+
+    34368-0008-Setup.sas                -       -         -       2016-03-31  9852fc5218ed19722e6c51a35b49b8d9
+
+    34368-0008-Setup.sps                -       -         -       2016-03-31  00846a3c16d0084ef7369a160bb99af4
+
+    34368-0008-Supplemental_syntax.do   -       -         -       2016-03-31  1e99ba9eeebf4c385b7efd174ea9e828
+
+    34368-0008-Supplemental_syntax.sas  -       -         -       2016-03-31  6d4b33d6435d015032316178b22c9635
+
+
+DS0009 Child - Wave 10
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0009-Codebook.pdf             -       -         -       2016-03-31  0ab7fe301c67fe790db2db5ed69bec71
+
+    34368-0009-Data.dta                 -       424       1389    2016-03-31  c6295617a15f4292098e318377bf2203
+
+    34368-0009-Data.rda                 -       424       1389    2016-03-31  be9faefa49925d2f38fb2cc9a9923fab
+
+    34368-0009-Data.sav                 -       424       1389    2016-03-31  551ea73bd1573f0acddd6c0568a71f2b
+
+    34368-0009-Data.stc                 -       424       1389    2016-03-31  37e92da249a63aa8317eced3aed2d3f7
+
+    34368-0009-Data.tsv                 -       424       1389    2016-03-31  ccd4147105242f9aca625284edce5e33
+
+    34368-0009-Data.txt                 3202    424       1389    2016-03-31  7a28c7657713832ab0c7ed20bf0729b7
+
+    34368-0009-Questionnaire.pdf        -       -         -       2016-03-31  21a3f3864464055a98d6cb192281783c
+
+    34368-0009-Setup.dct                -       -         -       2016-03-31  0240e27883e7b77dda55959bb253be57
+
+    34368-0009-Setup.do                 -       -         -       2016-03-31  f4af2af56298a05b9ea7e52f18e6eccc
+
+    34368-0009-Setup.sas                -       -         -       2016-03-31  bbb0fe763fa4d7c53c9fe84e03209038
+
+    34368-0009-Setup.sps                -       -         -       2016-03-31  55cf813c08cffbab42a60624f3027b93
+
+    34368-0009-Supplemental_syntax.do   -       -         -       2016-03-31  79a0d5286ee1731377ace2f0708e1492
+
+    34368-0009-Supplemental_syntax.sas  -       -         -       2016-03-31  99c6040fb41203ad0922dcc5e1c6e58d
+
+
+DS0010 Child - Wave 11
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0010-Codebook.pdf             -       -         -       2016-03-31  6015eefbc4c9b44ed76d8527f413431f
+
+    34368-0010-Data.dta                 -       424       1390    2016-03-31  009c325eafaeff46290e4fa86f0a2a63
+
+    34368-0010-Data.rda                 -       424       1390    2016-03-31  d92a55b1524d3c05fa85d91cb52e3d20
+
+    34368-0010-Data.sav                 -       424       1390    2016-03-31  2007bd3d065980581b4e5ec22caf41b9
+
+    34368-0010-Data.stc                 -       424       1390    2016-03-31  c61f491b00bce5766a7ad06753c1f092
+
+    34368-0010-Data.tsv                 -       424       1390    2016-03-31  05e36ae981a87a1c9fa8df9ecdfc2b3e
+
+    34368-0010-Data.txt                 3216    424       1390    2016-03-31  ae2c22907f7ade69410e8c6d3c9a74f3
+
+    34368-0010-Questionnaire.pdf        -       -         -       2016-03-31  798c5cabf1154eb0f1ceb92022ba75b3
+
+    34368-0010-Setup.dct                -       -         -       2016-03-31  6b96e88c3fb5120c3ed911369b767aa2
+
+    34368-0010-Setup.do                 -       -         -       2016-03-31  eb5b13040c855f0c6ceebea3a55c6498
+
+    34368-0010-Setup.sas                -       -         -       2016-03-31  ccad0fb50f7717651f1aadd1e8efbf62
+
+    34368-0010-Setup.sps                -       -         -       2016-03-31  7c00155e1f928c338ed7d91239044e90
+
+    34368-0010-Supplemental_syntax.do   -       -         -       2016-03-31  3c82ce323feb63dd25282cc6962aaab5
+
+    34368-0010-Supplemental_syntax.sas  -       -         -       2016-03-31  9c8a162d758cb1a077654d48cc6e46e7
+
+
+DS0011 Primary Caregiver - Wave 1
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0011-Codebook.pdf             -       -         -       2016-03-31  37bc3b9cfc48853cbb7c8ab072f2806f
+
+    34368-0011-Data.dta                 -       424       925     2016-03-31  acb68ed9a875e341451fd3aeda467342
+
+    34368-0011-Data.rda                 -       424       925     2016-03-31  a9b540b502c0a64c0cccc3af912764f5
+
+    34368-0011-Data.sav                 -       424       925     2016-03-31  098c271aba494cc4f1eca28ad45b6515
+
+    34368-0011-Data.stc                 -       424       925     2016-03-31  cf3a7b86ba2afe0c24ffbce6c6f964d8
+
+    34368-0011-Data.tsv                 -       424       925     2016-03-31  f5f5c72f5ea39a27eb77e3c7daf02476
+
+    34368-0011-Data.txt                 2162    424       925     2016-03-31  00a828fec4cf53326f649de41a05e741
+
+    34368-0011-Questionnaire.pdf        -       -         -       2016-03-31  95afc96cd8c479d987f7b0a2e13db14e
+
+    34368-0011-Setup.dct                -       -         -       2016-03-31  253b55901c49de6e410989c2446e7644
+
+    34368-0011-Setup.do                 -       -         -       2016-03-31  1a5b119edcb670d4dfecda5cb2691a6c
+
+    34368-0011-Setup.sas                -       -         -       2016-03-31  dafbacc6cfea837a2ccb59b7a4523cf8
+
+    34368-0011-Setup.sps                -       -         -       2016-03-31  90c67d3623e95d30a28bc21af8c4ca44
+
+    34368-0011-Supplemental_syntax.do   -       -         -       2016-03-31  b7e3a6a372442782f646867cabbecafe
+
+    34368-0011-Supplemental_syntax.sas  -       -         -       2016-03-31  ef21dc9c7d86a8d5a8f815a8b1d30019
+
+
+DS0012 Primary Caregiver - Wave 2
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0012-Codebook.pdf             -       -         -       2016-03-31  07cef12790cdb0706cf1dba67e7d38b7
+
+    34368-0012-Data.dta                 -       424       470     2016-03-31  8e6b3094d5d439bda016521a95aa4725
+
+    34368-0012-Data.rda                 -       424       470     2016-03-31  a7dc54d718d94ed0c9542add9433c56a
+
+    34368-0012-Data.sav                 -       424       470     2016-03-31  619f94eab46ebb616afd946dcc411335
+
+    34368-0012-Data.stc                 -       424       470     2016-03-31  0da438f7557cfa6f16db61f32c911504
+
+    34368-0012-Data.tsv                 -       424       470     2016-03-31  c811ad5e58be946a2674504abb7d5a03
+
+    34368-0012-Data.txt                 1259    424       470     2016-03-31  453618af9125ad7a972caf4f2c9d6baa
+
+    34368-0012-Questionnaire.pdf        -       -         -       2016-03-31  5b2a064512d49a165885c3cd62696b32
+
+    34368-0012-Setup.dct                -       -         -       2016-03-31  1459a390331749abe0d62e05035638f5
+
+    34368-0012-Setup.do                 -       -         -       2016-03-31  09cfe788aa136a1ba7dc01838c974d07
+
+    34368-0012-Setup.sas                -       -         -       2016-03-31  527f5e2f067745530d295b2a838b4325
+
+    34368-0012-Setup.sps                -       -         -       2016-03-31  7ff9d2e022659f93b3b25075c4993ca6
+
+    34368-0012-Supplemental_syntax.do   -       -         -       2016-03-31  3b142f865411fdf5f81e73255b86615a
+
+    34368-0012-Supplemental_syntax.sas  -       -         -       2016-03-31  b59ed7402acd13deaf9978c922073a68
+
+
+DS0013 Primary Caregiver - Wave 4
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0013-Codebook.pdf             -       -         -       2016-03-31  dc9090838fae03b0c7a264e5475ce6d4
+
+    34368-0013-Data.dta                 -       424       1143    2016-03-31  ecfb3169060d74c31e1243024d59a882
+
+    34368-0013-Data.rda                 -       424       1143    2016-03-31  e61deb8bfe3fff6f38501f556c389672
+
+    34368-0013-Data.sav                 -       424       1143    2016-03-31  354ad3c4153eafeebd32c993661e54df
+
+    34368-0013-Data.stc                 -       424       1143    2016-03-31  1136d55a6e92377632ad84e9f2efa70e
+
+    34368-0013-Data.tsv                 -       424       1143    2016-03-31  9e23b23f5e959426189fee29a95b55e2
+
+    34368-0013-Data.txt                 2862    424       1143    2016-03-31  cd90b554eb90616dd106ae84e6e29cc7
+
+    34368-0013-Questionnaire.pdf        -       -         -       2016-03-31  edde29851882ff9fffd018283bf68f59
+
+    34368-0013-Setup.dct                -       -         -       2016-03-31  d79ce6672b62ea5cf7530f40e4ea0322
+
+    34368-0013-Setup.do                 -       -         -       2016-03-31  3a2439788cff4f184651994b2351c8e7
+
+    34368-0013-Setup.sas                -       -         -       2016-03-31  d698a4f41a157d91bb30b047d25c1c65
+
+    34368-0013-Setup.sps                -       -         -       2016-03-31  3bc938d414acec945937289bbf3b5cc4
+
+    34368-0013-Supplemental_syntax.do   -       -         -       2016-03-31  4c8f165b7b09e904aff2895925d6e608
+
+    34368-0013-Supplemental_syntax.sas  -       -         -       2016-03-31  b86b8f745e2c017d3fa51ea039e281a4
+
+
+DS0014 Primary Caregiver - Wave 5
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0014-Codebook.pdf             -       -         -       2016-03-31  fc68a0b63432c814ba9937a47789e308
+
+    34368-0014-Data.dta                 -       424       1280    2016-03-31  317529413b3de185594468eac745b262
+
+    34368-0014-Data.rda                 -       424       1280    2016-03-31  af4bce7e99eb3acf923fcf702f104acb
+
+    34368-0014-Data.sav                 -       424       1280    2016-03-31  bce88cebd88e008737f47239cec86252
+
+    34368-0014-Data.stc                 -       424       1280    2016-03-31  ef28f1d1f5b8cf4d3765208271fea246
+
+    34368-0014-Data.tsv                 -       424       1280    2016-03-31  5c1cec34a458493aedc9bf1b4b4236b0
+
+    34368-0014-Data.txt                 3131    424       1280    2016-03-31  d9cc212232262d3eea06b0b15a774a6a
+
+    34368-0014-Questionnaire.pdf        -       -         -       2016-03-31  2392f8726a35ad85366a2509e982b207
+
+    34368-0014-Setup.dct                -       -         -       2016-03-31  7ab3f703e1e4289f5dacaa977ace5f6d
+
+    34368-0014-Setup.do                 -       -         -       2016-03-31  dcca9624d3d11b3d19fdb50127b2663d
+
+    34368-0014-Setup.sas                -       -         -       2016-03-31  d863905665f42ab6ef57d114bed0ea56
+
+    34368-0014-Setup.sps                -       -         -       2016-03-31  425bfc8a3f06b25c213dd7f6aa81385a
+
+    34368-0014-Supplemental_syntax.do   -       -         -       2016-03-31  09a5c50dff4d6de5c980811f16ad4de8
+
+    34368-0014-Supplemental_syntax.sas  -       -         -       2016-03-31  fd0b680ad1b786f4b5b08386226de967
+
+
+DS0015 Primary Caregiver - Wave 6
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0015-Codebook.pdf             -       -         -       2016-03-31  78a2be069ef7b5833f9892cd83b11a43
+
+    34368-0015-Data.dta                 -       424       1435    2016-03-31  3d0f1d2cbd032b528e7e53f1a4e30a34
+
+    34368-0015-Data.rda                 -       424       1435    2016-03-31  d06041a56b6815b8646ac8d8e2451c1c
+
+    34368-0015-Data.sav                 -       424       1435    2016-03-31  9f08c861476bf2fe36a207997b8c24be
+
+    34368-0015-Data.stc                 -       424       1435    2016-03-31  99754c765e478a4e22662053e56cfa40
+
+    34368-0015-Data.tsv                 -       424       1435    2016-03-31  17dfa0ff0e0df633f4ebb4f8b8a69ebc
+
+    34368-0015-Data.txt                 3594    424       1435    2016-03-31  5181ecf6eeefb5ec510d229c8c65676b
+
+    34368-0015-Questionnaire.pdf        -       -         -       2016-03-31  1ff7c37d52033b87031a76f968f5b39f
+
+    34368-0015-Setup.dct                -       -         -       2016-03-31  b5995b9718d4af1fea63a5b5f7671346
+
+    34368-0015-Setup.do                 -       -         -       2016-03-31  dcea2823035f8c8173b6d0d6f6b38d58
+
+    34368-0015-Setup.sas                -       -         -       2016-03-31  845889c432798f31e0aed6f1ca88cf35
+
+    34368-0015-Setup.sps                -       -         -       2016-03-31  17a7d18194c4d6fb822eeee4b1d2b834
+
+    34368-0015-Supplemental_syntax.do   -       -         -       2016-03-31  0b4e486f34308b0213fe7018d38a27d5
+
+    34368-0015-Supplemental_syntax.sas  -       -         -       2016-03-31  66c9cf6ea245abe9625686eb7cf6e27f
+
+
+DS0016 Primary Caregiver - Wave 8
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0016-Codebook.pdf             -       -         -       2016-03-31  b29382568894f4e4e0cf79b3c1607c4a
+
+    34368-0016-Data.dta                 -       424       1259    2016-03-31  a20488508846e056f5fab5f51624b4da
+
+    34368-0016-Data.rda                 -       424       1259    2016-03-31  31e1ba7b32f3682f8a28ed6185ec7cca
+
+    34368-0016-Data.sav                 -       424       1259    2016-03-31  fc2f882ceb54576cb9cafbf0a01fc572
+
+    34368-0016-Data.stc                 -       424       1259    2016-03-31  5e6b0609128c42e860101262c6fea080
+
+    34368-0016-Data.tsv                 -       424       1259    2016-03-31  2d0dea7e61663c33ffee2fd5b5f2b77f
+
+    34368-0016-Data.txt                 3175    424       1259    2016-03-31  c8cec60d857126abdaf8de2c4f31280e
+
+    34368-0016-Questionnaire.pdf        -       -         -       2016-03-31  5a47d54fca764c3d9308afff34dd79e3
+
+    34368-0016-Setup.dct                -       -         -       2016-03-31  25fc95dc28065a2564946b7b810a590c
+
+    34368-0016-Setup.do                 -       -         -       2016-03-31  97466ad0deea451b5a9b1f0463d3860c
+
+    34368-0016-Setup.sas                -       -         -       2016-03-31  ea7d942a7fb47947878fd7a084c011f5
+
+    34368-0016-Setup.sps                -       -         -       2016-03-31  c718a0886c6791276efb348a05dd2260
+
+    34368-0016-Supplemental_syntax.do   -       -         -       2016-03-31  dcb662951621ee0095b89cada2e2f6b7
+
+    34368-0016-Supplemental_syntax.sas  -       -         -       2016-03-31  985770dfc5e4d56af2f38ec0eb24e41f
+
+
+DS0017 Primary Caregiver - Wave 9
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0017-Codebook.pdf             -       -         -       2016-03-31  a1234bd1561116e235422054b52373d2
+
+    34368-0017-Data.dta                 -       424       1259    2016-03-31  96ef4623c63043ca5146a6ff8b4e9ce0
+
+    34368-0017-Data.rda                 -       424       1259    2016-03-31  b56067a80493cb20737818c3e8b3f8bc
+
+    34368-0017-Data.sav                 -       424       1259    2016-03-31  3b787184ecfe27166ae3e4ca552da764
+
+    34368-0017-Data.stc                 -       424       1259    2016-03-31  d696eb5ca0b837f8b2686b39a1c159ec
+
+    34368-0017-Data.tsv                 -       424       1259    2016-03-31  193676aee5174cdad3b966c9cb865a7f
+
+    34368-0017-Data.txt                 3166    424       1259    2016-03-31  663424e3f3703b1d8ead569f35e9a998
+
+    34368-0017-Questionnaire.pdf        -       -         -       2016-03-31  dbe1080da0f06cb1a6a143435a2f0327
+
+    34368-0017-Setup.dct                -       -         -       2016-03-31  d479335e103b01f8e3bb8ffdb923fb79
+
+    34368-0017-Setup.do                 -       -         -       2016-03-31  5f815a0a3080c6acf4eb735b3fa6c9c6
+
+    34368-0017-Setup.sas                -       -         -       2016-03-31  6abf58a80c0097a323c06927d10c0104
+
+    34368-0017-Setup.sps                -       -         -       2016-03-31  d8ed8a58dc857348066df88a926c539c
+
+    34368-0017-Supplemental_syntax.do   -       -         -       2016-03-31  9c2fe5722fe26e2021501ff29535527b
+
+    34368-0017-Supplemental_syntax.sas  -       -         -       2016-03-31  e0a3bfdb57a480823e42044fd1917905
+
+
+DS0018 Primary Caregiver - Wave 10
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0018-Codebook.pdf             -       -         -       2016-03-31  7ffc368e641a8d04fb95cc6c7de5a548
+
+    34368-0018-Data.dta                 -       424       885     2016-03-31  2ff4064d44b73450f7d1adc50911ef16
+
+    34368-0018-Data.rda                 -       424       885     2016-03-31  07d5a02390a60a748e7b12f929813f64
+
+    34368-0018-Data.sav                 -       424       885     2016-03-31  fed083daaac36b7c46e5f69d85444caf
+
+    34368-0018-Data.stc                 -       424       885     2016-03-31  73cad92293827a4ee07b29600869ccce
+
+    34368-0018-Data.tsv                 -       424       885     2016-03-31  934c02ecb7e45a1bc57253f5eadd2165
+
+    34368-0018-Data.txt                 2260    424       885     2016-03-31  953ccc41f7be65c5ccf7f27c1c5310b7
+
+    34368-0018-Questionnaire.pdf        -       -         -       2016-03-31  2e30490d5dae22c2b9ea149fe294903f
+
+    34368-0018-Setup.dct                -       -         -       2016-03-31  33f24760103ba43ba38fe98dae191159
+
+    34368-0018-Setup.do                 -       -         -       2016-03-31  e7feb21ea2db2b1dcac66f350f30c036
+
+    34368-0018-Setup.sas                -       -         -       2016-03-31  a1aa4608c90e096b9d00d97bbecc2904
+
+    34368-0018-Setup.sps                -       -         -       2016-03-31  34645b0f7e992a8c02903eb4ad45e1a6
+
+    34368-0018-Supplemental_syntax.do   -       -         -       2016-03-31  d2d46c7692567f37efa4ed3393d5634e
+
+    34368-0018-Supplemental_syntax.sas  -       -         -       2016-03-31  490a60f34af4e619709602ed5e6008fd
+
+
+DS0019 Primary Caregiver - Wave 11
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0019-Codebook.pdf             -       -         -       2016-03-31  79609012970ec962b99843d8da523252
+
+    34368-0019-Data.dta                 -       424       895     2016-03-31  859b4cc70456a58fd46ed76cd84eb1da
+
+    34368-0019-Data.rda                 -       424       895     2016-03-31  7f75d22a8a5390278c889aaaa0c94926
+
+    34368-0019-Data.sav                 -       424       895     2016-03-31  7204c01138c32121796ea68da5c62fba
+
+    34368-0019-Data.stc                 -       424       895     2016-03-31  635452bf050f11fda86d07c63b1d7275
+
+    34368-0019-Data.tsv                 -       424       895     2016-03-31  e68b4533825175fa0d6a87c69fc8e3c3
+
+    34368-0019-Data.txt                 2260    424       895     2016-03-31  0617e9a5cc036c9553416f3e7e056fd7
+
+    34368-0019-Questionnaire.pdf        -       -         -       2016-03-31  378264430a11e6557c6f3e791ea95574
+
+    34368-0019-Setup.dct                -       -         -       2016-03-31  6c6407278d71a0491a2ff28a2cae02eb
+
+    34368-0019-Setup.do                 -       -         -       2016-03-31  93d327a17008fd525a9aa7b6b12cdf50
+
+    34368-0019-Setup.sas                -       -         -       2016-03-31  06b81a0fb9c792b78db1c6c47a227cc3
+
+    34368-0019-Setup.sps                -       -         -       2016-03-31  ed4c1a033b6e8e54883ebca66063d1b4
+
+    34368-0019-Supplemental_syntax.do   -       -         -       2016-03-31  a9b70c390355aec128b49a7fbf0c4c33
+
+    34368-0019-Supplemental_syntax.sas  -       -         -       2016-03-31  1df7d536d3a0c18dd665fbb6f0742bb5
+
+
+DS0020 Teacher - Wave 1
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0020-Codebook.pdf             -       -         -       2016-03-31  a80b57d7caf87777984a4e2f7c09a063
+
+    34368-0020-Data.dta                 -       424       121     2016-03-31  50ec1499fc297528f0eccc440353a314
+
+    34368-0020-Data.rda                 -       424       121     2016-03-31  fe0ce1a69cb69fc8487bd70d3bf36c70
+
+    34368-0020-Data.sav                 -       424       121     2016-03-31  73d720ce40793359c40097930262aeb2
+
+    34368-0020-Data.stc                 -       424       121     2016-03-31  0330afebe29ec6d7f01a65e9f8c8f712
+
+    34368-0020-Data.tsv                 -       424       121     2016-03-31  73a3dfa461a04e4ed4671b650630a810
+
+    34368-0020-Data.txt                 386     424       121     2016-03-31  83ddb6dc866f9ed6ba3ea4efffa24ba3
+
+    34368-0020-Questionnaire.pdf        -       -         -       2016-03-31  5a8d452012094a140fe65314fef3d53e
+
+    34368-0020-Setup.dct                -       -         -       2016-03-31  83c741337633c4ea7e41753ab6a1527a
+
+    34368-0020-Setup.do                 -       -         -       2016-03-31  3d8191577ac125576ab724201407b4bb
+
+    34368-0020-Setup.sas                -       -         -       2016-03-31  69f8a4505f40db88eac45bd1ff55263a
+
+    34368-0020-Setup.sps                -       -         -       2016-03-31  2ea8bb2fde195cb955cd20f9223ccbee
+
+    34368-0020-Supplemental_syntax.do   -       -         -       2016-03-31  898cfcc8f4643a145e0f030a8b89dc68
+
+    34368-0020-Supplemental_syntax.sas  -       -         -       2016-03-31  56546ce73ba0c825dc8557330efa7e61
+
+
+DS0021 Teacher - Wave 2
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0021-Codebook.pdf             -       -         -       2016-03-31  2b0e3e67621423e30ee0f454cc7c1128
+
+    34368-0021-Data.dta                 -       424       122     2016-03-31  a1fe14aec4dcf607e8f65e54ff7db6ea
+
+    34368-0021-Data.rda                 -       424       122     2016-03-31  082293e67709886cd4404576f2926a3c
+
+    34368-0021-Data.sav                 -       424       122     2016-03-31  91115d6e090ea5f4b3b2ca8f386edc71
+
+    34368-0021-Data.stc                 -       424       122     2016-03-31  5642731b1ca68c9bd50684e614178d46
+
+    34368-0021-Data.tsv                 -       424       122     2016-03-31  3a99d12064f7db36a5ac13df7e169579
+
+    34368-0021-Data.txt                 407     424       122     2016-03-31  aa0c375fadf7b2d405eb61a696a22fe5
+
+    34368-0021-Questionnaire.pdf        -       -         -       2016-03-31  e9d0acaf1c2f844724861e35a3a9cfd7
+
+    34368-0021-Setup.dct                -       -         -       2016-03-31  630ac23b7c732ecab21ced75c8bff916
+
+    34368-0021-Setup.do                 -       -         -       2016-03-31  0b2c7ec3c34509a8dee503f070e617dc
+
+    34368-0021-Setup.sas                -       -         -       2016-03-31  782210b41a21aa7644acf917ca3d8a9c
+
+    34368-0021-Setup.sps                -       -         -       2016-03-31  940c1addad30d320c0bf83a586a87ce6
+
+    34368-0021-Supplemental_syntax.do   -       -         -       2016-03-31  8edf2f52c5470c4c717cdb11c36691db
+
+    34368-0021-Supplemental_syntax.sas  -       -         -       2016-03-31  9b8de5e98c9a5b54019d2bab8ac856a4
+
+
+DS0022 Teacher - Wave 3
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0022-Codebook.pdf             -       -         -       2016-03-31  54e33e21207085cc2c6d8390125d90e0
+
+    34368-0022-Data.dta                 -       424       145     2016-03-31  691700927b6c5fd57fbca633ade324e9
+
+    34368-0022-Data.rda                 -       424       145     2016-03-31  d4cc076e17db40535e32c2155853a146
+
+    34368-0022-Data.sav                 -       424       145     2016-03-31  5a3eba65956eb2ca6f178ea55fbdcb93
+
+    34368-0022-Data.stc                 -       424       145     2016-03-31  2ffda8a2de49a7f8e4bf53da29e3bdce
+
+    34368-0022-Data.tsv                 -       424       145     2016-03-31  f7a52e5813246f01445878be2b3bb203
+
+    34368-0022-Data.txt                 479     424       145     2016-03-31  55d4833493d8039e83146079d3f127c4
+
+    34368-0022-Questionnaire.pdf        -       -         -       2016-03-31  0daae4950aed6807babc35ce0ae959e0
+
+    34368-0022-Setup.dct                -       -         -       2016-03-31  f7a373d1af7ee3f3c43ad250534939c1
+
+    34368-0022-Setup.do                 -       -         -       2016-03-31  d589931e6bf69d99a9003a77e9429347
+
+    34368-0022-Setup.sas                -       -         -       2016-03-31  3d8816927aeb3c29208a5d90735a67c8
+
+    34368-0022-Setup.sps                -       -         -       2016-03-31  e76538556c2642997ff3866c706e7f3e
+
+    34368-0022-Supplemental_syntax.do   -       -         -       2016-03-31  aae5b027d0d07e5df0895dd5d2774a09
+
+    34368-0022-Supplemental_syntax.sas  -       -         -       2016-03-31  02dce039188d93492a6ffc5beb9861d6
+
+
+DS0023 Teacher - Wave 4
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0023-Codebook.pdf             -       -         -       2016-03-31  a03e780d0a31dae0cbf41f3b21d3961a
+
+    34368-0023-Data.dta                 -       424       145     2016-03-31  5bc136ab890c5f3208393a4765bb6343
+
+    34368-0023-Data.rda                 -       424       145     2016-03-31  c7182b6343ecec2c6e04c6fe47ee000a
+
+    34368-0023-Data.sav                 -       424       145     2016-03-31  15c61da679a720198fcbea5fcb5400d7
+
+    34368-0023-Data.stc                 -       424       145     2016-03-31  0039bdb788fee3e43a7a6ef3cc58fcc3
+
+    34368-0023-Data.tsv                 -       424       145     2016-03-31  b76d2a773127aa252c232a7f497d6e1e
+
+    34368-0023-Data.txt                 479     424       145     2016-03-31  deb34444bfc6266991c522f6a6992fe1
+
+    34368-0023-Questionnaire.pdf        -       -         -       2016-03-31  9d096c4a70b8657782d7983fb5eaa04c
+
+    34368-0023-Setup.dct                -       -         -       2016-03-31  5ca1e2105d1030953fb341fbae98261a
+
+    34368-0023-Setup.do                 -       -         -       2016-03-31  3c95ec3b8cc8d484880e24b968e4b80a
+
+    34368-0023-Setup.sas                -       -         -       2016-03-31  0370ae6589aaa0553d218db9b61c9c2c
+
+    34368-0023-Setup.sps                -       -         -       2016-03-31  d071d98de33a0d196b03c4143980e856
+
+    34368-0023-Supplemental_syntax.do   -       -         -       2016-03-31  57bd5b4831899f28763281c54d79b186
+
+    34368-0023-Supplemental_syntax.sas  -       -         -       2016-03-31  6e91cbbc7fba74656299e73718e210f1
+
+
+DS0024 Teacher - Wave 5
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0024-Codebook.pdf             -       -         -       2016-03-31  22ed3d334d1305a9c1cd4310f4e2e8e5
+
+    34368-0024-Data.dta                 -       424       145     2016-03-31  b848ca0c332bf406766933410d5aa83c
+
+    34368-0024-Data.rda                 -       424       145     2016-03-31  2164fc54875943545f5eb52339f205fc
+
+    34368-0024-Data.sav                 -       424       145     2016-03-31  2a19c0a39c00c98d82157cf2b5fe458d
+
+    34368-0024-Data.stc                 -       424       145     2016-03-31  262395296d5764982dc046195f6963bd
+
+    34368-0024-Data.tsv                 -       424       145     2016-03-31  e3dbf027ce724ae86e238ba20d6abb14
+
+    34368-0024-Data.txt                 470     424       145     2016-03-31  cc6c4799dd492b43038ca004cdd466c5
+
+    34368-0024-Questionnaire.pdf        -       -         -       2016-03-31  c85626280f783568590b651da7dd988b
+
+    34368-0024-Setup.dct                -       -         -       2016-03-31  7b4b5002ee79aea39dd452956bc65da0
+
+    34368-0024-Setup.do                 -       -         -       2016-03-31  5ab648ca042348235a861705498642f0
+
+    34368-0024-Setup.sas                -       -         -       2016-03-31  0e72ca7861634bbe872b34098c5c7328
+
+    34368-0024-Setup.sps                -       -         -       2016-03-31  410f630fca5c709220c4bf38eba37e8d
+
+    34368-0024-Supplemental_syntax.do   -       -         -       2016-03-31  e95f934fc2dd9eb4b3ef349d4714e8a9
+
+    34368-0024-Supplemental_syntax.sas  -       -         -       2016-03-31  66ec658bebc666664b6e1bb41ac9bc55
+
+
+DS0025 Teacher - Wave 6
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0025-Codebook.pdf             -       -         -       2016-03-31  bb13c6e4138d3de2af4a8d6070d9b6d5
+
+    34368-0025-Data.dta                 -       424       173     2016-03-31  ee5041f22512d62b9e8d17398163a43e
+
+    34368-0025-Data.rda                 -       424       173     2016-03-31  12a8a6c541f43f2d19347cd008d1fe3d
+
+    34368-0025-Data.sav                 -       424       173     2016-03-31  d3fad878d37ad62ba95e9daa3259e0e0
+
+    34368-0025-Data.stc                 -       424       173     2016-03-31  ad8f3e8aa3b919efb292049e8660c665
+
+    34368-0025-Data.tsv                 -       424       173     2016-03-31  3c31b93a4f64509396a51b36b0de004b
+
+    34368-0025-Data.txt                 574     424       173     2016-03-31  38a418973f826f2a59eb06863e0cd71f
+
+    34368-0025-Questionnaire.pdf        -       -         -       2016-03-31  d08a00fed058bfad3274fd628894e9de
+
+    34368-0025-Setup.dct                -       -         -       2016-03-31  1ec3027aec8ecc6ff74a62d0a7589068
+
+    34368-0025-Setup.do                 -       -         -       2016-03-31  b41910f2ee922630ec124267ca6b296f
+
+    34368-0025-Setup.sas                -       -         -       2016-03-31  97307e1f97072245822ed588c08dfd90
+
+    34368-0025-Setup.sps                -       -         -       2016-03-31  89a1740da008af8b845cc29c32fa0e5e
+
+    34368-0025-Supplemental_syntax.do   -       -         -       2016-03-31  6507924a360d0ca031ec4e99b0240d94
+
+    34368-0025-Supplemental_syntax.sas  -       -         -       2016-03-31  31f9dfab8a9547b9cc0ae709418ca9e0
+
+
+DS0026 Teacher - Wave 7
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0026-Codebook.pdf             -       -         -       2016-03-31  bcacc5436b8f5686f398422be3730ca8
+
+    34368-0026-Data.dta                 -       424       173     2016-03-31  8d321b33c27f79f98916c99e8e3bf614
+
+    34368-0026-Data.rda                 -       424       173     2016-03-31  70cbd86840dec1ddaa912d4edaecee6f
+
+    34368-0026-Data.sav                 -       424       173     2016-03-31  62267ba87201f5b9034bc4eac0c2bb02
+
+    34368-0026-Data.stc                 -       424       173     2016-03-31  9ceae56cae6ee9bb192c3f4f101db4dd
+
+    34368-0026-Data.tsv                 -       424       173     2016-03-31  29821ce6460b31a4aef1c526fbec7e2c
+
+    34368-0026-Data.txt                 574     424       173     2016-03-31  dc0293144c6d2d80d7f9f79dccd4106c
+
+    34368-0026-Questionnaire.pdf        -       -         -       2016-03-31  c60a96e9fb712f4fd59170eae69cfd2c
+
+    34368-0026-Setup.dct                -       -         -       2016-03-31  f6962e005492df863cf8912fa33bff7e
+
+    34368-0026-Setup.do                 -       -         -       2016-03-31  71127a42fd597477508e048e771519c8
+
+    34368-0026-Setup.sas                -       -         -       2016-03-31  7667d4fffdf8c2b86ce42a8db4e651d7
+
+    34368-0026-Setup.sps                -       -         -       2016-03-31  d1f97f7831972df61f726f3315d970f5
+
+    34368-0026-Supplemental_syntax.do   -       -         -       2016-03-31  77d97b24731000073b43d9f03b0a98e4
+
+    34368-0026-Supplemental_syntax.sas  -       -         -       2016-03-31  ff0c270ca3df659d83cdae3f88a4dc6b
+
+
+DS0027 Teacher - Wave 8
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    34368-0027-Codebook.pdf             -       -         -       2016-03-31  a0d8b201de56ba2b89ea4c72e7bab415
+
+    34368-0027-Data.dta                 -       424       173     2016-03-31  4fea422d0abe1c3e356937e9863fd624
+
+    34368-0027-Data.rda                 -       424       173     2016-03-31  edcb9af922e50d521aff5a1dfa4212ee
+
+    34368-0027-Data.sav                 -       424       173     2016-03-31  24adf9cba6a3d9beb6c481b584243466
+
+    34368-0027-Data.stc                 -       424       173     2016-03-31  783d89f40303c7feeef7e2aac14d358b
+
+    34368-0027-Data.tsv                 -       424       173     2016-03-31  fd7dce892f8491a36f5e8e47812d66f2
+
+    34368-0027-Data.txt                 564     424       173     2016-03-31  2463463d7300185fe0d7ab71e863b4fc
+
+    34368-0027-Questionnaire.pdf        -       -         -       2016-03-31  0aafa95c981a71058a17f5a3ddaf58a2
+
+    34368-0027-Setup.dct                -       -         -       2016-03-31  3da655a6123407417dc8b13ac3ce915f
+
+    34368-0027-Setup.do                 -       -         -       2016-03-31  8a87476842454756ad0fe4c5ae51328c
+
+    34368-0027-Setup.sas                -       -         -       2016-03-31  3f77fb49a79a0b861bfd6073803f66ba
+
+    34368-0027-Setup.sps                -       -         -       2016-03-31  e3ecc5db3cc3627f30ee35cddbda455a
+
+    34368-0027-Supplemental_syntax.do   -       -         -       2016-03-31  b5c357b93b2a0b3aca07445a37c7ec4b
+
+    34368-0027-Supplemental_syntax.sas  -       -         -       2016-03-31  cb3ee30a73ecd4083f8d45aa037061f2
+
