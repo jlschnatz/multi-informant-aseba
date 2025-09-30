@@ -9,7 +9,7 @@
 #let var_loop = 222deg
 
 #diagram(
-  node-stroke: .05em,
+  node-stroke: .04em,
   node-fill: gradient.radial(silver.lighten(95%), silver, center: (30%, 20%), radius: 80%),
 	spacing: spacing,
   let(ISC, CIC, ISP, CIP) = ((-.75, 0), (0, -.75), (0.75, 0), (0, .75)),

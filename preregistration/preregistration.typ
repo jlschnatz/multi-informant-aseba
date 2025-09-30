@@ -154,9 +154,7 @@
  abstracts: (
    title:  [#text(11pt)[Abstract]], 
    content:  [#text(11pt)[
-    Write a short summary (ca. 150 words) that includes information about the background of your study (i.e. how are your research hypotheses justified?), your objectives and research questions, your sample (e.g. size, recruitment, participant characteristics, or compensation), your methods (i.e. type of study, design) and your analyses (e.g. t tests comparing A vs. B). You will find more information about each point in the later sections of this template.
-
-
+    Comprehensive clinical assessment of mental health in children and adolesents often relies on multiple informant, such as parent, teachers and children themselves. However, discrepancies in reports from different informants are common, leading to challenges in interpreting the results of assessment procedures. These discrepancies may arise because some items capture behaviors and that are commonly observed across informants, while others reflect informant-specific perspectives unique to each informant. At the same time, there is a need for economic assessment instruments that reduce burden for respondents and clinicians while maintaining reliability and validity. To address these callenges the present study aims to develop a subtest containning 32 items of the commonly used multi-informant assessment instrument Achenbach System of Empirically Based Assessment (ASEBA) that balances shared and informant-specific perspectives while retaining a manageable number of items for economic administration in clinical settings. This will be achieved within a structural equation modeling framework leveraging an automatic item selection approach to identify item sets that optimally satisfy a predefined set of construction criteria. Data used for the study will be sourced from the publicly available SAFE Children Study (ICPSR 34368). 
    ]]
    )
 ))
@@ -459,7 +457,7 @@ To address missing data in the dataset, full information maximum likelihood (FIM
 
 To construct a subtest of the ASEBA that integrates both shared and informant-specific perspectives, a structural equation modeling approach (SEM) will be employed.
 
-Here, each manifest variable $X_(i j k l )$ refers to the $i$-th item ($i = 1, ..., i = I_j$) within the $j$-th clinical subscale of the ASEBA ($j = 1, ..., j = J$) for the $k$-th informant ($k in \{1, 2\}$) loading on the $l$ latent factor ($l in  \{ "CI-C", "CI-P", "IS-C", "IS-P"\}$). For simplicity, the subscript $l$ will be dropped in the following description of the model and only refer to it when necessary.
+Here, each manifest variable $X_(i j k l )$ refers to the $i$-th item ($i = 1, ..., i = I_j$) within the $j$-th clinical subscale of the ASEBA ($j = 1, ..., j = J$) for the $k$-th informant ($k in \{1, 2\}$) loading on the $l$ latent factor where $l in  \{ "CI-C", "CI-P", "IS-C", "IS-P"\}$. For simplicity, the subscript $l$ will be dropped in the following description of the model and only refer to it when necessary.
 
 Building on the outlined Operations Triad Model @delosreyes2013, we posit that the covariance structure of the items of the ASEBA subscales can be explained by two latent variables for each informant: a shared cross-informant factor that reflects common variances across informant (_converging operations_), and an informant-specific factor that should capture unique variance relevant to each informant's perspective (_diverging operations_). 
 
@@ -602,7 +600,7 @@ Parallel to the latent correlation, we will again use the agreement values repor
 
 <diagnostic_algorithm>
 
-In cases, when one of the Minimum Viable Criteria (MVC) is not met, we will run through a diagnostic algorithm to identify potential issues with the item selection. 
+In cases, when one of the Minimum Viable Criteria (MVC) is not met, we will run through a diagnostic algorithm to identify potential issues with the item selection (see @fig3). 
 
 1. If both RMSEA and SRMR do not meet the MVC, we will drop the clinical subscale from the item selection procedure.
 2. If SRMR meets the MVC, but RMSEA does not, the model is likely overparametrized, implying one or more factors may not be necessary. This should manifest in in either too low cross-informant consistency (i.e., low regression weight $gamma$) or too low informant-specific uniquencess (i.e., high latent correlation $phi$). See point 3. and 4.
@@ -614,14 +612,14 @@ In cases where one or more factors are dropped from the model, we will rerun the
 
 #figure(
   [
-  #image("diagnostic_algorithm.jpg")
+  #include "algorithm.typ"
   #text(size: 10pt)[
     #par(first-line-indent: 0em, [
-    #align(left)[_Note:_ \*Only drop the respective factor, if the reliability of only one of the two informants falls below the threshold.]
+    #align(left)[_Note:_ \*Only drop the respective factor, if the reliability of only one of the two informants falls below the threshold. CI: Cross-Informant, IS: Informant-Specific]
   ])]
   ],
   caption: [Diagnostic Algorithm for Identifying Issues with the Item Selection]
-)
+) <fig3>
 
 == Testing Hypotheses
 
