@@ -1,9 +1,14 @@
-# Forschungsmodul 
+# Forschungsmodul *PsyMSc5*
 
-# License
+| **Project Title** | **Student**    | **Coordination**        | **Semester**        |
+|-------------------|----------------|-------------------------|---------------------|
+| Using Automatic Item Selection in Multi-Informant Assessment of Child Mental Health | Luca Schnatz | Prof. Martin Schultze | SS25 + WS25/26 |
+
+
+## License
 
 The code in the repository is licensed under the GPL-3.0 License.
-<a href="https://creativecommons.org"> </a> © 2025 by <a href="mailto:schnatz@psych.uni-frankfurt.de">Jan Luca Schnatz</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+<a href="https://creativecommons.org"> </a> © 2025 by <a href="mailto:schnatz@psych.uni-frankfurt.de">Jan Luca Schnatz</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 0.5em;max-height:0.5em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 0.5em;max-height:1em;margin-left: .2em;">
 
 
 ## Project structure
