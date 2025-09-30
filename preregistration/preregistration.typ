@@ -230,7 +230,7 @@ To clarify the study design, particularly regarding the assessment waves in whic
 
 #figure(
   [
-  #image("resources/contribution.png")
+  #image("resources/contribution.svg")
   #text(size: 10pt)[
     #par(first-line-indent: 0em, [
     #align(left)[_Note:_ CRediT see https://credit.niso.org/.]
