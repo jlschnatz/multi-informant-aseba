@@ -307,7 +307,7 @@ Repositories where project materials will be shared:
 
 == Theoretical background
 
-Evidence-based clinical assessment in children and adolescents often relies on multiple informants, such as parents, teachers, and children themselves to obtain a comprehensive understanding of child’s mental health @hunsley2007 @mash2005. This typically involves using parallel standardized questionnaires such as the widely used Achenbach System of Empirically Based Assessment (ASEBA) that includes self-report, parent-report, and teacher-report forms @achenbach2001a.
+Evidence-based clinical assessment in children and adolescents often relies on multiple informants, such as parents, teachers, and children themselves, to obtain a comprehensive understanding of child’s mental health @hunsley2007 @mash2005. This typically involves using parallel standardized questionnaires such as the widely used Achenbach System of Empirically Based Assessment (ASEBA) that includes self-report, parent-report, and teacher-report forms @achenbach2001a.
 
 However, extensive meta-analytical empirical evidence has shown that discrepancies in reports from different informants (_informant discrepancies_) are common in these instruments @delosreyes2015 @achenbach1987 @jungersen2023, leading to challenges in understanding and interpreting the results of the assessment procedures. 
 
@@ -424,8 +424,8 @@ The primary study included a wide range of additional variables that were releva
 
 #v(1em)
 
-- [ ] All variables of the planned study are outline here and their roles are clearly defined
-- [x] Our planned study includes additonal variables that are not listed here.
+- [ ] All variables of the planned study are outlined here and their roles are clearly defined
+- [x] Our planned study includes additional variables that are not listed here.
 
 == Study Materials
 
@@ -513,7 +513,7 @@ where $l$ is the number of latent factors (i.e., $l = 4$), $lambda_(i j k l)$  i
 
 3. _Regression weight_ $gamma$
 
-Highlighted in orange in the model in @fig2, the regression coefficient $gamma$ from the cross-informant parent factor (CI-P) to the cross-informant child factor (CI-C) will be included as a criterion in the objective function. This coefficients reflects the extent item selected for these factors are answered consistently across both informants.
+Highlighted in orange in the model in @fig2, the regression coefficient $gamma$ from the cross-informant parent factor (CI-P) to the cross-informant child factor (CI-C) will be included as a criterion in the objective function. This coefficient reflects the extent item selected for these factors are answered consistently across both informants.
 
 4. _Latent correlation_ $phi$
 
@@ -600,7 +600,7 @@ Parallel to the latent correlation, we will again use the agreement values repor
 
 <diagnostic_algorithm>
 
-In cases, when one of the Minimum Viable Criteria (MVC) is not met, we will run through a diagnostic algorithm to identify potential issues with the item selection (see @fig3). 
+In cases when one of the Minimum Viable Criteria (MVC) is not met, we will run through a diagnostic algorithm to identify potential issues with the item selection (see @fig3). 
 
 1. If both RMSEA and SRMR do not meet the MVC, we will drop the clinical subscale from the item selection procedure.
 2. If SRMR meets the MVC, but RMSEA does not, the model is likely overparametrized, implying one or more factors may not be necessary. This should manifest in either too low cross-informant consistency (i.e., low regression weight $gamma$) or too low informant-specific uniqueness (i.e., high latent correlation $phi$). See point 3. and 4.
@@ -660,6 +660,6 @@ To analyse our exploratory research question, we will extract factor scores for 
 
 In step one, Bartlett-Factor-Scores (BFS) will be estimated for each of the four latent factors (CI-C, CI-P, IS-C, IS-P) for each clinical subscale of the ASEBA. This will be done using the `lavPredict()` function of the _lavaan_ package @rosseel2012. In step two, the estimated factor scores will be adjusted for measurement error by fitting a single indicator factor model where the estimated factor scores are used as a manifest variable for the respective latent factor with fixed factor loading of one and error variance fixed to the squared standard error of the factor scores. 
 
-After factor scores have been estimated, pairwise correlations between the factors scores of the four latent factors (CI-C, CI-P, IS-C, IS-P) of each clinical subscale with each respective latent factor of all other clinical subscales will be calculated. In total this will result in $4 dot 8 dot 7 = 224$ unique correlations. No inferential testing will be conducted, but rather the correlations will be interpreted descriptively in exploratory manner.
+After factor scores have been estimated, pairwise correlations between the factor scores of the four latent factors (CI-C, CI-P, IS-C, IS-P) of each clinical subscale with each respective latent factor of all other clinical subscales will be calculated. In total this will result in $4 dot 8 dot 7 = 224$ unique correlations. No inferential testing will be conducted, but rather the correlations will be interpreted descriptively in an exploratory manner.
 
 #bibliography("resources/references.bib", style: "american-psychological-association")
