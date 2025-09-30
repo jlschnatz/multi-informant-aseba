@@ -1,6 +1,10 @@
-# Template - Correlative and Descriptive Studies - MSc
+# Forschungsmodul 
 
-Use this template if you would like to initiate a folder with the standard subfolders (i.e., preregistration, materials, scripts, data, manuscript). This template includes three different preregistration files to choose from: the standard OSF preregistration file and the PRP-QUANT preregistration file, both for an elaborative preregistration, and the AsPredicted preregistration file.
+# License
+
+The code in the repository is licensed under the GPL-3.0 License.
+<a href="https://creativecommons.org"> </a> © 2025 by <a href="mailto:schnatz@psych.uni-frankfurt.de">Jan Luca Schnatz</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
+
 
 ## Project structure
 
