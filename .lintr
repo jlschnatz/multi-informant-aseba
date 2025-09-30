@@ -1,4 +1,0 @@
-linters: linters_with_defaults(
-  return_linter = NULL
-  ) 
-encoding: "UTF-8"

@@ -3,4 +3,3 @@ data/processed/
 data/raw/
 data/*.pdf
 materials/*.pdf
-.lintr
