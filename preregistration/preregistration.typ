@@ -154,7 +154,7 @@
  abstracts: (
    title:  [#text(11pt)[Abstract]], 
    content:  [#text(11pt)[
-    Comprehensive clinical assessment of mental health in children and adolesents often relies on multiple informants, such as parents, teachers and children themselves. However, discrepancies in reports from different raters are common, leading to challenges in interpreting the results of assessment procedures. These discrepancies may arise because some items capture behaviors and that are commonly observed across informants, while others reflect informant-specific perspectives unique to each rater. At the same time, there is a need for economic instruments that reduce burden for respondents and clinicians while maintaining reliability and validity. To address these challenges the present study aims to develop a subtest containing 32 items of the commonly employed multi-informant assessment instrument Achenbach System of Empirically Based Assessment (ASEBA) that balances shared and informant-specific perspectives while retaining a manageable number of items for economic administration in clinical settings. This will be achieved within a structural equation modeling framework leveraging an automatic item selection approach to identify an item set that optimally satisfies a predefined set of construction criteria. The present study will use two waves of data of parent and child ratings on the ASEBA Child Behavior Checklist (CBCL/6-18) and Youth Self Report (YSR/11-18) from the SAFE Children Study #cite(<tolan2016>), a longitudinal randomized controlled trial with $N = 424$ children and their primary caregivers that participated in a family-centered preventive intervention program.     
+    Comprehensive clinical assessment of mental health in children and adolescents often relies on multiple informants, such as parents, teachers and children themselves. However, discrepancies in reports from different raters are common, leading to challenges in interpreting the results of assessment procedures. These discrepancies may arise because some items capture behaviors that are commonly observed across informants, while others reflect informant-specific perspectives unique to each rater. At the same time, there is a need for economic instruments that reduce burden for respondents and clinicians while maintaining reliability and validity. To address these challenges the present study aims to develop a subtest containing 32 items of the commonly employed multi-informant assessment instrument Achenbach System of Empirically Based Assessment (ASEBA) that balances shared and informant-specific perspectives while retaining a manageable number of items for economic administration in clinical settings. This will be achieved within a structural equation modeling framework leveraging an automatic item selection approach to identify an item set that optimally satisfies a predefined set of construction criteria. The present study will use two waves of data of parent and child ratings on the ASEBA Child Behavior Checklist (CBCL/6-18) and Youth Self Report (YSR/11-18) from the SAFE children study #cite(<tolan2016>), a longitudinal randomized controlled trial with $N = 424$ children and their primary caregivers that participated in a family-centered preventive intervention program.     
    ]]
    )
 ))
@@ -247,7 +247,7 @@ The project is expected to take approximately 6 months, starting from the date o
 
 == IRB Status
 
-This study is a secondary analysis of existing publicly available data from the SAFE Children Study (ICPSR 34368). The original study received ethical approval from the University of Illinois at Chicago's Institutional Review Board (IRB) and followed the 1964 Helsinki Declaration and its later amendments. Informed consent was obtained from all caregivers and from participating children at the time of original data collection.
+This study is a secondary analysis of existing publicly available data from the SAFE children study (ICPSR 34368). The original study received ethical approval from the University of Illinois at Chicago's Institutional Review Board (IRB) and followed the 1964 Helsinki Declaration and its later amendments. Informed consent was obtained from all caregivers and from participating children at the time of original data collection.
 
 == Conflict of Interest Statement
 
@@ -307,7 +307,7 @@ Repositories where project materials will be shared:
 
 == Theoretical background
 
-Evidence-based clinical assessment in children and adolesents often relies on multiple informants, such as parents, teachers, and children themselves to obtain a comprehensive understanding of child‘s mental health @hunsley2007 @mash2005. This typically involves using parallel standardized questionnaires such as the widely used Achenbach System of Empirically Based Assement (ASEBA) that includes self-report, parent-report, and teacher-report forms @achenbach2001a. 
+Evidence-based clinical assessment in children and adolescents often relies on multiple informants, such as parents, teachers, and children themselves to obtain a comprehensive understanding of child’s mental health @hunsley2007 @mash2005. This typically involves using parallel standardized questionnaires such as the widely used Achenbach System of Empirically Based Assessment (ASEBA) that includes self-report, parent-report, and teacher-report forms @achenbach2001a.
 
 However, extensive meta-analytical empirical evidence has shown that discrepancies in reports from different informants (_informant discrepancies_) are common in these instruments @delosreyes2015 @achenbach1987 @jungersen2023, leading to challenges in understanding and interpreting the results of the assessment procedures. 
 
@@ -317,7 +317,7 @@ More recent theoretical advances concerning the _Operations Triad Model_ @delosr
 
 This reconceptualization has contributed to a paradigm shift in measurement, highlighting the need to account for both common variance and meaningful informant-specific variance @delosreyes2023. However, because most existing instruments were developed with an emphasis on common variance, they may lack sensitivity to detect domain-relevant informant discrepancies, highlighting the need to refine current measures or develop new tools that explicitly integrate both shared and informant-specific item content @delosreyes2023.
 
-In addition to the need for instruments that capture both shared and informant-specific perspectives, there is also a growing demand for shortened tests that are feasible to implement in time-limited clinical settings @goetz2013. For example, within the widely used ASEBA system introduced above, the Brief Problem Monitor (BPM) has been developed as a shortened to economically assess emotional and behavioral problems @achenbach2011. However, the BPM uses the same items across all informants, which may not be optimal for capturing meaningful informant-specific perspectives. This highlights the need for instruments that can effectively balance shared and informant-specific perspectives while also being economical for use in clinical settings.
+In addition to the need for instruments that capture both shared and informant-specific perspectives, there is also a growing demand for shortened tests that are feasible to implement in time-limited clinical settings @goetz2013. For example, within the widely used ASEBA system introduced above, the Brief Problem Monitor (BPM) has been developed as a shortened test for the economical assessment of emotional and behavioral problems @achenbach2011. However, the BPM uses the same items across all informants, which may not be optimal for capturing meaningful informant-specific perspectives. This highlights the need for instruments that can effectively balance shared and informant-specific perspectives while also being economical for use in clinical settings.
 
 == Objectives and Research Questions
 
@@ -345,7 +345,7 @@ To explore the discriminant validity of the four factors (cross-informant and in
 
 === Dataset Description
 
-The dataset used for this study is sourced from the SAFE Children Study (ICPSR 34368), see also #cite(<tolan2016>, form: "prose"). The primary study was a longitudinal randomized controlled trial with a total of 11 waves of data collection from 1997 to 2008. The study aimed to test the efficacy of a multicomponent family-centered preventive intervention for children entering 1st grade in inner-city Chicago schools. The intervention targeted key early risk factors for later substance use and adjustment problems. Data were collected from children, their primary caregivers, and teachers across three phases of the study (initial intervention, booster, and long-term follow-up).
+The dataset used for this study is sourced from the SAFE children study (ICPSR 34368), see also #cite(<tolan2016>, form: "prose"). The primary study was a longitudinal randomized controlled trial with a total of 11 waves of data collection from 1997 to 2008. The study aimed to test the efficacy of a multicomponent family-centered preventive intervention for children entering 1st grade in inner-city Chicago schools. The intervention targeted key early risk factors for later substance use and adjustment problems. Data were collected from children, their primary caregivers, and teachers across three phases of the study (initial intervention, booster, and long-term follow-up).
 
 === Public Availability 
 
@@ -353,7 +353,7 @@ The dataset is publicly available and can be accessed via the Inter-University C
 
 === Data Access
 
-The dataset can be accessed after registration at the ICPSR website using a academic email address. The data is available for scientific usage only and can be downloaded in various formats (SAS, SPSS, Stata, R, ASCII, Delimited) via this link https://doi.org/10.3886/ICPSR34368.v1. 
+The dataset can be accessed after registration at the ICPSR website using an academic email address. The data is available for scientific usage only and can be downloaded in various formats (SAS, SPSS, Stata, R, ASCII, Delimited) via this link https://doi.org/10.3886/ICPSR34368.v1. 
 
 
 === Access Date
@@ -364,13 +364,13 @@ The dataset can be accessed after registration at the ICPSR website using a acad
   day: 14,
 )
 
-The dataset was downloaded and first accessed on the #access_date.display("[month repr:long] [day], [year]").
+The dataset was downloaded and first accessed on #access_date.display("[month repr:long] [day], [year]").
 
 === Data Collection Method
 
 === Data Codebook
 
-The data is accompanied by extensive documentation, including codebooks, original questionnaires and user guides for each subcomponent of the study. They can be accessed using the the same link as above. (https://doi.org/10.3886/ICPSR34368.v1). 
+The data is accompanied by extensive documentation, including codebooks, original questionnaires and user guides for each subcomponent of the study. They can be accessed using the same link as above. (https://doi.org/10.3886/ICPSR34368.v1). 
 
 === Knowledge of Data
 
@@ -388,15 +388,15 @@ No piloting was conducted for this study.
 
 == Sample size justification
 
-The sample size of this study is predetermined by the original study design of the SAFE Children study. The original study included a total of $N = 424$ children in the first wave. A complete assessment of the Youth Self Report (YSR) and Child Behavior Checklist (CBCL) was carried out only in wave 10 and 11. Other waves included only partial assessments of the instruments. Because of this, we only use the data of the 10th and 11th wave for the current study. 
+The sample size of this study is predetermined by the original study design of the SAFE children study. The original study included a total of $N = 424$ children in the first wave. A complete assessment of the Youth Self Report (YSR) and Child Behavior Checklist (CBCL) was carried out only in the 10th and 11th wave. Other waves included only partial assessments of the instruments. Because of this, we only use the data of the 10th and 11th wave for the current study. 
 
 == Participant recruitment, selection, and compensation
 
-The prevention program of the SAFE children study targeted families based on their residence in high-risk neighborhoods in Chicago, rather than on individual characteristics. These neighborhoods were characterized by high rates of poverty, crime and resource deprivation @tolan2004. The study aimed to recruit families with children in the transition from kindergarten to first grade. A total of seven elementary schools were selected to participate based on these criteria. All parents of those identified schools were contacted and invited to participate in the study. A total of 507 families were deemed eligible based on of their residence within the designated neighborhood boundaries of the children's schools. Of these, 424 families (84%) agreed to participate in the study and completed baseline assessment @tolan2016. No weighting or stratification was applied to the sample.
+The prevention program of the SAFE children study targeted families based on their residence in high-risk neighborhoods in Chicago, rather than on individual characteristics. These neighborhoods were characterized by high rates of poverty, crime and resource deprivation @tolan2004. The study aimed to recruit families with children in the transition from kindergarten to first grade. A total of seven elementary schools were selected to participate based on these criteria. All parents of those identified schools were contacted and invited to participate in the study. A total of 507 families were deemed eligible based of their residence within the designated neighborhood boundaries of the children's schools. Of these, 424 families (84%) agreed to participate in the study and completed baseline assessment @tolan2016. No weighting or stratification was applied to the sample.
 
 == Handling of participant drop-out
 
-To our knowledge, the primary investigators did not implement any specific procedure to handle participant drop-out during the course of the longitudinal study. However, they reported no significant differences in demographic characteristics in the attrition rates for the first five waves for both intervention and control group @tolan2004. According to the metadata provided on ICPSR, the response rates for parents and children at wave 10 were $72.%$ and $75.0%$, respectively. For the 11th wave, the response rates response rates were $73.6%$ for the parents and $74.1%$ for the children.
+To our knowledge, the primary investigators did not implement any specific procedure to handle participant drop-out during the course of the longitudinal study. However, they reported no significant differences in demographic characteristics in the attrition rates for the first five waves for both intervention and control group @tolan2004. According to the metadata provided on ICPSR, the response rates for parents and children in the 10th wave were $72.%$ and $75.0%$, respectively. For the 11th wave, the response rates were $73.6%$ for the parents and $74.1%$ for the children.
 
 == Masking of participants and researchers
 
@@ -404,19 +404,19 @@ No masking of participants or researchers was implemented in the original study 
 
 == Type of study and study design
 
-The study design was a randomized controlled trial (RCT) with 11 waves of data collection spanning 13 years. The study consisted of three phases: Phase 1 (wave 1-5) was included carrying out the preventive intervention or control condition. Phase 2 (wave 6-9) was aimed at differentiating the effect of a second "booster" intervention among a random subsample of the treated families in comparison to non-treated families on the outcomes of interest. The third phase of the study (wave 10-11) was focused on the long-term effects of the initial and booster intervention @tolan2016. For the present study, we focus only on the data collected at wave 10 and 11 (see section #link(<Variables>)[Variables])
+The study design was a randomized controlled trial (RCT) with 11 waves of data collection spanning 13 years. The study consisted of three phases: Phase 1 (1st-5th wave) was included carrying out the preventive intervention or control condition. Phase 2 (6th-9th wave) was aimed at differentiating the effect of a second "booster" intervention among a random subsample of the treated families in comparison to non-treated families on the outcomes of interest. The third phase of the study (10th and 11th wave) was focused on the long-term effects of the initial and booster intervention @tolan2016. For the present study, we focus only on the data collected at 10th and 11th wave (see section #link(<Variables>)[Variables])
 
 == Randomization
 
-In the SAFE Children study, the initial random assignment to the control or treatment condition was done within classroms to control for potential confounding school related effect. They randomly assigned 55% of the children in each classroom to the treatment condition and 45% to the control condition. This intentional imbalance was based research indicating higher attrition rates for the intervention group @tolan2004. After randomization, families remained in the same conditions throughout the study.  In the second study phase, during fourth grade, approximately half of the families ($N = 114$) in the treatment group were randomly selected to receive a “booster” intervention. 
+In the SAFE children study, the initial random assignment to the control or treatment condition was done within classrooms to control for potential confounding school-related effects. They randomly assigned 55% of the children in each classroom to the treatment condition and 45% to the control condition. This intentional imbalance was based on research indicating higher attrition rates for the intervention group @tolan2004. After randomization, families remained in the same conditions throughout the study.  In the second study phase, during fourth grade, approximately half of the families ($N = 114$) in the treatment group were randomly selected to receive a “booster” intervention. 
 
-Regarding the present study, wave 10 and wave 11 data will be randomly split into two equal halves to create a training and testing/validation sample. The training set comprises the first half of wave 10 and the second half of wave 11, whereas the remaining half of wave 11 constitutes the test set. Randomization will be conducted using the seed `250925192132`.
+Regarding the present study, data from the 10th and 11th wave will be randomly split into two equal halves to create a training and testing/validation sample. The training set comprises the first half of the 10th wave and the second half of the 11th wave, whereas the remaining half of the 11th wave constitutes the test set. Randomization will be conducted using the seed `250925192132`.
 
 == Variables 
 
 <Variables>
 
-Based on the study's objective, the main variables of interest the are the items of  the Youth Self Report (YSR) and Child Behavior Checklist (CBCL) from the Achenbach System of Empirically Based Assessment @achenbach2001a. The Teacher Report Form (TRF) was excluded from the current study, because there were no overlapping waves of data that included the full item set for all three informants (parent, child, teacher). In the primary study the 2001 version of the ASEBA was used @achenbach2001a. It includes 113 items for the CBCL, and 112 items for the YSR. The items are rated on a three-point Likert scale, where 0 = Not true, 1 = Somewhat or sometimes true, and 2 = Very true or often true. The ASEBA is organized into eight clinical subscales, which are used to assess various dimensions of child behavior and emotional problems (see Table 3). Not all items are included in these subscales, and items that do not correspond to one of the clinical subscales are grouped under "Other problems". These items will be disregarded for the construction of the subtest in the the current study. This is due to fact that the contents of these items focus on very specific psychopathological problems that do not belong to the general psychopathological dimensions that the ASEBA subscales are designed to assess. The YSR and CBCL differ in the number of items per clinical subscale (see Table 3) because  the CBCL includes additional items that cannot be assessed via self-report. The exact mapping of the item identifier to the clinical subscales for both measures is provided in an additional file in the registration (_aseba_man_2001.xlsx_).
+Based on the study's objective, the main variables of interest are the items of  the Youth Self Report (YSR) and Child Behavior Checklist (CBCL) from the Achenbach System of Empirically Based Assessment @achenbach2001a. The Teacher Report Form (TRF) was excluded from the current study, because there were no overlapping waves of data that included the full item set for all three informants (parent, child, teacher). In the primary study the 2001 version of the ASEBA was used @achenbach2001a. It includes 113 items for the CBCL, and 112 items for the YSR. The items are rated on a three-point Likert scale, where 0 = Not true, 1 = Somewhat or sometimes true, and 2 = Very true or often true. The ASEBA is organized into eight clinical subscales, which are used to assess various dimensions of child behavior and emotional problems (see Table 3). Not all items are included in these subscales, and items that do not correspond to one of the clinical subscales are grouped under "Other problems". These items will be disregarded for the construction of the subtest in the current study. This is due to the fact that the contents of these items focus on very specific psychopathological problems that do not belong to the general psychopathological dimensions that the ASEBA subscales are designed to assess. The YSR and CBCL differ in the number of items per clinical subscale (see Table 3) because  the CBCL includes additional items that cannot be assessed via self-report. The exact mapping of the item identifiers to the clinical subscales for both measures is provided in an additional file in the registration (_aseba_man_2001.xlsx_).
 
 == Exhaustiveness of Variables
 
@@ -484,13 +484,13 @@ To select a set of items that meets the construction goal, an objective function
 
 1. _Model fit_
 
-Two model fit indices will be included as criteria for the objective funtion: The sample-corrected robust Root Mean Square Error of Approximation @li2006.
+Two model fit indices will be included as criteria for the objective function: The sample-corrected robust Root Mean Square Error of Approximation @li2006.
 
 $
 R M S E A = sqrt(max(0, hat(F)_("ML")/(d f) - (hat(c))/(n - 1)))
 $ <eq1>
 
-where $hat(c)$ is a correction constant, $hat(F)_("ML")$ is the value of the minimized fit function, $d f$ are the degress of freedom and $n$ is the sample size @brosseau-liard2012. This corresponds to the _"rmsea.robust"_ criterion in the _lavaan_ package @rosseel2012.  
+where $hat(c)$ is a correction constant, $hat(F)_("ML")$ is the value of the minimized fit function, $d f$ are the degrees of freedom and $n$ is the sample size @brosseau-liard2012. This corresponds to the _"rmsea.robust"_ criterion in the _lavaan_ package @rosseel2012.  
 
 Additionally, the Standardized Root Mean Square Residual @bentler1995 will be included as a second model fit criterion
 
@@ -535,18 +535,18 @@ with weights $cal(W)$ set as $w_("RMSEA") = w_("SRMR") = w_phi = w_gamma = 1/6$ 
 
 == Model Estimation
 
-Because the search space of all possible item combinations is feasable for a brute-force search, we will use an exhaustive search to identify the item combination that optimally satisfies the criteria of the empirical objective function $f$. As a rationale for the brute-force search, we note that the number of combinations is feasible to compute exhaustively. For the clinical subscale with the most number of items, _Aggressive Behavior (AB)_ with 13 items, the number of possible combinations when selecting two items per factor given the model provided in @fig2 equates to 474552 combinations, which is a managble number to compute exhaustively. For the remaining clinical subscales, the number of combinations is even smaller, because they have fewer items.
+Because the search space of all possible item combinations is feasible for a brute-force search, we will use an exhaustive search to identify the item combination that optimally satisfies the criteria of the empirical objective function $f$. As a rationale for the brute-force search, we note that the number of combinations is feasible to compute exhaustively. For the clinical subscale with the most number of items, _Aggressive Behavior (AB)_ with 13 items, the number of possible combinations when selecting two items per factor given the model provided in @fig2 equates to 474552 combinations, which is a manageable number to compute exhaustively. For the remaining clinical subscales, the number of combinations is even smaller, because they have fewer items.
 
 To estimate the structural equation models, the _stuart_ R-package @schultze2023 will be used to perform the search and model estimation, which uses the _lavaan_ package @rosseel2012 as a backend. Because a factor model including all eight clinical subscales at the same time would lead to a very complex model with a large number of parameters, the model in @fig2 will be sequentially estimated for each clinical subscale separately. 
 
-As mentioned previously, we will use both 10th and 11th wave data of the SAFE Children Study for the present study. Using both waves of data allows us to randomly split the data into two equal parts, combining the first half of the wave 10 data with the second hald of the wave 11 data. This combined dataset will be used as a training set for the item selection procedure. All hypotheses and exploratory research questions will be tested on the remaining half of the data, which will be used as a test set. This approach allows us to better assess the generalizability of the constructed subtests and to avoid overfitting the model to the training data.
+As mentioned previously, we will use both 10th and 11th wave data of the SAFE children study for the present study. Using both waves of data allows us to randomly split the data into two equal parts, combining the first half of the wave 10 data with the second half of the wave 11 data. This combined dataset will be used as a training set for the item selection procedure. All hypotheses and exploratory research questions will be tested on the remaining half of the data, which will be used as a test set. This approach allows us to better assess the generalizability of the constructed subtests and to avoid overfitting the model to the training data.
 
 == Minimum Viable Criteria (MVC) 
 
 <mvc>
 
 In order to assess the overall quality of the constructed subtest ($H_1$), we will define a set of Minimum Viable Criteria (MVC) based on the criteria included in the empirical objective function $f$. The MVC will serve as benchmarks that the constructed subtest _must_ meet to be considered acceptable. 
-This will determined without inferential testing, but rather by comparing the estimated values of the criteria to the determined cutoff values of the MVC. If a subscale does not meet one of the criteria, we will run through a diagnostic algorithm (see section #link(<diagnostic_algorithm>)[Diagnostic Algorithm]) to identify potential issues with the item selection.
+This will be determined without inferential testing, but rather by comparing the estimated values of the criteria to the determined cutoff values of the MVC. If a subscale does not meet one of the criteria, we will run through a diagnostic algorithm (see section #link(<diagnostic_algorithm>)[Diagnostic Algorithm]) to identify potential issues with the item selection.
 
 === Model Fit Criteria 
 
@@ -556,17 +556,17 @@ Cutoff values for model fit criteria (RMSEA, SRMR) will not be based on conventi
 
 Selecting only $k = 2$ items per factor to construct the subtest will inherently lead to substantially lower reliability estimates than those for the full scales. Still, consistency within each factor remains a desirable psychometric property of the subtest. 
 
-To establish a reasonable benchmark for the expected reliability given the reduced number of items, we will use the Brown-Spearman prediction formula @brown1910@spearman1910a. This formula allows us to to estimate the reliability for a shortened version of a scale based on the reliability of estimates of the original scale and the ratio of number of items between the original and new scale. Reliability estimates reported in the ASEBA manual @achenbach2001a will be used as the original reliability estimates for these calculations. The Brown-Spearman formula is given by:
+To establish a reasonable benchmark for the expected reliability given the reduced number of items, we will use the Brown-Spearman prediction formula @brown1910@spearman1910a. This formula allows us to estimate the reliability for a shortened version of a scale based on the reliability of estimates of the original scale and the ratio of number of items between the original and new scale. Reliability estimates reported in the ASEBA manual @achenbach2001a will be used as the original reliability estimates for these calculations. The Brown-Spearman formula is given by:
 
 $
 rho^* = (r rho) / (1 + (r-1) rho)
 $ <eq6>
 
-where $r$ is the ratio of the number of items in the new test to the number of items in the original test, $rho$ is the reliability of the original test, and $rho^*$ is the predicted reliability of the new test. The calculated reliabilites are summarized in the two right columns of Table 3 below. These values will serve as benchmarks for the reliability of the constructed subtest. 
+where $r$ is the ratio of the number of items in the new test to the number of items in the original test, $rho$ is the reliability of the original test, and $rho^*$ is the predicted reliability of the new test. The calculated reliabilities are summarized in the two right columns of Table 3 below. These values will serve as benchmarks for the reliability of the constructed subtest. 
 
 === Latent Correlation $phi$
 
-Because the informant-specific factors are intended to capture uniquue variance relevant to each informant's perspective, we expect that the latent correlation between the informant-specific factors of the child and parent informants should be as low as possible. To have a reasable benchmark for the expected latent correlation, we refer to the agreement between the parent and child reports of the ASEBA manual @achenbach2001a. Agreement is defined as the correlation between the parent (CBCL) and youth (YSR) reports for each subscale. The agreement values are summarized in the second column of Table 3 above. To satisfy this criterium, agreement in the constructed subtests should be lower for the informant-specific factors than the agreement values reported in the ASEBA manual.
+Because the informant-specific factors are intended to capture unique variance relevant to each informant's perspective, we expect that the latent correlation between the informant-specific factors of the child and parent informants should be as low as possible. To have a reasonable benchmark for the expected latent correlation, we refer to the agreement between the parent and child reports of the ASEBA manual @achenbach2001a. Agreement is defined as the correlation between the parent (CBCL) and youth (YSR) reports for each subscale. The agreement values are summarized in the second column of Table 3 above. To satisfy this criterion, agreement in the constructed subtests should be lower for the informant-specific factors than the agreement values reported in the ASEBA manual.
 
 === Latent Regression Weight $gamma$
 
@@ -603,7 +603,7 @@ Parallel to the latent correlation, we will again use the agreement values repor
 In cases, when one of the Minimum Viable Criteria (MVC) is not met, we will run through a diagnostic algorithm to identify potential issues with the item selection (see @fig3). 
 
 1. If both RMSEA and SRMR do not meet the MVC, we will drop the clinical subscale from the item selection procedure.
-2. If SRMR meets the MVC, but RMSEA does not, the model is likely overparametrized, implying one or more factors may not be necessary. This should manifest in in either too low cross-informant consistency (i.e., low regression weight $gamma$) or too low informant-specific uniquencess (i.e., high latent correlation $phi$). See point 3. and 4.
+2. If SRMR meets the MVC, but RMSEA does not, the model is likely overparametrized, implying one or more factors may not be necessary. This should manifest in either too low cross-informant consistency (i.e., low regression weight $gamma$) or too low informant-specific uniqueness (i.e., high latent correlation $phi$). See point 3. and 4.
 3. If the regression weight $gamma$ does not meet the MVC, we will drop the cross-informant factors (CI-C, CI-P) from the model.
 4. If the latent correlation $phi$ does not meet the MVC, we will drop the informant-specific factors (IS-C, IS-P) from the model.
 5. If the average reliability $overline(omega)$ is too low and does not meet the MVC, we will check, which of the four factors falls below the reliability threshold. If one of the cross-informant factors (CI-C, CI-P) falls below it, we will drop both factors. If one of the informant-specific factors (IS-C, IS-P) falls below it, we will drop only the respective factor. If at least one of both cross-informant and informant-specific factors falls below the threshold, we will drop the entire clinical subscale from the item selection procedure.
@@ -627,14 +627,14 @@ Because the item selection procedure will be conducted sequentially for each cli
 
 === $H_1$
 
-Hypothesis 1 will be tested by assessing the overall model fit of the constructed subtests using the Mimimum Viable Criteria (MVC) approach described above. As mentioned, whether MVC are met will be determined strictly by comparing the estimated values of the criteria to the determined cutoff values of the MVC. 
+Hypothesis 1 will be tested by assessing the overall model fit of the constructed subtests using the Minimum Viable Criteria (MVC) approach described above. As mentioned, whether MVC are met will be determined strictly by comparing the estimated values of the criteria to the determined cutoff values of the MVC. 
 
 
 === $H_2$
 
 Hypothesis 2 will be tested by assessing the measurement invariance of the cross-informant factors across the child and parent informants. By specification of the measurement model, these factors are already constrained to configural measurement invariance. More restrictive levels of measurement invariance (metric, scalar, strict) will be sequentially tested. For metric invariance, the factor loadings of the items loading onto the cross-informant factors (CI-C, CI-P) will be constrained to be equal across informants. For scalar invariance, both factor loadings and item intercepts will be constrained to be equal across informants. Finally, for strict invariance, factor loadings, item intercepts and item residual variances will be constrained to be equal across informants.
 
-Invariance will be tested using information criteria (AIC, BIC, aBIC; see @eq7 - @eq9) to assess whether the more restrictive models leads to a substantial decrease in model fit. If the information criteria do not agree uniamously, a $chi^2$ difference test will be used to test whether the equivalence in model fit between the less and more restrictive model must be rejected.
+Invariance will be tested using information criteria (AIC, BIC, aBIC; see @eq7 - @eq9) to assess whether the more restrictive models lead to a substantial decrease in model fit. If the information criteria do not agree unanimously, a $chi^2$ difference test will be used to test whether the equivalence in model fit between the less and more restrictive model must be rejected.
 
 $
 A I C = -2 log cal(L)(hat(cal(upsilon))) + 2 k
@@ -652,7 +652,7 @@ $ <eq9>
 
 To test the informant-specific functioning of items selected for the informant-specific factors, a model will be defined where items selected for the informant specific factors (IS-C, IS-P) load onto their respective cross-informant factor counterpart and remove the informant-specific factors from the model completely. 
 
-For instance consider items the example in @fig2. In this case, two models would be defined: In the first model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(3 1 1)$, $X_(4 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(3 1 2)$, $X_(4 1 2)$ would load onto the parent factor. In the second model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(5 1 1)$, $X_(6 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(5 1 2)$, $X_(6 1 2)$ would load onto the parent factor. Only if the model fit for both models is rejected, we will conclude that the items selected for the informant-specific factors demonstrate informant-specific functioning. Model fit will again be assessed in terms of RMSEA and SRMR using the _ezCutoffs_ approach described above. However, cutoffs determined in this way previously cannot be used and must be recalculated, because the model structure has changed. 
+For instance consider the example items in @fig2. In this case, two models would be defined: In the first model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(3 1 1)$, $X_(4 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(3 1 2)$, $X_(4 1 2)$ would load onto the parent factor. In the second model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(5 1 1)$, $X_(6 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(5 1 2)$, $X_(6 1 2)$ would load onto the parent factor. Only if the model fit for both models is rejected, we will conclude that the items selected for the informant-specific factors demonstrate informant-specific functioning. Model fit will again be assessed in terms of RMSEA and SRMR using the _ezCutoffs_ approach described above. However, cutoffs determined in this way previously cannot be used and must be recalculated, because the model structure has changed. 
 
 == Analysis of Exploratory Research Questions
 
