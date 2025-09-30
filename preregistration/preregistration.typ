@@ -174,12 +174,8 @@
 }
 
 #show outline.entry: set outline.entry(fill: [])
-
-
 #set text(font: "TeX Gyre Pagella")
 #show math.equation: set text(font: "TeX Gyre Pagella Math")
-
-
 
 //* —————————————————————————————————————————————————
 //* Main document content
@@ -231,9 +227,9 @@ To clarify the study design, particularly regarding the assessment waves in whic
 #figure(
   [
   #image("resources/contribution.svg")
-  #text(size: 10pt)[
+  #text(size: 11pt)[
     #par(first-line-indent: 0em, [
-    #align(left)[_Note:_ CRediT see https://credit.niso.org/.]
+    #align(left)[_Note:_ CRediT see https://credit.niso.org/.; figure generated using the _R_ package #link("https://www.jvcasillas.com/contributoR/")[_contributoR_].]
   ])]
   ],
   caption: [CRediT Taxonomy for Planned Author Contributions]
@@ -302,6 +298,7 @@ Repositories where project materials will be shared:
 - Open Science Framework: https://osf.io/hzus8/
 - GitHub: https://github.com/jlschnatz/multi-informant-aseba
 
+#v(0.5em)
 
 = Introduction
 
@@ -469,7 +466,7 @@ Regarding the number of manifest variables $X$ included in the model, we decided
   [
   #include "resources/model.typ"
   #text(size: 11pt)[#par(first-line-indent: 0em, [
-    #align(left)[_Note:_ IS: Informant-Specific Factor, CI: Cross-Informant Factor, C: Child informant, P: Parent informant]
+    #align(left)[_Note:_ IS: Informant-Specific Factor, CI: Cross-Informant Factor, C: Child informant, P: Parent informant; figure generated using thetypst package #link("https://typst.app/universe/package/fletcher/")[_fletcher_].]
   ])]
   ],
   caption: par(first-line-indent: 0em, [Proposed Structural Equation Model for a Single Clinical Subscale of the ASEBA])
@@ -533,6 +530,8 @@ $ <eq4>
 
 with weights $cal(W)$ set as $w_("RMSEA") = w_("SRMR") = w_phi = w_gamma = 1/6$ and  $w_(overline(omega)) = 1/3$, reflecting their relative importance.
 
+#pagebreak()
+
 == Model Estimation
 
 Because the search space of all possible item combinations is feasible for a brute-force search, we will use an exhaustive search to identify the item combination that optimally satisfies the criteria of the empirical objective function $f$. As a rationale for the brute-force search, we note that the number of combinations is feasible to compute exhaustively. For the clinical subscale with the most number of items, _Aggressive Behavior (AB)_ with 13 items, the number of possible combinations when selecting two items per factor given the model provided in @fig2 equates to 474552 combinations, which is a manageable number to compute exhaustively. For the remaining clinical subscales, the number of combinations is even smaller, because they have fewer items.
@@ -546,7 +545,7 @@ As mentioned previously, we will use both 10th and 11th wave data of the SAFE ch
 <mvc>
 
 In order to assess the overall quality of the constructed subtest ($H_1$), we will define a set of Minimum Viable Criteria (MVC) based on the criteria included in the empirical objective function $f$. The MVC will serve as benchmarks that the constructed subtest _must_ meet to be considered acceptable. 
-This will be determined without inferential testing, but rather by comparing the estimated values of the criteria to the determined cutoff values of the MVC. If a subscale does not meet one of the criteria, we will run through a diagnostic algorithm (see section #link(<diagnostic_algorithm>)[Diagnostic Algorithm]) to identify potential issues with the item selection.
+This will be determined without inferential testing. Instead estimated values of the criteria will be compared to the determined cutoff values of the MVC. If a subscale does not meet one of the criteria, we will run through a diagnostic algorithm (see section #link(<diagnostic_algorithm>)[Diagnostic Algorithm]) to identify potential issues with the item selection.
 
 === Model Fit Criteria 
 
@@ -592,7 +591,7 @@ Parallel to the latent correlation, we will again use the agreement values repor
   caption: [Cross-Informant Agreement and Reliability Estimates for all ASEBA Subscales],
 ) <table3>
 
-#text(size:8pt)[
+#text(size:9pt)[
   _Note:_ Agree (agreement) refers to the correlation between the parent (CBCL) and youth (YSR) reports for each subscale. Data taken from the ASEBA manual @achenbach2001a. The sample sizes for the CBCL and YSR are denoted as $N$ in parentheses. The reliability estimates ($alpha$) are calculated using Cronbach's alpha for each subscale, with the predicted reliability ($rho^*$) estimated using the Spearman-Brown prediction formula based on the number of items in the new tests compared to the original tests. 
 ]
 
@@ -613,12 +612,14 @@ In cases where one or more factors are dropped from the model, we will rerun the
 #figure(
   [
   #include "resources/algorithm.typ"
-  #text(size: 10pt)[
+  #text(size:10pt)[
+    #v(0.5em)
     #par(first-line-indent: 0em, [
-    #align(left)[_Note:_ \*Only drop the respective factor, if the reliability of only one of the two informants falls below the threshold. CI: Cross-Informant, IS: Informant-Specific]
+    #align(left)[ _Note:_ \*Only drop the respective factor, if the reliability of only one of the two informants falls below the threshold. CI: Cross-Informant, IS: Informant-Specific; figure generated using the typst package #link("https://typst.app/universe/package/fletcher/")[_fletcher_].
+    ]
   ])]
   ],
-  caption: [Diagnostic Algorithm for Identifying Issues with the Item Selection]
+  caption: [Diagnostic Algorithm for Identifying Issues with the Item Selection #v(0.5em)]
 ) <fig3>
 
 == Testing Hypotheses
@@ -652,7 +653,11 @@ $ <eq9>
 
 To test the informant-specific functioning of items selected for the informant-specific factors, a model will be defined where items selected for the informant specific factors (IS-C, IS-P) load onto their respective cross-informant factor counterpart and remove the informant-specific factors from the model completely. 
 
-For instance consider the example items in @fig2. In this case, two models would be defined: In the first model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(3 1 1)$, $X_(4 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(3 1 2)$, $X_(4 1 2)$ would load onto the parent factor. In the second model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(5 1 1)$, $X_(6 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(5 1 2)$, $X_(6 1 2)$ would load onto the parent factor. Only if the model fit for both models is rejected, we will conclude that the items selected for the informant-specific factors demonstrate informant-specific functioning. Model fit will again be assessed in terms of RMSEA and SRMR using the _ezCutoffs_ approach described above. However, cutoffs determined in this way previously cannot be used and must be recalculated, because the model structure has changed. 
+For instance consider the example items in @fig2. In this case, two models would be defined: In the first model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(3 1 1)$, $X_(4 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(3 1 2)$, $X_(4 1 2)$ would load onto the parent factor. In the second model, items $X_(1 1 1)$, $X_(2 1 1)$, $X_(5 1 1)$, $X_(6 1 1)$ would load onto the child factor and items $X_(1 1 2)$, $X_(2 1 2)$, $X_(5 1 2)$, $X_(6 1 2)$ would load onto the parent factor. Only if the model fit for both models is rejected, we will conclude that the items selected for the informant-specific factors demonstrate informant-specific functioning. 
+
+Model fit will again be assessed in terms of RMSEA and SRMR using the _ezCutoffs_ approach described above. However, cutoffs determined in this way previously cannot be used and must be recalculated, because the model structure has changed. 
+
+#pagebreak()
 
 == Analysis of Exploratory Research Questions
 
@@ -660,6 +665,6 @@ To analyse our exploratory research question, we will extract factor scores for 
 
 In step one, Bartlett-Factor-Scores (BFS) will be estimated for each of the four latent factors (CI-C, CI-P, IS-C, IS-P) for each clinical subscale of the ASEBA. This will be done using the `lavPredict()` function of the _lavaan_ package @rosseel2012. In step two, the estimated factor scores will be adjusted for measurement error by fitting a single indicator factor model where the estimated factor scores are used as a manifest variable for the respective latent factor with fixed factor loading of one and error variance fixed to the squared standard error of the factor scores. 
 
-After factor scores have been estimated, pairwise correlations between the factor scores of the four latent factors (CI-C, CI-P, IS-C, IS-P) of each clinical subscale with each respective latent factor of all other clinical subscales will be calculated. In total this will result in $4 dot 8 dot 7 = 224$ unique correlations. No inferential testing will be conducted, but rather the correlations will be interpreted descriptively in an exploratory manner.
+After factor scores have been estimated, pairwise correlations between the factor scores of the four latent factors (CI-C, CI-P, IS-C, IS-P) of each clinical subscale with each respective latent factor of all other clinical subscales will be calculated. In total this will result in $4 dot 8 dot 7 = 224$ unique correlations. No inferential testing will be conducted. Instead, the correlations will be interpreted descriptively in an exploratory manner.
 
 #bibliography("resources/references.bib", style: "american-psychological-association")

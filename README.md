@@ -11,7 +11,7 @@ The code in the repository is licensed under the [GPL-3.0 License](https://www.g
 
 ## Preregistration
 
-The preregistration for this project was submitted on September 30th, 2025 and can be found in the folder `preregistration/preregistration.pdf`.
+The preregistration for this project was submitted on October, 1st, 2025 and can be found in the folder `preregistration/preregistration.pdf`.
 
 ## Data Download
 

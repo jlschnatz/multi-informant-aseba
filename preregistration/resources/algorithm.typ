@@ -1,8 +1,6 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 #import fletcher.shapes: pill, diamond
 
-
-
 #let decision(pos, label, ..args) = node(
   pos, align(center, label), 
   fill:  gradient.radial(silver.lighten(95%), silver.darken(10%), center: (30%, 20%), radius: 80%), 
@@ -15,7 +13,6 @@
 #let state(pos, label, ..args) = node(
   pos, align(center, label), 
   shape: rect, 
-  //fill: navy.lighten(50%), 
   fill: gradient.radial(navy.lighten(85%), navy.lighten(30%), center: (30%, 20%), radius: 80%),
   width: 7.5em,
   height: 4em,
@@ -31,11 +28,10 @@
   ..args
   )
 
-
 #set par(justify: false)
 
 #align(center, [
-    #text(size: 9pt, [
+    #text(size: 9.5pt, [
       #diagram(
       let(srmr_met, rmsea_met, phi_met, gamma_met, omega_met) = ((-2, 0), (-1, 0), (0, 0), (1, 0), (2, 0)),
       let(rmsea_met2, fct_threshold) = ((-2, -1), (2, -1)),
