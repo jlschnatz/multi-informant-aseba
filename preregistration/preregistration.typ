@@ -230,7 +230,7 @@ To clarify the study design, particularly regarding the assessment waves in whic
 
 #figure(
   [
-  #image("contribution.png")
+  #image("resources/contribution.png")
   #text(size: 10pt)[
     #par(first-line-indent: 0em, [
     #align(left)[_Note:_ CRediT see https://credit.niso.org/.]
@@ -467,7 +467,7 @@ Regarding the number of manifest variables $X$ included in the model, we decided
 
 #figure(
   [
-  #include "model.typ"
+  #include "resources/model.typ"
   #text(size: 11pt)[#par(first-line-indent: 0em, [
     #align(left)[_Note:_ IS: Informant-Specific Factor, CI: Cross-Informant Factor, C: Child informant, P: Parent informant]
   ])]
@@ -612,7 +612,7 @@ In cases where one or more factors are dropped from the model, we will rerun the
 
 #figure(
   [
-  #include "algorithm.typ"
+  #include "resources/algorithm.typ"
   #text(size: 10pt)[
     #par(first-line-indent: 0em, [
     #align(left)[_Note:_ \*Only drop the respective factor, if the reliability of only one of the two informants falls below the threshold. CI: Cross-Informant, IS: Informant-Specific]
@@ -662,4 +662,4 @@ In step one, Bartlett-Factor-Scores (BFS) will be estimated for each of the four
 
 After factor scores have been estimated, pairwise correlations between the factors scores of the four latent factors (CI-C, CI-P, IS-C, IS-P) of each clinical subscale with each respective latent factor of all other clinical subscales will be calculated. In total this will result in $4 dot 8 dot 7 = 224$ unique correlations. No inferential testing will be conducted, but rather the correlations will be interpreted descriptively in exploratory manner.
 
-#bibliography("references.bib", style: "american-psychological-association")
+#bibliography("resources/references.bib", style: "american-psychological-association")

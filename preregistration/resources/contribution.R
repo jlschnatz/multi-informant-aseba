@@ -14,7 +14,7 @@ contributor(contributions = contr) +
   theme(text = element_text(family = "TeX Gyre Pagella"))
 
 ggsave(
-  filename = "preregistration/contribution.png",
+  filename = "preregistration/resources/contribution.png",
    width = 6,
    height = 3.5,
    dpi = 300,
