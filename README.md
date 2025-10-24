@@ -1,5 +1,7 @@
 # Forschungsmodul *PsyMSc5*
 
+## General Information
+
 <table>
   <tr>
     <td><h5>Project Title</h5></td>
