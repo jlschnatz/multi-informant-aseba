@@ -51,6 +51,7 @@ tar_source()
 
 # Replace the target list below with your own:
 list(
+  
   tar_file(
     aseba_reliability,
     "data/processed/aseba_reliability.csv"
@@ -77,21 +78,29 @@ list(
   # Generate variable dictionary
   tar_target(
     dict,
-    generate_dict(data_safe)
+    create_dictionary(data_safe)
   ),
-  # Find dropouts
+  # Find attrition
   tar_target(
     dropout,
-    find_dropout(data_safe)
+    handle_attrition(data_safe)
   ),
   # Prepare ASEBA data
   tar_target(
     data_aseba,
-    prepare_data(data_safe, dropout)
+    create_aseba(data_safe, dropout)
   ),
   # Train-test split
   tar_target(
-    split_data,
-    finalize_split(data_aseba)
+    split_list,
+    split_data(data_aseba)
+  ),
+  tar_target(
+    training_set,
+    extract_datasets(split_list, which = "training")
+  ),
+  tar_target(
+    test_set,
+    extract_datasets(split_list, which = "testing")
   )
 )

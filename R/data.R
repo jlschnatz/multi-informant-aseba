@@ -1,0 +1,110 @@
+#' Create a safe child dataset by merging multiple .sav files
+#' @param files A character vector of file paths to .sav files
+#' @return A data frame containing the merged data
+create_safechild <- function(files) {
+  data_list <- lapply(files, function(x) dplyr::select(haven::read_sav(x), -CASEID))
+  data_full <- purrr::reduce(data_list, dplyr::left_join, by = dplyr::join_by(SAFE_ID))
+  return(data_full)
+}
+
+
+#' Generate a dictionary from the dataset
+#' @param x A data frame (from SAV format)
+#' @return A data frame containing the variable dictionary
+create_dictionary <- function(x) {
+  dict <- labelled::generate_dictionary(x, details = "full") |>
+    labelled::lookfor_to_long_format() |>
+    labelled::convert_list_columns_to_character()
+  return(dict)
+}
+
+
+#' Attrition analysis to find dropouts of follow-up waves (10th and 11th) of the SAFE child study
+#' @param data A data frame containing the SAFE child dataset
+#' @return A list with handle_attrition statistics (number and proportion of dropouts, and their IDs)
+handle_attrition <- function(data) {
+  is_missing <- with(data, is.na(C10ASSDAT) & is.na(C11ASSDAT) & is.na(P10ASSDAT) & is.na(P11ASSDAT))
+  n_dropout <- sum(is_missing)
+  out <- list(
+    n_dropout = n_dropout,
+    total = nrow(data), 
+    prop_dropout = n_dropout / nrow(data),
+    id_dropout = data$SAFE_ID[is_missing]
+    )
+  return(out)
+}
+
+#' Prepare ASEBA data by filtering out dropouts and selecting relevant variables
+#' @param data A data frame containing the SAFE child dataset (from create_safechild() function)
+#' @param attrition A list containing attrition information (from handle_attrition() function)
+#' @return A data frame containing the prepared ASEBA data
+create_aseba <- function(data, attrition) {
+  data_aseba <- data |> 
+    dplyr::filter(!SAFE_ID %in% attrition$id_dropout) |> 
+    dplyr::select(
+      SAFE_ID,
+      dplyr::matches("^C\\d{2}AYS\\d{2,3}[a-zA-Z]?$"),
+      dplyr::matches("^P\\d{2}CBP\\d{2,3}[a-zA-Z]?$")
+    ) |>
+    dplyr::rename_with(~gsub("AYS", "YSR", .x), matches("AYS")) |>
+    dplyr::rename_with(~gsub("CBP", "CBCL", .x), matches("CBP"))
+  return(data_aseba)
+}
+
+#' Split the ASEBA data into training and test sets
+#' @param data A data frame containing the prepared ASEBA data (from create_aseba() function)
+#' @return A list containing the training and test datasets
+split_data <- function(data) {
+
+  data_wave10 <- dplyr::select(data, c(SAFE_ID, matches("(C|P)10"))) |>
+    dplyr::rename_with(~ gsub("^C10", "", .x), dplyr::matches("^C10")) |>
+    dplyr::rename_with(~ gsub("^P10", "", .x), dplyr::matches("^P10"))
+
+  data_wave11 <- dplyr::select(data, c(SAFE_ID, matches("(C|P)11"))) |>
+    dplyr::rename_with(~ gsub("^C11", "", .x), dplyr::matches("^C11")) |>
+    dplyr::rename_with(~ gsub("^P11", "", .x), dplyr::matches("^P11"))
+
+  id_half1 <- sample(data$SAFE_ID, size = nrow(data)/2, replace = FALSE)
+  id_half2 <- setdiff(data$SAFE_ID, id_half1)
+
+  wave10_half1 <- dplyr::filter(data_wave10, SAFE_ID %in% id_half1)
+  wave10_half2 <- dplyr::filter(data_wave10, SAFE_ID %in% id_half2)
+  wave11_half1 <- dplyr::filter(data_wave11, SAFE_ID %in% id_half1)
+  wave11_half2 <- dplyr::filter(data_wave11, SAFE_ID %in% id_half2)
+  training_set <- dplyr::bind_rows(wave10_half1, wave11_half2)
+  test_set <- dplyr::bind_rows(wave10_half2, wave11_half1)
+
+  out <- list(
+    training_set = training_set,
+    test_set = test_set
+  )
+  return(out)
+}
+
+#' Extract training or test dataset from the split data
+#' @param data A list containing the split datasets (from split_data() function)
+#' @param which A character string specifying which dataset to extract ("training" or "testing")
+#' @return A data frame containing the requested dataset
+extract_datasets <- function(data, which = c("training", "testing")) {
+  which <- match.arg(which)
+  out <- switch(which,
+    training = data$training_set,
+    testing = data$test_set
+  )
+  return(out)
+}
+
+
+create_cutoff <- function(file1, file2, capacity = 2) {
+  rel <- read.csv(file1)
+  agr <- read.csv(file2)
+  comb <- dplyr::inner_join(agr, rel, by = "scale")
+  comb |> 
+    tidyr::pivot_longer(
+      cols = -c(scale, agreement),
+      names_to = c(".value", "instrument"),
+      names_sep = "_"
+    ) |>
+    dplyr::mutate(alpha_star = spearman_brown(alpha, n, capacity)) |>
+    dplyr::mutate(dplyr::across(dplyr::starts_with("alpha"), ~round(.x, 3)))
+}
