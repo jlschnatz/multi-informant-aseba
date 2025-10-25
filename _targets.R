@@ -51,18 +51,18 @@ tar_source()
 
 # Replace the target list below with your own:
 list(
-  
+  # Reliability and Agreement CSV files
   tar_file(
-    aseba_reliability,
-    "data/processed/aseba_reliability.csv"
+    rel_file,
+    "data/processed/aseba_rel.csv"
   ),
   tar_file(
-    aseba_ci_agreement,
-    "data/processed/aseba_ci-agreement.csv"
+    agr_file,
+    "data/processed/aseba_agr.csv"
   ),
   tar_target(
     data_cutoff,
-    create_cutoff(aseba_reliability, aseba_ci_agreement, capacity = 2)
+    create_cutoff(rel_file, agr_file, capacity = 2),
   ),
   # SAV-files of raw data
   tar_files(
@@ -102,5 +102,15 @@ list(
   tar_target(
     test_set,
     extract_datasets(split_list, which = "testing")
+  ),
+  # Read in ASEBA metadata (manual from 2001)
+  tar_file(file_meta_aseba, "data/meta/aseba_man_2001.xlsx"),
+  tar_target(
+    meta_cbcl,
+    read_meta_aseba(file_meta_aseba, sheet = "cbcl")
+  ),
+  tar_target(
+    meta_ysr,
+    read_meta_aseba(file_meta_aseba, sheet = "ysr")
   )
 )
