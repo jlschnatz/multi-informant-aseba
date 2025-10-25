@@ -1,3 +1,20 @@
+---
+output: github_document
+embed-resources: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<!-- badges: start -->
+<!-- badges: end -->
+
 # Forschungsmodul *PsyMSc5*
 
 ## General Information
@@ -40,3 +57,8 @@ Data used for this study is sourced from the Schools and Families Educating (SAF
 
 
 ### Dependecy Graph of targets
+
+```{r}
+library(targets)
+tar_visnetwork()
+```
