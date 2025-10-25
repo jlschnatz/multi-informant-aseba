@@ -1,16 +1,7 @@
 ---
-output: github_document
-embed-resources: true
+format: gfm
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -58,7 +49,24 @@ Data used for this study is sourced from the Schools and Families Educating (SAF
 
 ### Dependecy Graph of targets
 
+Test
+
+
+
 ```{r}
+#| echo: false
+
 library(targets)
-tar_visnetwork()
+merm <- tar_mermaid(reporter = "silent")
+writeLines(merm, "mermaid.mmd")
 ```
+
+
+
+```{mermaid}
+%%| file:  mermaid.mmd
+```
+
+
+
+
