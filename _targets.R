@@ -112,5 +112,24 @@ list(
   tar_target(
     meta_ysr,
     read_meta_aseba(file_meta_aseba, sheet = "ysr")
+  ),
+  # Create item assignment  
+  tar_target(
+    item_assignment,
+    create_item_assignment(meta_ysr, meta_cbcl)
+  ),
+  tar_target(
+    missing_items,
+    check_item_assignment(item_assignment, training_set)
+  ),
+  tar_target(
+    item_assignment_fixed,
+    fix_item_assignment(item_assignment, missing_items)
+  ),
+  tar_target(
+    test,
+    f(item_assignment_fixed, training_set),
+    pattern = map(item_assignment_fixed)
   )
+  # ...
 )

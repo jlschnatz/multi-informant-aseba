@@ -7,7 +7,6 @@ create_safechild <- function(files) {
   return(data_full)
 }
 
-
 #' Generate a dictionary from the dataset
 #' @param x A data frame (from SAV format)
 #' @return A data frame containing the variable dictionary
@@ -17,7 +16,6 @@ create_dictionary <- function(x) {
     labelled::convert_list_columns_to_character()
   return(dict)
 }
-
 
 #' Attrition analysis to find dropouts of follow-up waves (10th and 11th) of the SAFE child study
 #' @param data A data frame containing the SAFE child dataset
@@ -94,7 +92,11 @@ extract_datasets <- function(data, which = c("training", "testing")) {
   return(out)
 }
 
-
+#' Create cutoff values for Minimum Viable Criteria (MVC) based on reliability and agreement data
+#' @param file1 A character string specifying the path to the reliability CSV file
+#' @param file2 A character string specifying the path to the agreement CSV file
+#' @param capacity An integer specifying the capacity for Spearman-Brown formula (default is 2)
+#' @return A data frame containing the cutoff values
 create_cutoff <- function(file1, file2, capacity = 2) {
   rel <- read.csv(file1)
   agr <- read.csv(file2)
@@ -108,3 +110,69 @@ create_cutoff <- function(file1, file2, capacity = 2) {
     dplyr::mutate(alpha_star = spearman_brown(alpha, n, capacity)) |>
     dplyr::mutate(dplyr::across(dplyr::starts_with("alpha"), ~round(.x, 3)))
 }
+
+#' Read in ASEBA metadata from an Excel file
+#' @param file A character string specifying the path to the Excel file
+#' @param sheet A character string specifying the sheet name ("cbcl" or "ysr")
+#' @return A data frame containing the ASEBA metadata
+read_meta_aseba <- function(file, sheet = c("cbcl", "ysr")) {
+  sheet <- match.arg(sheet)
+  meta <- readxl::read_excel(file, sheet = sheet) |>
+    dplyr::mutate(id = toupper(paste0(sheet, stringr::str_pad(id, width = 3, side = "left", pad = "0")))) |>
+    dplyr::mutate(instrument = toupper(sheet))
+  return(meta)
+}
+
+#' Create item assignment for ASEBA scales
+#' @param ysr A data frame containing YSR metadata (from read_meta_aseba() function)
+#' @param cbcl A data frame containing CBCL metadata (from read_meta_aseba() function)
+#' @return A nested list containing item assignments for each scale and instrument
+create_item_assignment <- function(ysr, cbcl) {
+  scale_map <- list(
+  "Anxious/Depressed"      ~ "AD",
+  "Withdrawn/Depressed"    ~ "WD",
+  "Somatic Complaints"     ~ "SC",
+  "Social Problems"        ~ "SP",
+  "Thought Problems"       ~ "TP",
+  "Attention Problems"     ~ "AP",
+  "Rule-Breaking Behavior" ~ "RB",
+  "Aggressive Behavior"    ~ "AB"
+  )
+  nested_items <- dplyr::bind_rows(ysr, cbcl) |>
+    dplyr::filter(!is.na(scale), scale != "Other Problems") |>
+    dplyr::mutate(id_scale = dplyr::case_match(scale, !!!scale_map, .default = NA_character_)) |>
+    split(~id_scale) |>
+    purrr::map(~split(.x$id, .x$instrument))
+  return(nested_items)
+}
+
+#' Check for missing items in the data compared to the manual
+#' @param item_assignment A nested list containing item assignments for each scale and instrument (from create_item_assignment() function)
+#' @param training_set A data frame containing the training dataset
+#' @return A character vector containing the IDs of missing items
+check_item_assignment <- function(item_assignment, training_set) {
+  missing_items <- setdiff(unlist(item_assignment, use.names = FALSE), names(training_set)[-1])
+  return(missing_items)
+}
+
+#' Fix item assignment by removing items not present in the training set
+#' @param item_assignment A nested list containing item assignments for each scale and instrument (from create_item_assignment() function)
+#' @param training_set A data frame containing the training dataset
+#' @return A nested list containing the fixed item assignments
+fix_item_assignment <- function(item_assignment, missing_items) {
+  fixed_assignment <- purrr::map(item_assignment, function(x) {
+    purrr::map(x, function(ids) {
+      setdiff(ids, missing_items)
+    })
+  })
+  return(fixed_assignment)
+}
+
+f <- function(scale, training_set) {
+  dplyr::select(training_set, SAFE_ID, dplyr::all_of(unlist(scale, use.names = FALSE))) |>
+  ncol()
+}
+
+
+
+
