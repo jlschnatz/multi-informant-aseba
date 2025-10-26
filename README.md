@@ -133,7 +133,7 @@ The OSF preregistration page can be found on
 ## Data Download
 
 Data used for this study is sourced from the Schools and Families
-Educating (SAFE) Children Study \[ICPSR 34368\], see
+Educating (SAFE) Children Study (ICPSR 34368), see
 https://doi.org/10.3886/ICPSR34368.v1. Data must not be redistributed on
 this platformaccording to the data use agreement but may be downloaded
 from the original source. To download the data, please register using an
@@ -146,9 +146,7 @@ reproducibility purposes, we recommend downloading the data as SAV
 
 ## Reproducibility of Project
 
-### Dependecy Graph of targets
-
-Test
+### Dependecy Graph of *targets* Pipeline
 
 ``` mermaid
 graph LR
@@ -163,41 +161,47 @@ graph LR
   end
   subgraph Graph
     direction LR
-    xdd09909d76aac889>"make_mats"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     xf79721e0f5e33594>"make_obj_fn"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     xc4d18a019ca90843>"get_empirical"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
+    xdd09909d76aac889>"make_mats"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     xa59b086f8c0dd786>"make_fixed"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     x50dee087cea480d6>"spearman_brown"]:::uptodate --> xeafdb142e30e0f1e>"create_cutoff"]:::uptodate
     x80190a1ecd7fc8cd>"create_aseba"]:::uptodate --> x647af5ca2a750e19(["data_aseba"]):::outdated
     x53cf5ba2a7a40912(["data_safe"]):::outdated --> x647af5ca2a750e19(["data_aseba"]):::outdated
     x474e7b3612aa05fe(["dropout"]):::outdated --> x647af5ca2a750e19(["data_aseba"]):::outdated
     xdb4e59bc3d0ac3b3(["agr_file"]):::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
-    xeafdb142e30e0f1e>"create_cutoff"]:::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
     x6e3a455736075628(["rel_file"]):::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
-    xa40ba6aba0ec489c>"create_safechild"]:::uptodate --> x53cf5ba2a7a40912(["data_safe"]):::outdated
+    xeafdb142e30e0f1e>"create_cutoff"]:::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
     x1e2f6b892b676f51["sav_files"]:::outdated --> x53cf5ba2a7a40912(["data_safe"]):::outdated
+    xa40ba6aba0ec489c>"create_safechild"]:::uptodate --> x53cf5ba2a7a40912(["data_safe"]):::outdated
     x53cf5ba2a7a40912(["data_safe"]):::outdated --> x3ed5bb9884f4eeb7(["dict"]):::outdated
     xadb06c49920217cf>"create_dictionary"]:::uptodate --> x3ed5bb9884f4eeb7(["dict"]):::outdated
-    x53cf5ba2a7a40912(["data_safe"]):::outdated --> x474e7b3612aa05fe(["dropout"]):::outdated
     x5a6d57d7231da317>"handle_attrition"]:::uptodate --> x474e7b3612aa05fe(["dropout"]):::outdated
-    x636fade0f61375ee>"get_m_sd"]:::uptodate --> xc4d18a019ca90843>"get_empirical"]:::uptodate
+    x53cf5ba2a7a40912(["data_safe"]):::outdated --> x474e7b3612aa05fe(["dropout"]):::outdated
     x9b27dfb35d384d60>"top_frac"]:::uptodate --> xc4d18a019ca90843>"get_empirical"]:::uptodate
-    xdd70d048569563e8>"create_item_assignment"]:::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
+    x636fade0f61375ee>"get_m_sd"]:::uptodate --> xc4d18a019ca90843>"get_empirical"]:::uptodate
     x06c0f8476667fd3f(["meta_ysr"]):::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
+    xdd70d048569563e8>"create_item_assignment"]:::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
     xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
+    x6a90fc6145ebf215(["item_assignment"]):::uptodate --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
+    x8d4cf3dd7520449b>"fix_item_assignment"]:::uptodate --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
+    x0c307f7e4efbd259(["missing_items"]):::outdated --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
     x5d64aea7dea2f65d>"combine_crit"]:::uptodate --> xf79721e0f5e33594>"make_obj_fn"]:::uptodate
     xbcbbd35f337db770>"make_crit"]:::uptodate --> xf79721e0f5e33594>"make_obj_fn"]:::uptodate
-    xd9e5ec19b55a4a31(["file_meta_aseba"]):::uptodate --> xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate
     xe273b2a40886dfdb>"read_meta_aseba"]:::uptodate --> xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate
+    xd9e5ec19b55a4a31(["file_meta_aseba"]):::uptodate --> xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate
     xe273b2a40886dfdb>"read_meta_aseba"]:::uptodate --> x06c0f8476667fd3f(["meta_ysr"]):::uptodate
     xd9e5ec19b55a4a31(["file_meta_aseba"]):::uptodate --> x06c0f8476667fd3f(["meta_ysr"]):::uptodate
+    xec06d6d77dd97950>"check_item_assignment"]:::uptodate --> x0c307f7e4efbd259(["missing_items"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x0c307f7e4efbd259(["missing_items"]):::outdated
+    x6a90fc6145ebf215(["item_assignment"]):::uptodate --> x0c307f7e4efbd259(["missing_items"]):::outdated
     x7849ff489c55a199(["sav_files_files"]):::outdated --> x1e2f6b892b676f51["sav_files"]:::outdated
     x647af5ca2a750e19(["data_aseba"]):::outdated --> xe28e6a915fe1f815(["split_list"]):::outdated
     x11c22b6039cb940b>"split_data"]:::uptodate --> xe28e6a915fe1f815(["split_list"]):::outdated
     x331f289e36e062ff>"extract_datasets"]:::uptodate --> xa673c03795543c98(["test_set"]):::outdated
     xe28e6a915fe1f815(["split_list"]):::outdated --> xa673c03795543c98(["test_set"]):::outdated
-    x331f289e36e062ff>"extract_datasets"]:::uptodate --> x71630008d1c0fd02(["training_set"]):::outdated
     xe28e6a915fe1f815(["split_list"]):::outdated --> x71630008d1c0fd02(["training_set"]):::outdated
+    x331f289e36e062ff>"extract_datasets"]:::uptodate --> x71630008d1c0fd02(["training_set"]):::outdated
     x4c122faa1e23fe53>"get_dfi"]:::uptodate
   end
   classDef uptodate stroke:#000000,color:#ffffff,fill:#354823;

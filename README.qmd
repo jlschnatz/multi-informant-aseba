@@ -1,9 +1,11 @@
 ---
 format: gfm
+license: CC BY-NC-SA
 ---
 
-
 <!-- badges: start -->
+
+
 <!-- badges: end -->
 
 # Forschungsmodul *PsyMSc5*
@@ -41,31 +43,27 @@ The preregistration for this project was submitted on October, 1st, 2025 and can
 
 ## Data Download
 
-Data used for this study is sourced from the Schools and Families Educating (SAFE) Children Study [ICPSR 34368], see https://doi.org/10.3886/ICPSR34368.v1. Data must not be redistributed on this platformaccording to the data use agreement but may be downloaded from the original source. To download the data, please register using an institutional email address and agree to the terms of the data use agreement. After registration, you can download the data directly from the [ICPSR website](https://www.icpsr.umich.edu/web/ICPSR/studies/34368). For reproducibility purposes, we recommend downloading the data as SAV (SPSS) files.
+Data used for this study is sourced from the Schools and Families Educating (SAFE) Children Study (ICPSR 34368), see https://doi.org/10.3886/ICPSR34368.v1. Data must not be redistributed on this platformaccording to the data use agreement but may be downloaded from the original source. To download the data, please register using an institutional email address and agree to the terms of the data use agreement. After registration, you can download the data directly from the [ICPSR website](https://www.icpsr.umich.edu/web/ICPSR/studies/34368). For reproducibility purposes, we recommend downloading the data as SAV (SPSS) files.
+
 
 ## Reproducibility of Project
 
 
-
-### Dependecy Graph of targets
-
-Test
-
-
+### Dependecy Graph of _targets_ Pipeline
 
 ```{r}
 #| echo: false
 
 library(targets)
 merm <- tar_mermaid(reporter = "silent")
-writeLines(merm, "mermaid.mmd")
+writeLines(merm, "data/meta/deps_graph.mmd")
 ```
-
-
 
 ```{mermaid}
-%%| file:  mermaid.mmd
+%%| file:  data/meta/deps_graph.mmd
 ```
+
+
 
 
 
