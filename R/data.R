@@ -169,8 +169,7 @@ fix_item_assignment <- function(item_assignment, missing_items) {
 }
 
 f <- function(scale, training_set) {
-  dplyr::select(training_set, SAFE_ID, dplyr::all_of(unlist(scale, use.names = FALSE))) |>
-  ncol()
+  dplyr::select(training_set, SAFE_ID, dplyr::all_of(unlist(scale, use.names = FALSE))) 
 }
 
 

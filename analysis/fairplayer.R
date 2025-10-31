@@ -1,5 +1,6 @@
 set.seed(123)
-pacman::p_load(stuart, lavaan)
+library(stuart)
+library(lavaan)
 source("R/helpers.R")
 source("R/objective.R")
 

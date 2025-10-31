@@ -131,5 +131,5 @@ list(
     f(item_assignment_fixed, training_set),
     pattern = map(item_assignment_fixed)
   )
-  # ...
+   # ...
 )

@@ -1,0 +1,34 @@
+Package: aco-aseba
+Title: Using Automatic Item Selection in Multi-Informant Assessment of Child Mental Health
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jan Luca", "Schnatz", , "schnatz@psych.uni-frankfurt.de", role = c("aut", "cre"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    cli (>= 3.6.5),
+    contributoR (>= 0.4.0),
+    dockerfiler (>= 0.2.5),
+    dplyr (>= 1.1.4),
+    ezCutoffs (>= 1.0.2),
+    ggplot2 (>= 3.5.2),
+    glue (>= 1.8.0),
+    haven (>= 2.5.4),
+    labelled (>= 2.14.1),
+    lavaan (>= 0.6.19),
+    pak (>= 0.9.0),
+    purrr (>= 1.1.0),
+    qs (>= 0.27.3),
+    readxl (>= 1.4.5),
+    renv (>= 1.1.4),
+    semPlot (>= 1.1.6),
+    showtext (>= 0.9.7),
+    stuart (>= 0.10.2),
+    sysfonts (>= 0.8.9),
+    tarchetypes (>= 0.13.2),
+    targets (>= 1.11.4),
+    tidyr (>= 1.3.1)
