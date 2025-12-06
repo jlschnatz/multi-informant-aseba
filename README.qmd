@@ -55,7 +55,7 @@ Data used for this study is sourced from the Schools and Families Educating (SAF
 #| echo: false
 
 library(targets)
-merm <- tar_mermaid(reporter = "silent")
+merm <- tar_mermaid(reporter = "silent", targets_only = TRUE)
 writeLines(merm, "data/meta/deps_graph.mmd")
 ```
 
