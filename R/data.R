@@ -2,8 +2,14 @@
 #' @param files A character vector of file paths to .sav files
 #' @return A data frame containing the merged data
 create_safechild <- function(files) {
-  data_list <- lapply(files, function(x) dplyr::select(haven::read_sav(x), -CASEID))
-  data_full <- purrr::reduce(data_list, dplyr::left_join, by = dplyr::join_by(SAFE_ID))
+  data_list <- lapply(files, function(x) {
+    dplyr::select(haven::read_sav(x), -CASEID)
+  })
+  data_full <- purrr::reduce(
+    data_list,
+    dplyr::left_join,
+    by = dplyr::join_by(SAFE_ID)
+  )
   return(data_full)
 }
 
@@ -21,14 +27,17 @@ create_dictionary <- function(x) {
 #' @param data A data frame containing the SAFE child dataset
 #' @return A list with handle_attrition statistics (number and proportion of dropouts, and their IDs)
 handle_attrition <- function(data) {
-  is_missing <- with(data, is.na(C10ASSDAT) & is.na(C11ASSDAT) & is.na(P10ASSDAT) & is.na(P11ASSDAT))
+  is_missing <- with(
+    data,
+    is.na(C10ASSDAT) & is.na(C11ASSDAT) & is.na(P10ASSDAT) & is.na(P11ASSDAT)
+  )
   n_dropout <- sum(is_missing)
   out <- list(
     n_dropout = n_dropout,
-    total = nrow(data), 
+    total = nrow(data),
     prop_dropout = n_dropout / nrow(data),
     id_dropout = data$SAFE_ID[is_missing]
-    )
+  )
   return(out)
 }
 
@@ -37,15 +46,15 @@ handle_attrition <- function(data) {
 #' @param attrition A list containing attrition information (from handle_attrition() function)
 #' @return A data frame containing the prepared ASEBA data
 create_aseba <- function(data, attrition) {
-  data_aseba <- data |> 
-    dplyr::filter(!SAFE_ID %in% attrition$id_dropout) |> 
+  data_aseba <- data |>
+    dplyr::filter(!SAFE_ID %in% attrition$id_dropout) |>
     dplyr::select(
       SAFE_ID,
       dplyr::matches("^C\\d{2}AYS\\d{2,3}[a-zA-Z]?$"),
       dplyr::matches("^P\\d{2}CBP\\d{2,3}[a-zA-Z]?$")
     ) |>
-    dplyr::rename_with(~gsub("AYS", "YSR", .x), matches("AYS")) |>
-    dplyr::rename_with(~gsub("CBP", "CBCL", .x), matches("CBP"))
+    dplyr::rename_with(~ gsub("AYS", "YSR", .x), matches("AYS")) |>
+    dplyr::rename_with(~ gsub("CBP", "CBCL", .x), matches("CBP"))
   return(data_aseba)
 }
 
@@ -53,7 +62,6 @@ create_aseba <- function(data, attrition) {
 #' @param data A data frame containing the prepared ASEBA data (from create_aseba() function)
 #' @return A list containing the training and test datasets
 split_data <- function(data) {
-
   data_wave10 <- dplyr::select(data, c(SAFE_ID, matches("(C|P)10"))) |>
     dplyr::rename_with(~ gsub("^C10", "", .x), dplyr::matches("^C10")) |>
     dplyr::rename_with(~ gsub("^P10", "", .x), dplyr::matches("^P10"))
@@ -62,7 +70,7 @@ split_data <- function(data) {
     dplyr::rename_with(~ gsub("^C11", "", .x), dplyr::matches("^C11")) |>
     dplyr::rename_with(~ gsub("^P11", "", .x), dplyr::matches("^P11"))
 
-  id_half1 <- sample(data$SAFE_ID, size = nrow(data)/2, replace = FALSE)
+  id_half1 <- sample(data$SAFE_ID, size = nrow(data) / 2, replace = FALSE)
   id_half2 <- setdiff(data$SAFE_ID, id_half1)
 
   wave10_half1 <- dplyr::filter(data_wave10, SAFE_ID %in% id_half1)
@@ -85,10 +93,7 @@ split_data <- function(data) {
 #' @return A data frame containing the requested dataset
 extract_datasets <- function(data, which = c("training", "testing")) {
   which <- match.arg(which)
-  out <- switch(which,
-    training = data$training_set,
-    testing = data$test_set
-  )
+  out <- switch(which, training = data$training_set, testing = data$test_set)
   return(out)
 }
 
@@ -100,15 +105,15 @@ extract_datasets <- function(data, which = c("training", "testing")) {
 create_cutoff <- function(file1, file2, capacity = 2) {
   rel <- read.csv(file1)
   agr <- read.csv(file2)
-  comb <- dplyr::inner_join(agr, rel, by = "scale")
-  comb |> 
+  comb <- dplyr::inner_join(agr, rel, by = c("id", "scale"))
+  comb |>
     tidyr::pivot_longer(
-      cols = -c(scale, agreement),
+      cols = -c(id, scale, agreement),
       names_to = c(".value", "instrument"),
       names_sep = "_"
     ) |>
     dplyr::mutate(alpha_star = spearman_brown(alpha, n, capacity)) |>
-    dplyr::mutate(dplyr::across(dplyr::starts_with("alpha"), ~round(.x, 3)))
+    dplyr::mutate(dplyr::across(dplyr::starts_with("alpha"), ~ round(.x, 3)))
 }
 
 #' Read in ASEBA metadata from an Excel file
@@ -118,7 +123,12 @@ create_cutoff <- function(file1, file2, capacity = 2) {
 read_meta_aseba <- function(file, sheet = c("cbcl", "ysr")) {
   sheet <- match.arg(sheet)
   meta <- readxl::read_excel(file, sheet = sheet) |>
-    dplyr::mutate(id = toupper(paste0(sheet, stringr::str_pad(id, width = 3, side = "left", pad = "0")))) |>
+    dplyr::mutate(
+      id = toupper(paste0(
+        sheet,
+        stringr::str_pad(id, width = 3, side = "left", pad = "0")
+      ))
+    ) |>
     dplyr::mutate(instrument = toupper(sheet))
   return(meta)
 }
@@ -129,20 +139,26 @@ read_meta_aseba <- function(file, sheet = c("cbcl", "ysr")) {
 #' @return A nested list containing item assignments for each scale and instrument
 create_item_assignment <- function(ysr, cbcl) {
   scale_map <- list(
-  "Anxious/Depressed"      ~ "AD",
-  "Withdrawn/Depressed"    ~ "WD",
-  "Somatic Complaints"     ~ "SC",
-  "Social Problems"        ~ "SP",
-  "Thought Problems"       ~ "TP",
-  "Attention Problems"     ~ "AP",
-  "Rule-Breaking Behavior" ~ "RB",
-  "Aggressive Behavior"    ~ "AB"
+    "Anxious/Depressed" ~ "AD",
+    "Withdrawn/Depressed" ~ "WD",
+    "Somatic Complaints" ~ "SC",
+    "Social Problems" ~ "SP",
+    "Thought Problems" ~ "TP",
+    "Attention Problems" ~ "AP",
+    "Rule-Breaking Behavior" ~ "RB",
+    "Aggressive Behavior" ~ "AB"
   )
   nested_items <- dplyr::bind_rows(ysr, cbcl) |>
     dplyr::filter(!is.na(scale), scale != "Other Problems") |>
-    dplyr::mutate(id_scale = dplyr::case_match(scale, !!!scale_map, .default = NA_character_)) |>
+    dplyr::mutate(
+      id_scale = dplyr::case_match(
+        scale,
+        !!!scale_map,
+        .default = NA_character_
+      )
+    ) |>
     split(~id_scale) |>
-    purrr::map(~split(.x$id, .x$instrument))
+    purrr::map(~ split(.x$id, .x$instrument))
   return(nested_items)
 }
 
@@ -151,7 +167,10 @@ create_item_assignment <- function(ysr, cbcl) {
 #' @param training_set A data frame containing the training dataset
 #' @return A character vector containing the IDs of missing items
 check_item_assignment <- function(item_assignment, training_set) {
-  missing_items <- setdiff(unlist(item_assignment, use.names = FALSE), names(training_set)[-1])
+  missing_items <- setdiff(
+    unlist(item_assignment, use.names = FALSE),
+    names(training_set)[-1]
+  )
   return(missing_items)
 }
 
@@ -168,10 +187,83 @@ fix_item_assignment <- function(item_assignment, missing_items) {
   return(fixed_assignment)
 }
 
-f <- function(scale, training_set) {
-  dplyr::select(training_set, SAFE_ID, dplyr::all_of(unlist(scale, use.names = FALSE))) 
+#' Subset Data by Scale ID
+#'
+#' This function takes the full training set and the nested assignment list,
+#' finds the specific items for the requested scale (e.g., "AB"), and
+#' returns the subsetted dataframe.
+#'
+#' @param data A dataframe (your training_set).
+#' @param assignments A named nested list (your item_assignment_fixed).
+#' @param scale_id A character string representing the scale to extract (e.g., "AB").
+#'
+#' @return A dataframe containing only the columns relevant to the scale.
+subset_by_scale <- function(data, assignments, scale_id) {
+  if (!scale_id %in% names(assignments)) {
+    cli::cli_abort(
+      "Error: Scale ID '{scale_id}' was expected but not found in the assignment list."
+    )
+  }
+
+  scale_items <- assignments[[scale_id]]
+  target_columns <- c(scale_items$CBCL, scale_items$YSR)
+  subset_df <- subset(data, select = target_columns)
+  return(subset_df)
 }
 
+#' Generate Factor Structure
+#' @param data A dataframe with the ID column and all column belonging to a clinical subscale
+#' @return A list with the defined factor structure
+create_factor_strucure <- function(data) {
+  cbcl_items <- grep("^CBCL", names(data), value = TRUE)
+  ysr_items <- grep("^YSR", names(data), value = TRUE)
+  fs <- list(
+    CIC = ysr_items,
+    CIP = cbcl_items,
+    ISC = ysr_items,
+    ISP = cbcl_items
+  )
+  return(fs)
+}
 
+#' Fit MTMM Model (Stuart)
+#'
+#' Fits the model using the stuart package logic you provided.
+#'
+#' @param data The subsetted dataframe.
+#' @param scale_id Included for error context (optional but recommended).
+construct_subtest <- function(data, objective) {
+  if (!is.data.frame(data)) {
+    cli::cli_abort("Input must be a dataframe")
+  }
 
+  cbcl_items <- grep("^CBCL", names(data), value = TRUE)
+  ysr_items <- grep("^YSR", names(data), value = TRUE)
 
+  fs <- list(
+    CIC = ysr_items,
+    CIP = cbcl_items,
+    ISC = ysr_items,
+    ISP = cbcl_items
+  )
+
+  mtmm <- list(
+    CI = c("CIC", "CIP"),
+    ISC = "ISC",
+    ISP = "ISP"
+  )
+
+  # 4. Run Model
+  do.call(
+    suppressMessages(stuart::randomsamples),
+    args = list(
+      data = data,
+      factor.structure = fs,
+      capacity = 2,
+      mtmm = mtmm,
+      n = 100,
+      cores = 8,
+      objective = objective$obj_fun
+    )
+  )
+}

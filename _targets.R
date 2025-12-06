@@ -9,7 +9,8 @@ library(tarchetypes)
 
 # Set target options:
 tar_option_set(
-  packages = c("tibble"), # Packages that your targets need for their tasks.
+  error = "null",
+  #packages = c("tibble"), # Packages that your targets need for their tasks.
   format = "qs", # Optionally set the default storage format. qs is fast.
   seed = 250925192132 %% .Machine$integer.max
   #
@@ -51,6 +52,35 @@ tar_source()
 
 # Replace the target list below with your own:
 list(
+  tar_target(
+    model_args,
+    list(
+      mtmm = list(
+        CI = c("CIC", "CIP"),
+        ISC = "ISC",
+        ISP = "ISP"
+      ),
+      mtmm_invariance = "configural",
+      capacity = 2,
+      analysis_opts = list(
+        estimator = "MLR",
+        missing = "FIML"
+      ),
+      n_random = 500,
+      p_top = 0.9,
+      cores = 4,
+      obj_info = list(
+        vec = c("rmsea.robust", "srmr", "rel"),
+        mat = list(
+          name = c("beta", "lvcor"),
+          which = list(beta = c("CIP", "CIC"), lvcor = c("ISP", "ISC")),
+          side = list(beta = "top", lvcor = "bottom")
+        ),
+        lower_tail = c(FALSE, FALSE, TRUE, TRUE, FALSE),
+        weights = c(1 / 6, 1 / 6, 1 / 3, 1 / 6, 1 / 6)
+      )
+    )
+  ),
   # Reliability and Agreement CSV files
   tar_file(
     rel_file,
@@ -67,7 +97,12 @@ list(
   # SAV-files of raw data
   tar_files(
     sav_files,
-    list.files("data/raw", full.names = TRUE, recursive = TRUE, pattern = "\\.sav$"),
+    list.files(
+      "data/raw",
+      full.names = TRUE,
+      recursive = TRUE,
+      pattern = "\\.sav$"
+    ),
     format = "file"
   ),
   # Create merged safechild datase
@@ -113,7 +148,7 @@ list(
     meta_ysr,
     read_meta_aseba(file_meta_aseba, sheet = "ysr")
   ),
-  # Create item assignment  
+  # Create item assignment
   tar_target(
     item_assignment,
     create_item_assignment(meta_ysr, meta_cbcl)
@@ -126,10 +161,71 @@ list(
     item_assignment_fixed,
     fix_item_assignment(item_assignment, missing_items)
   ),
-  tar_target(
-    test,
-    f(item_assignment_fixed, training_set),
-    pattern = map(item_assignment_fixed)
+  # Map over all clinical subscales
+  tar_map(
+    values = tibble::tibble(
+      scale_id = c("AB", "AD", "AP", "RB", "SC", "SP", "TP", "WD")
+    ),
+    names = "scale_id",
+    # Subset training data to required columns
+    tar_target(
+      training_subset,
+      subset_by_scale(training_set, item_assignment_fixed, scale_id)
+    ),
+    # Create factor structure for each clinical scale
+    tar_target(
+      fs,
+      create_factor_strucure(training_subset)
+    ),
+    # Build objective function for search
+    tar_target(
+      objective_fun,
+      build_obj(
+        data = training_subset,
+        fs = fs,
+        capacity = 2,
+        mtmm = model_args$mtmm,
+        mtmm_invariance = model_args$mtmm_invariance,
+        analysis_opts = model_args$analysis_opts,
+        n_random = model_args$n_random,
+        p_top = model_args$p_top,
+        cores = 4,
+        obj_info = model_args$obj_info
+      )
+    ),
+    tar_target(
+      solution,
+      construct_subtest(training_subset, objective_fun)
+    ),
+    tar_target(
+      h2,
+      test_invariance(
+        x = solution,
+        capacity = model_args$capacity,
+        mtmm = model_args$mtmm,
+        alpha = .05
+      )
+    ),
+    # Generate MVC cutoffs
+    tar_target(
+      cutoffs,
+      generate_cutoffs(
+        x = solution,
+        cores = 4,
+        alpha_level = .05,
+        data_cutoff = data_cutoff,
+        scale_id = scale_id
+      )
+    ),
+    tar_target(
+      h3,
+      test_informant_specificness(
+        x = solution,
+        scale_id = scale_id,
+        alpha = .05,
+        n_rep = 10,
+        verbose = FALSE
+      )
+    )
   )
-   # ...
 )

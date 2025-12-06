@@ -20,21 +20,43 @@
 #' empirical means and standard deviations, and the objective matrices.
 #'
 build_obj <- function(
-  data, fs, capacity, mtmm, mtmm_invariance, analysis_opts,
-  n_random, p_top, cores, obj_info
+  data,
+  fs,
+  capacity,
+  mtmm,
+  mtmm_invariance,
+  analysis_opts,
+  n_random,
+  p_top,
+  cores,
+  obj_info
 ) {
   t1 <- proc.time()
+
   obj_mat <- make_mats(
-    data, fs, capacity, mtmm,
-    mtmm_invariance, obj_info
+    data,
+    fs,
+    capacity,
+    mtmm,
+    mtmm_invariance,
+    obj_info
   )
 
   fo <- make_fixed(obj_info, obj_mat)
 
   msd_df <- get_empirical(
-    data, fs, capacity, mtmm,
-    mtmm_invariance, obj_info,
-    cores, fo, n_random, obj_mat
+    data,
+    fs,
+    capacity,
+    mtmm,
+    mtmm_invariance,
+    obj_info,
+    cores,
+    fo,
+    analysis_opts,
+    n_random,
+    obj_mat,
+    p_top
   )
 
   objective <- make_obj_fn(msd_df, obj_mat = obj_mat)
@@ -60,16 +82,20 @@ build_obj <- function(
 #' objective function matrices.
 #' @return A list of objective matrices prepared for the analysis.
 make_mats <- function(
-  data, fs, capacity, mtmm,
-  mtmm_invariance, obj_info
+  data,
+  fs,
+  capacity,
+  mtmm,
+  mtmm_invariance,
+  obj_info
 ) {
-  if (all(obj_info$mat$name %in% c("lambda", "theta", "psi",  "alpha"))) {
+  if (all(obj_info$mat$name %in% c("lambda", "theta", "psi", "alpha"))) {
     cli::cli_abort("The provided criteria for matrices are not supported.")
   }
   cli::cli_alert_info("Preparing objective matrices for the analysis.")
 
   # Define objective matrices
-  obj_mat <- suppressMessages(stuart::objectivematrices(
+  mats_list <- list(
     data = data,
     factor.structure = fs,
     capacity = capacity,
@@ -77,12 +103,14 @@ make_mats <- function(
     mtmm.invariance = mtmm_invariance,
     ignore.errors = TRUE,
     matrices = obj_info$mat$name
-  ))
+  )
+
+  obj_mat <- suppressMessages(do.call(stuart::objectivematrices, mats_list))
 
   # Set the use and side for each matrix based on criteria
   for (m in obj_info$mat$name) {
     mat_ind <- matrix(obj_info$mat$which[[m]], nrow = 1)
-    obj_mat[[m]]$use[, ] <- FALSE
+    obj_mat[[m]]$use[,] <- FALSE
     obj_mat[[m]]$use[mat_ind] <- TRUE
     obj_mat[[m]]$side[mat_ind] <- obj_info$mat$side[[m]]
   }
@@ -134,24 +162,54 @@ make_fixed <- function(obj_info, obj_mat) {
 #' @return A data frame containing the empirical means
 #' and standard deviations for the criteria.
 get_empirical <- function(
-  data, fs, capacity, mtmm, mtmm_invariance,
-  obj_info, cores, objective, n_random, obj_mat
+  data,
+  fs,
+  capacity,
+  mtmm,
+  mtmm_invariance,
+  obj_info,
+  cores,
+  objective,
+  analysis_opts,
+  n_random,
+  obj_mat,
+  p_top
 ) {
-  cli::cli_alert_info("Generating empirical means and standard deviations for the criteria drawn from {n_random} random samples.") # nolint 
+  cli::cli_alert_info(
+    "Generating empirical means and standard deviations for the criteria drawn from {n_random} random samples."
+  ) # nolint
 
-  invisible(utils::capture.output({
-    rs <- suppressMessages(stuart::randomsamples(
-      data = data,
-      factor.structure = fs,
-      capacity = capacity,
-      mtmm = mtmm,
-      mtmm.invariance = mtmm_invariance,
-      objective = objective,
-      analysis.options = analysis_opts,
-      cores = cores,
-      n = n_random
-    ))
-  }))
+  rs_list <- list(
+    data = data,
+    factor.structure = fs,
+    capacity = capacity,
+    mtmm = mtmm,
+    mtmm.invariance = mtmm_invariance,
+    objective = objective,
+    analysis.options = analysis_opts,
+    cores = cores,
+    n = n_random
+  )
+
+  invisible(
+    utils::capture.output({
+      rs <- suppressMessages(do.call(stuart::randomsamples, rs_list))
+    })
+  )
+
+  #invisible(utils::capture.output({
+  #  rs <- suppressMessages(stuart::randomsamples(
+  #    data = data,
+  #    factor.structure = fs,
+  #    capacity = capacity,
+  #    mtmm = mtmm,
+  #    mtmm.invariance = mtmm_invariance,
+  #    objective = objective,
+  #    analysis.options = analysis_opts,
+  #    cores = cores,
+  #    n = n_random
+  #  ))
+  #}))
 
   # Extract Results for Vector Criteria
   obj_nms <- obj_info$vec
@@ -195,7 +253,9 @@ get_empirical <- function(
   msd_df$weights <- obj_info$weights
   allowed <- c("theta", "psi", "alpha", "beta", "lambda", "lvcor") # nolint
   msd_df$type <- with(msd_df, ifelse(criteria %in% allowed, "mat", "vec"))
-  cli::cli_alert_success("Empirical means and standard deviations generated successfully.") # nolint
+  cli::cli_alert_success(
+    "Empirical means and standard deviations generated successfully."
+  ) # nolint
   return(msd_df)
 }
 
@@ -216,20 +276,33 @@ get_empirical <- function(
 #' @return A function that computes the criterion value
 #' based on the provided parameters.
 make_crit <- function(
-  criteria, weight, mean, sd,
-  lower_tail, type, obj_mat = NULL
+  criteria,
+  weight,
+  mean,
+  sd,
+  lower_tail,
+  type,
+  obj_mat = NULL
 ) {
   q <- criteria
   if (type == "mat") {
-    if (is.null(obj_mat)) stop("obj_mat must be provided for matrix types.")
-    if (!criteria %in% names(obj_mat)) stop("Criteria not found in obj_mat.")
+    if (is.null(obj_mat)) {
+      stop("obj_mat must be provided for matrix types.")
+    }
+    if (!criteria %in% names(obj_mat)) {
+      stop("Criteria not found in obj_mat.")
+    }
     ind <- which(obj_mat[[criteria]]$use)
     if (length(ind) > 1) {
-      stop("Multiple criteria from the same matrix type are currently not supported.") # nolint
+      stop(
+        "Multiple criteria from the same matrix type are currently not supported."
+      ) # nolint
     }
     q <- sprintf("%s[%s]", q, ind)
   }
-  if (criteria == "rel") q <- sprintf("mean(%s)", q)
+  if (criteria == "rel") {
+    q <- sprintf("mean(%s)", q)
+  }
   stri <- glue::glue(
     "function({criteria}) {{\n",
     " {weight} * pnorm({q}, {mean}, {sd}, {lower_tail})\n",
@@ -251,9 +324,9 @@ combine_crit <- function(...) {
   args <- vapply(fns, function(f) names(formals(f)), character(1))
   bodies <- lapply(X = fns, function(f) body(f)[[2]])
   combined_body <- Reduce(function(x, y) call("+", x, y), bodies)
-  new_fn <- as.function(c(alist(...=), combined_body))
+  new_fn <- as.function(c(alist(... = ), combined_body))
   formals(new_fn) <- as.pairlist(
-    setNames(replicate(length(args), quote(expr=)), args)
+    setNames(replicate(length(args), quote(expr = )), args)
   )
   return(new_fn) # nolint
 }
@@ -272,7 +345,12 @@ make_obj_fn <- function(msd_df, obj_mat = NULL) {
     data = msd_df,
     expr = mapply(
       FUN = make_crit,
-      criteria, weights, mean, sd, lower_tail, type,
+      criteria,
+      weights,
+      mean,
+      sd,
+      lower_tail,
+      type,
       MoreArgs = list(obj_mat = obj_mat),
       SIMPLIFY = FALSE
     )

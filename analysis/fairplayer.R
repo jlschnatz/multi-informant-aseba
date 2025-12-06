@@ -7,9 +7,9 @@ source("R/objective.R")
 args_list <- list(
   data = fairplayer,
   fs = list(
-    CIC = names(fairplayer)[83:92],
+    CIC = names(fairplayer)[83:91],
     CIP = names(fairplayer)[113:122],
-    ISC = names(fairplayer)[83:92],
+    ISC = names(fairplayer)[83:91],
     ISP = names(fairplayer)[113:122]
   ),
   capacity = 2,
@@ -38,56 +38,44 @@ args_list <- list(
   )
 )
 
-#list2env(args_list, envir = .GlobalEnv)
+list2env(args_list, .GlobalEnv)
 
-
-
-
-
-combinations(
-  data = fairplayer,
-  factor.structure = fs,
-  capacity = capacity,
-  mtmm = mtmm
-   )
-
-
-res <- do.call(build_obj, args_list)
-
-purrr::exec(build_obj, !!!args_list)
-
-res$obj_fun
-
-bf <- stuart::bruteforce(
+build_obj(
   data = data,
-  factor.structure = fs,
+  fs = fs,
   capacity = capacity,
   mtmm = mtmm,
-  item.invariance = "congeneric",
-  mtmm.invariance = "configural",
-  analysis.options = analysis_opts,
-  objective = res$obj_fun,
-  cores = 6
+  mtmm_invariance = mtmm_invariance,
+  analysis_opts = analysis_opts,
+  n_random = n_random,
+  p_top = p_top,
+  cores = cores,
+  obj_info = obj_info
 )
 
 
+res <- do.call(build_obj, args_list)
 randomsamples(
-  data = data,
-  factor.structure = fs,
-  capacity = capacity,
-  mtmm = mtmm,
+  data = args_list$data,
+  factor.structure = args_list$fs,
+  capacity = args_list$capacity,
+  mtmm = args_list$mtmm,
   item.invariance = "congeneric",
-  mtmm.invariance = "configural",
-  analysis.options = analysis_opts,
+  mtmm.invariance = args_list$mtmm_invariance,
+  analysis.options = args_list$analysis_opts,
   objective = res$obj_fun,
-  n = 1000,
-  cores = 4
+  n = args_list$n_random,
+  cores = args_list$cores
 ) -> rs
 
-rs$final
+
+fit <- rs$final
+
+summary(fit)
 
 
-semPlot::semSyntax(rs$final) -> model
+semPlot::semSyntax(fit) -> model
+
 
 
 #### Hypothesis 2: Measurement Invariance
@@ -117,6 +105,8 @@ invariance_steps <- list(
     pre = "scalar"
   )
 )
+
+# statt dieser Möglichkeit könnte ich einen neuen Datensatz mit den Items aus brutforce erstellen und dann wieder bruteforce anwenden mit gleichsetzungen (dafür gibt es nur eine Lösung)
 
 # Higher-order function to create an invariance function from a step
 make_invariance_fn <- function(name, steps) {
@@ -174,7 +164,7 @@ compare_inform_criteria <- function(...) {
   comp_df <- as.data.frame(comp_mat)
   comp_df$model <- rownames(comp_mat)
   rownames(comp_df) <- NULL
-  colnames(comp_df) <- c("model", "aic", "bic", "abic")
+  colnames(comp_df) <- c("aic", "bic", "abic", "model")
   comp_df <- comp_df[, c("model", "aic", "bic", "abic")]
   out <- list(
     comparison = comp_df,
@@ -185,6 +175,9 @@ compare_inform_criteria <- function(...) {
   return(out)
 }
 
+
+# 1. all_agree -> wenn FALSE -> dann LRT
+# 2. wenn TRUE -> dann schauen ob all TRUE (dannn aufhören) oder all FALSE (nächste Invarianzstufe testen)
 compare_inform_criteria(fit_configural, fit_weak, fit_strong, fit_strict)
 
 test_measurement_invariance <- function(model, data) {
@@ -209,6 +202,7 @@ test_measurement_invariance(model, fairplayer)
 #### Hypothesis 1: MVC
 
 library(ezCutoffs)
+
 
 generate_cutoffs <- function(model, data, n_cores = 4, alpha_level = .05, clinical_subscale) {
   ezc <- ezCutoffs(

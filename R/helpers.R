@@ -31,3 +31,12 @@ spearman_brown <- function(r, n1, n2) {
 }
 
 
+# Source - https://stackoverflow.com/a
+# Posted by Ben
+# Retrieved 2025-12-05, License - CC BY-SA 4.0
+
+quiet <- function(x) {
+    sink(tempfile())
+    on.exit(sink())
+    invisible(force(suppressWarnings(suppressMessages(x))))
+}

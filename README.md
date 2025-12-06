@@ -161,47 +161,211 @@ graph LR
   end
   subgraph Graph
     direction LR
-    xf79721e0f5e33594>"make_obj_fn"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
-    xc4d18a019ca90843>"get_empirical"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     xdd09909d76aac889>"make_mats"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     xa59b086f8c0dd786>"make_fixed"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
+    xf79721e0f5e33594>"make_obj_fn"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
+    xc4d18a019ca90843>"get_empirical"]:::uptodate --> xd20899a452aea33a>"build_obj"]:::uptodate
     x50dee087cea480d6>"spearman_brown"]:::uptodate --> xeafdb142e30e0f1e>"create_cutoff"]:::uptodate
+    x9f1f644ccc1a57e8(["solution_AB"]):::outdated --> xe0db2d402d09558a(["cutoffs_AB"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> xe0db2d402d09558a(["cutoffs_AB"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> xe0db2d402d09558a(["cutoffs_AB"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> x0480ac0541dbaa5f(["cutoffs_AD"]):::outdated
+    x13b6d3cc35bfc623(["solution_AD"]):::outdated --> x0480ac0541dbaa5f(["cutoffs_AD"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> x0480ac0541dbaa5f(["cutoffs_AD"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> x67b2b52b9ccc3fd5(["cutoffs_AP"]):::outdated
+    x2281cb03d5dddcda(["solution_AP"]):::outdated --> x67b2b52b9ccc3fd5(["cutoffs_AP"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> x67b2b52b9ccc3fd5(["cutoffs_AP"]):::outdated
+    xa5df33531960f2cc(["solution_RB"]):::outdated --> xb6193fa99ce7445e(["cutoffs_RB"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> xb6193fa99ce7445e(["cutoffs_RB"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> xb6193fa99ce7445e(["cutoffs_RB"]):::outdated
+    x3a7e60512ad4a028(["solution_SC"]):::outdated --> xfef4e7f2979c5687(["cutoffs_SC"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> xfef4e7f2979c5687(["cutoffs_SC"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> xfef4e7f2979c5687(["cutoffs_SC"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> x25e4606903bb5cd9(["cutoffs_SP"]):::outdated
+    x1200691f4b62af4a(["solution_SP"]):::outdated --> x25e4606903bb5cd9(["cutoffs_SP"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> x25e4606903bb5cd9(["cutoffs_SP"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> x00a5b28f1e6cf291(["cutoffs_TP"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> x00a5b28f1e6cf291(["cutoffs_TP"]):::outdated
+    x94c15ca1564b7a81(["solution_TP"]):::outdated --> x00a5b28f1e6cf291(["cutoffs_TP"]):::outdated
+    xe078f1fb87a5f306(["data_cutoff"]):::uptodate --> xbea11ac8aed9ec0a(["cutoffs_WD"]):::outdated
+    x0c38459fc2b72815>"generate_cutoffs"]:::uptodate --> xbea11ac8aed9ec0a(["cutoffs_WD"]):::outdated
+    xa991b6d2b4431cb9(["solution_WD"]):::outdated --> xbea11ac8aed9ec0a(["cutoffs_WD"]):::outdated
+    x474e7b3612aa05fe(["dropout"]):::outdated --> x647af5ca2a750e19(["data_aseba"]):::outdated
     x80190a1ecd7fc8cd>"create_aseba"]:::uptodate --> x647af5ca2a750e19(["data_aseba"]):::outdated
     x53cf5ba2a7a40912(["data_safe"]):::outdated --> x647af5ca2a750e19(["data_aseba"]):::outdated
-    x474e7b3612aa05fe(["dropout"]):::outdated --> x647af5ca2a750e19(["data_aseba"]):::outdated
     xdb4e59bc3d0ac3b3(["agr_file"]):::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
-    x6e3a455736075628(["rel_file"]):::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
     xeafdb142e30e0f1e>"create_cutoff"]:::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
+    x6e3a455736075628(["rel_file"]):::uptodate --> xe078f1fb87a5f306(["data_cutoff"]):::uptodate
     x1e2f6b892b676f51["sav_files"]:::outdated --> x53cf5ba2a7a40912(["data_safe"]):::outdated
     xa40ba6aba0ec489c>"create_safechild"]:::uptodate --> x53cf5ba2a7a40912(["data_safe"]):::outdated
     x53cf5ba2a7a40912(["data_safe"]):::outdated --> x3ed5bb9884f4eeb7(["dict"]):::outdated
     xadb06c49920217cf>"create_dictionary"]:::uptodate --> x3ed5bb9884f4eeb7(["dict"]):::outdated
     x5a6d57d7231da317>"handle_attrition"]:::uptodate --> x474e7b3612aa05fe(["dropout"]):::outdated
     x53cf5ba2a7a40912(["data_safe"]):::outdated --> x474e7b3612aa05fe(["dropout"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> xcb78b2803fa3be2c(["fs_AB"]):::outdated
+    xf60d83bc019bc9d7(["training_subset_AB"]):::outdated --> xcb78b2803fa3be2c(["fs_AB"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> xcf9c67916e997734(["fs_AD"]):::outdated
+    x3473628798949931(["training_subset_AD"]):::outdated --> xcf9c67916e997734(["fs_AD"]):::outdated
+    x4ba6a6489e391b5d(["training_subset_AP"]):::outdated --> xb1a628294e9ab995(["fs_AP"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> xb1a628294e9ab995(["fs_AP"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> x8605b3768caaab21(["fs_RB"]):::outdated
+    x690aaa23c060b0c7(["training_subset_RB"]):::outdated --> x8605b3768caaab21(["fs_RB"]):::outdated
+    x9dd12e61daa5c580(["training_subset_SC"]):::outdated --> x2f08e535180f031f(["fs_SC"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> x2f08e535180f031f(["fs_SC"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> x71e324cc06f2c42f(["fs_SP"]):::outdated
+    x2f73011017deaa39(["training_subset_SP"]):::outdated --> x71e324cc06f2c42f(["fs_SP"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> xbee8fb64ded30192(["fs_TP"]):::outdated
+    xef5410a5dce77230(["training_subset_TP"]):::outdated --> xbee8fb64ded30192(["fs_TP"]):::outdated
+    xd2fb9b1b91b3b55f>"create_factor_strucure"]:::uptodate --> xa4678874b5695712(["fs_WD"]):::outdated
+    xecb8f0f67e98a6e5(["training_subset_WD"]):::outdated --> xa4678874b5695712(["fs_WD"]):::outdated
     x9b27dfb35d384d60>"top_frac"]:::uptodate --> xc4d18a019ca90843>"get_empirical"]:::uptodate
     x636fade0f61375ee>"get_m_sd"]:::uptodate --> xc4d18a019ca90843>"get_empirical"]:::uptodate
+    x9f1f644ccc1a57e8(["solution_AB"]):::outdated --> x33425557521a5715(["h2_AB"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> x33425557521a5715(["h2_AB"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x33425557521a5715(["h2_AB"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xeac1355c62f46484(["h2_AD"]):::outdated
+    x13b6d3cc35bfc623(["solution_AD"]):::outdated --> xeac1355c62f46484(["h2_AD"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> xeac1355c62f46484(["h2_AD"]):::outdated
+    x2281cb03d5dddcda(["solution_AP"]):::outdated --> x1c2baf73b8b9013f(["h2_AP"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> x1c2baf73b8b9013f(["h2_AP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x1c2baf73b8b9013f(["h2_AP"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> xa423733ded11340e(["h2_RB"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xa423733ded11340e(["h2_RB"]):::outdated
+    xa5df33531960f2cc(["solution_RB"]):::outdated --> xa423733ded11340e(["h2_RB"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> x54d76411cdc17880(["h2_SC"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x54d76411cdc17880(["h2_SC"]):::outdated
+    x3a7e60512ad4a028(["solution_SC"]):::outdated --> x54d76411cdc17880(["h2_SC"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> xb33e0c820ad81765(["h2_SP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xb33e0c820ad81765(["h2_SP"]):::outdated
+    x1200691f4b62af4a(["solution_SP"]):::outdated --> xb33e0c820ad81765(["h2_SP"]):::outdated
+    x94c15ca1564b7a81(["solution_TP"]):::outdated --> xeb4fc7960bdc5acf(["h2_TP"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> xeb4fc7960bdc5acf(["h2_TP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xeb4fc7960bdc5acf(["h2_TP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x37072e48cf4465a2(["h2_WD"]):::outdated
+    xa991b6d2b4431cb9(["solution_WD"]):::outdated --> x37072e48cf4465a2(["h2_WD"]):::outdated
+    xbdb4f2284369acef>"test_invariance"]:::uptodate --> x37072e48cf4465a2(["h2_WD"]):::outdated
+    x9f1f644ccc1a57e8(["solution_AB"]):::outdated --> x90c9236e4e768b0b(["h3_AB"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> x90c9236e4e768b0b(["h3_AB"]):::outdated
+    x13b6d3cc35bfc623(["solution_AD"]):::outdated --> xe9b98d57d0c60fed(["h3_AD"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> xe9b98d57d0c60fed(["h3_AD"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> xab08567b967ea9e4(["h3_AP"]):::outdated
+    x2281cb03d5dddcda(["solution_AP"]):::outdated --> xab08567b967ea9e4(["h3_AP"]):::outdated
+    xa5df33531960f2cc(["solution_RB"]):::outdated --> x697ca187f42fb802(["h3_RB"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> x697ca187f42fb802(["h3_RB"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> x49710659d920eeba(["h3_SC"]):::outdated
+    x3a7e60512ad4a028(["solution_SC"]):::outdated --> x49710659d920eeba(["h3_SC"]):::outdated
+    x1200691f4b62af4a(["solution_SP"]):::outdated --> x624bd8800368c7be(["h3_SP"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> x624bd8800368c7be(["h3_SP"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> x1b03a215bf036ea1(["h3_TP"]):::outdated
+    x94c15ca1564b7a81(["solution_TP"]):::outdated --> x1b03a215bf036ea1(["h3_TP"]):::outdated
+    xa991b6d2b4431cb9(["solution_WD"]):::outdated --> xe3f9d2a8a27258ca(["h3_WD"]):::outdated
+    x7def38a6cacb983b>"test_informant_specificness"]:::uptodate --> xe3f9d2a8a27258ca(["h3_WD"]):::outdated
     x06c0f8476667fd3f(["meta_ysr"]):::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
-    xdd70d048569563e8>"create_item_assignment"]:::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
     xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
-    x6a90fc6145ebf215(["item_assignment"]):::uptodate --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
-    x8d4cf3dd7520449b>"fix_item_assignment"]:::uptodate --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
+    xdd70d048569563e8>"create_item_assignment"]:::uptodate --> x6a90fc6145ebf215(["item_assignment"]):::uptodate
     x0c307f7e4efbd259(["missing_items"]):::outdated --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
-    x5d64aea7dea2f65d>"combine_crit"]:::uptodate --> xf79721e0f5e33594>"make_obj_fn"]:::uptodate
+    x8d4cf3dd7520449b>"fix_item_assignment"]:::uptodate --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
+    x6a90fc6145ebf215(["item_assignment"]):::uptodate --> x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated
     xbcbbd35f337db770>"make_crit"]:::uptodate --> xf79721e0f5e33594>"make_obj_fn"]:::uptodate
-    xe273b2a40886dfdb>"read_meta_aseba"]:::uptodate --> xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate
+    x5d64aea7dea2f65d>"combine_crit"]:::uptodate --> xf79721e0f5e33594>"make_obj_fn"]:::uptodate
     xd9e5ec19b55a4a31(["file_meta_aseba"]):::uptodate --> xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate
+    xe273b2a40886dfdb>"read_meta_aseba"]:::uptodate --> xa7c0e709c76a0ac5(["meta_cbcl"]):::uptodate
     xe273b2a40886dfdb>"read_meta_aseba"]:::uptodate --> x06c0f8476667fd3f(["meta_ysr"]):::uptodate
     xd9e5ec19b55a4a31(["file_meta_aseba"]):::uptodate --> x06c0f8476667fd3f(["meta_ysr"]):::uptodate
     xec06d6d77dd97950>"check_item_assignment"]:::uptodate --> x0c307f7e4efbd259(["missing_items"]):::outdated
-    x71630008d1c0fd02(["training_set"]):::outdated --> x0c307f7e4efbd259(["missing_items"]):::outdated
     x6a90fc6145ebf215(["item_assignment"]):::uptodate --> x0c307f7e4efbd259(["missing_items"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x0c307f7e4efbd259(["missing_items"]):::outdated
+    xcb78b2803fa3be2c(["fs_AB"]):::outdated --> x3cb85ffeed963a54(["objective_fun_AB"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> x3cb85ffeed963a54(["objective_fun_AB"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x3cb85ffeed963a54(["objective_fun_AB"]):::outdated
+    xf60d83bc019bc9d7(["training_subset_AB"]):::outdated --> x3cb85ffeed963a54(["objective_fun_AB"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> xbfdb472195c4518d(["objective_fun_AD"]):::outdated
+    x3473628798949931(["training_subset_AD"]):::outdated --> xbfdb472195c4518d(["objective_fun_AD"]):::outdated
+    xcf9c67916e997734(["fs_AD"]):::outdated --> xbfdb472195c4518d(["objective_fun_AD"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xbfdb472195c4518d(["objective_fun_AD"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x9cce0ead64844b28(["objective_fun_AP"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> x9cce0ead64844b28(["objective_fun_AP"]):::outdated
+    xb1a628294e9ab995(["fs_AP"]):::outdated --> x9cce0ead64844b28(["objective_fun_AP"]):::outdated
+    x4ba6a6489e391b5d(["training_subset_AP"]):::outdated --> x9cce0ead64844b28(["objective_fun_AP"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> xd7d5e3779ecc1b7b(["objective_fun_RB"]):::outdated
+    x690aaa23c060b0c7(["training_subset_RB"]):::outdated --> xd7d5e3779ecc1b7b(["objective_fun_RB"]):::outdated
+    x8605b3768caaab21(["fs_RB"]):::outdated --> xd7d5e3779ecc1b7b(["objective_fun_RB"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xd7d5e3779ecc1b7b(["objective_fun_RB"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xa1c49a793f5e3cf5(["objective_fun_SC"]):::outdated
+    x9dd12e61daa5c580(["training_subset_SC"]):::outdated --> xa1c49a793f5e3cf5(["objective_fun_SC"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> xa1c49a793f5e3cf5(["objective_fun_SC"]):::outdated
+    x2f08e535180f031f(["fs_SC"]):::outdated --> xa1c49a793f5e3cf5(["objective_fun_SC"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> x794ff61a4b518494(["objective_fun_SP"]):::outdated
+    x2f73011017deaa39(["training_subset_SP"]):::outdated --> x794ff61a4b518494(["objective_fun_SP"]):::outdated
+    x71e324cc06f2c42f(["fs_SP"]):::outdated --> x794ff61a4b518494(["objective_fun_SP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> x794ff61a4b518494(["objective_fun_SP"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> xa5a448ba6ee321c2(["objective_fun_TP"]):::outdated
+    xbee8fb64ded30192(["fs_TP"]):::outdated --> xa5a448ba6ee321c2(["objective_fun_TP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xa5a448ba6ee321c2(["objective_fun_TP"]):::outdated
+    xef5410a5dce77230(["training_subset_TP"]):::outdated --> xa5a448ba6ee321c2(["objective_fun_TP"]):::outdated
+    x370c26d77466d196(["model_args"]):::uptodate --> xab506cb1f85898ca(["objective_fun_WD"]):::outdated
+    xa4678874b5695712(["fs_WD"]):::outdated --> xab506cb1f85898ca(["objective_fun_WD"]):::outdated
+    xecb8f0f67e98a6e5(["training_subset_WD"]):::outdated --> xab506cb1f85898ca(["objective_fun_WD"]):::outdated
+    xd20899a452aea33a>"build_obj"]:::uptodate --> xab506cb1f85898ca(["objective_fun_WD"]):::outdated
     x7849ff489c55a199(["sav_files_files"]):::outdated --> x1e2f6b892b676f51["sav_files"]:::outdated
-    x647af5ca2a750e19(["data_aseba"]):::outdated --> xe28e6a915fe1f815(["split_list"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> x9f1f644ccc1a57e8(["solution_AB"]):::outdated
+    x3cb85ffeed963a54(["objective_fun_AB"]):::outdated --> x9f1f644ccc1a57e8(["solution_AB"]):::outdated
+    xf60d83bc019bc9d7(["training_subset_AB"]):::outdated --> x9f1f644ccc1a57e8(["solution_AB"]):::outdated
+    xbfdb472195c4518d(["objective_fun_AD"]):::outdated --> x13b6d3cc35bfc623(["solution_AD"]):::outdated
+    x3473628798949931(["training_subset_AD"]):::outdated --> x13b6d3cc35bfc623(["solution_AD"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> x13b6d3cc35bfc623(["solution_AD"]):::outdated
+    x9cce0ead64844b28(["objective_fun_AP"]):::outdated --> x2281cb03d5dddcda(["solution_AP"]):::outdated
+    x4ba6a6489e391b5d(["training_subset_AP"]):::outdated --> x2281cb03d5dddcda(["solution_AP"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> x2281cb03d5dddcda(["solution_AP"]):::outdated
+    xd7d5e3779ecc1b7b(["objective_fun_RB"]):::outdated --> xa5df33531960f2cc(["solution_RB"]):::outdated
+    x690aaa23c060b0c7(["training_subset_RB"]):::outdated --> xa5df33531960f2cc(["solution_RB"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> xa5df33531960f2cc(["solution_RB"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> x3a7e60512ad4a028(["solution_SC"]):::outdated
+    xa1c49a793f5e3cf5(["objective_fun_SC"]):::outdated --> x3a7e60512ad4a028(["solution_SC"]):::outdated
+    x9dd12e61daa5c580(["training_subset_SC"]):::outdated --> x3a7e60512ad4a028(["solution_SC"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> x1200691f4b62af4a(["solution_SP"]):::outdated
+    x2f73011017deaa39(["training_subset_SP"]):::outdated --> x1200691f4b62af4a(["solution_SP"]):::outdated
+    x794ff61a4b518494(["objective_fun_SP"]):::outdated --> x1200691f4b62af4a(["solution_SP"]):::outdated
+    xef5410a5dce77230(["training_subset_TP"]):::outdated --> x94c15ca1564b7a81(["solution_TP"]):::outdated
+    xa5a448ba6ee321c2(["objective_fun_TP"]):::outdated --> x94c15ca1564b7a81(["solution_TP"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> x94c15ca1564b7a81(["solution_TP"]):::outdated
+    x88b1e9a630b6fb97>"construct_subtest"]:::uptodate --> xa991b6d2b4431cb9(["solution_WD"]):::outdated
+    xecb8f0f67e98a6e5(["training_subset_WD"]):::outdated --> xa991b6d2b4431cb9(["solution_WD"]):::outdated
+    xab506cb1f85898ca(["objective_fun_WD"]):::outdated --> xa991b6d2b4431cb9(["solution_WD"]):::outdated
     x11c22b6039cb940b>"split_data"]:::uptodate --> xe28e6a915fe1f815(["split_list"]):::outdated
-    x331f289e36e062ff>"extract_datasets"]:::uptodate --> xa673c03795543c98(["test_set"]):::outdated
+    x647af5ca2a750e19(["data_aseba"]):::outdated --> xe28e6a915fe1f815(["split_list"]):::outdated
+    x90cfd2e0b6e0e829>"quiet"]:::uptodate --> x7def38a6cacb983b>"test_informant_specificness"]:::uptodate
+    x7c98031197aba77d>"fit_mi"]:::uptodate --> xbdb4f2284369acef>"test_invariance"]:::uptodate
     xe28e6a915fe1f815(["split_list"]):::outdated --> xa673c03795543c98(["test_set"]):::outdated
-    xe28e6a915fe1f815(["split_list"]):::outdated --> x71630008d1c0fd02(["training_set"]):::outdated
+    x331f289e36e062ff>"extract_datasets"]:::uptodate --> xa673c03795543c98(["test_set"]):::outdated
     x331f289e36e062ff>"extract_datasets"]:::uptodate --> x71630008d1c0fd02(["training_set"]):::outdated
+    xe28e6a915fe1f815(["split_list"]):::outdated --> x71630008d1c0fd02(["training_set"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> xf60d83bc019bc9d7(["training_subset_AB"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> xf60d83bc019bc9d7(["training_subset_AB"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> xf60d83bc019bc9d7(["training_subset_AB"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> x3473628798949931(["training_subset_AD"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x3473628798949931(["training_subset_AD"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> x3473628798949931(["training_subset_AD"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> x4ba6a6489e391b5d(["training_subset_AP"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> x4ba6a6489e391b5d(["training_subset_AP"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x4ba6a6489e391b5d(["training_subset_AP"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> x690aaa23c060b0c7(["training_subset_RB"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x690aaa23c060b0c7(["training_subset_RB"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> x690aaa23c060b0c7(["training_subset_RB"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> x9dd12e61daa5c580(["training_subset_SC"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x9dd12e61daa5c580(["training_subset_SC"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> x9dd12e61daa5c580(["training_subset_SC"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> x2f73011017deaa39(["training_subset_SP"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> x2f73011017deaa39(["training_subset_SP"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> x2f73011017deaa39(["training_subset_SP"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> xef5410a5dce77230(["training_subset_TP"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> xef5410a5dce77230(["training_subset_TP"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> xef5410a5dce77230(["training_subset_TP"]):::outdated
+    x4bfa2536b5912c35(["item_assignment_fixed"]):::outdated --> xecb8f0f67e98a6e5(["training_subset_WD"]):::outdated
+    x6d8468d705778064>"subset_by_scale"]:::uptodate --> xecb8f0f67e98a6e5(["training_subset_WD"]):::outdated
+    x71630008d1c0fd02(["training_set"]):::outdated --> xecb8f0f67e98a6e5(["training_subset_WD"]):::outdated
+    x774740c5f5aaf2ef>"evaluate_mvc"]:::uptodate
+    x840d637f7d992393>"get_actual"]:::uptodate
     x4c122faa1e23fe53>"get_dfi"]:::uptodate
   end
   classDef uptodate stroke:#000000,color:#ffffff,fill:#354823;
