@@ -18,8 +18,12 @@ test_informant_specificness <- function(
   subscale_id,
   alpha_level = 0.05,
   n_rep,
-  verbose = FALSE
+  verbose = FALSE,
+  mvc_results
 ) {
+  if (isFALSE(mvc_results$all_criteria_met)) {
+    return(NULL)
+  }
   if (!inherits(model_output, "stuartOutput")) {
     cli::cli_abort(
       "Argument {.arg model_output} must be an object of class {.emph stuartOutput}"

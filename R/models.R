@@ -4,7 +4,13 @@
 #'
 #' @param data The subsetted dataframe.
 #' @param subscale_id Character scalar identifying the subscale
-construct_subtest <- function(data, objective, n_cores = 4, capacity = 2) {
+construct_subtest <- function(
+  data,
+  objective,
+  n_cores = 4,
+  capacity = 2,
+  testing = TRUE
+) {
   if (!is.data.frame(data)) {
     cli::cli_abort("Input must be a dataframe")
   }
@@ -25,9 +31,16 @@ construct_subtest <- function(data, objective, n_cores = 4, capacity = 2) {
     ISP = "ISP"
   )
 
+  if (testing) {
+    f <- function(...) quiet(stuart::randomsamples(...))
+  } else {
+    cli::cli_alert_info("Running bruteforce to find subtest.")
+    f <- function(...) quiet(stuart::bruteforce(...))
+  }
+
   # 4. Run Model
   do.call(
-    function(...) quiet(stuart::randomsamples(...)),
+    f,
     args = list(
       data = data,
       factor.structure = fs,

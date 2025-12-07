@@ -29,7 +29,7 @@ list(
         estimator = "MLR",
         missing = "FIML"
       ),
-      n_random = 1000, # should be 5000 on the server
+      n_random = 5000, # should be 5000 on the server
       p_top = 0.9,
       n_cores = 8, # should be higher on the server
       obj_info = list(
@@ -183,7 +183,8 @@ list(
         training_subset,
         objective_function,
         n_cores = model_parameters$n_cores,
-        capacity = model_parameters$capacity
+        capacity = model_parameters$capacity,
+        testing = TRUE # set this to false to run bruteforce approach instead of randomsamples
       )
     ),
 
@@ -207,7 +208,8 @@ list(
         model_output = subtest_solution,
         capacity = model_parameters$capacity,
         mtmm = model_parameters$mtmm,
-        alpha_level = model_parameters$alpha_level
+        alpha_level = model_parameters$alpha_level,
+        mvc_results = mvc_results
       )
     ),
 
@@ -219,7 +221,8 @@ list(
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, # model_parameters$n_rep
-        verbose = FALSE
+        verbose = FALSE,
+        mvc_results = mvc_results
       )
     )
   )

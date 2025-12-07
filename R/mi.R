@@ -35,7 +35,16 @@ fit_mi <- function(model_output, capacity, mtmm, mtmm_invariance) {
 #' @param capacity The capacity for the factor structure.
 #' @param mtmm A list specifying the MTMM structure.
 #' @return A list containing the fitted models, comparison table, LRT results, and overview of decisions.
-test_invariance <- function(model_output, capacity, mtmm, alpha_level) {
+test_invariance <- function(
+  model_output,
+  capacity,
+  mtmm,
+  alpha_level,
+  mvc_results
+) {
+  if (isFALSE(mvc_results$all_criteria_met)) {
+    return(NULL)
+  }
   invariance_levels <- c("configural", "weak", "strong", "strict")
   fits <- lapply(
     invariance_levels,
