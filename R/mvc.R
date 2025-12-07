@@ -1,5 +1,8 @@
 #' @title Evaluate Minimum Viable Criteria (MVC)
 #' @param model_output A stuartOutput object
+#' @param testing_subset The testing data subset used to test the hypothesis
+#' @param mtmm
+#' @param capacity
 #' @param n_cores The number of cores used to run ezCutoffs()
 #' @param alpha_level Type-I error rate (defaults to 0.05)
 #' @param n_rep The number of replications in ezCutoffs()
@@ -9,6 +12,10 @@
 #'   `all_criteria_met`, and `cutoff_simulation`
 test_mvc <- function(
   model_output,
+  testing_subset,
+  mtmm,
+  capacity,
+  objective,
   n_cores,
   alpha_level = .05,
   n_rep = 100,
@@ -17,6 +24,7 @@ test_mvc <- function(
 ) {
   cutoff_results <- compute_cutoffs(
     model_output = model_output,
+    testing_subset = testing_subset,
     n_cores = n_cores,
     alpha_level = alpha_level,
     n_rep = n_rep,
@@ -24,7 +32,13 @@ test_mvc <- function(
     subscale_id = subscale_id
   )
 
-  actual_values <- extract_actual_values(model_output)
+  actual_values <- extract_actual_values(
+    model_output,
+    testing_subset,
+    mtmm,
+    capacity,
+    objective
+  )
 
   comparison_results <- compare_to_cutoffs(
     actual = actual_values,
@@ -36,9 +50,9 @@ test_mvc <- function(
   return(comparison_results)
 }
 
-
 #' @title Compute Cutoffs for MVC Criteria
 #' @param model_output A stuartOutput object
+#' @param testing_subset The testing data subset used to test the hypothesis
 #' @param n_cores Number of cores for ezCutoffs()
 #' @param alpha_level Type-I error rate
 #' @param n_rep The number of replications in ezCutoffs()
@@ -48,6 +62,7 @@ test_mvc <- function(
 #'   and `cutoff_simulation` (the ezCutoffs object)
 compute_cutoffs <- function(
   model_output,
+  testing_subset,
   n_cores = 4,
   alpha_level = .05,
   n_rep = 100,
@@ -61,7 +76,8 @@ compute_cutoffs <- function(
   }
 
   model_syntax <- quiet(semPlot::semSyntax(model_output$final))
-  model_data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
+  #model_data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
+  model_data <- testing_subset
 
   cutoff_simulation <- quiet(
     ezCutoffs::ezCutoffs(
@@ -103,9 +119,34 @@ compute_cutoffs <- function(
 
 #' @title Extract Actual Values for MVC Criteria
 #' @param model_output A stuartOutput object
+#' @param testing_subset The testing data subset used to test the hypothesis
+#' @mtmm
+#' @capacity
 #' @return Named numeric vector of actual values
-extract_actual_values <- function(model_output) {
-  last_log <- tail(na.omit(model_output$log), n = 1)
+extract_actual_values <- function(
+  model_output,
+  testing_subset,
+  mtmm,
+  capacity,
+  objective
+) {
+  # refit model using testing data:
+  args_list <- list(
+    data = testing_subset,
+    factor.structure = model_output$subtests,
+    mtmm = mtmm,
+    ignore.errors = TRUE,
+    capacity = capacity,
+    objective = objective$obj_fun,
+    analysis.options = list(estimator = "MLR", missing = "FIML")
+  )
+
+  test_model_output <- do.call(
+    function(...) quiet(stuart::bruteforce(...)),
+    args_list
+  )
+
+  last_log <- tail(na.omit(test_model_output$log), n = 1)
 
   actual_fit_indices <- last_log[, -c(1, 2)]
   names(actual_fit_indices) <- c(
@@ -118,7 +159,7 @@ extract_actual_values <- function(model_output) {
   )
 
   df_params <- lavaan::parameterestimates(
-    model_output$final,
+    test_model_output$final,
     standardized = TRUE
   )
 

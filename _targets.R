@@ -153,6 +153,12 @@ list(
       subset_by_scale(training_data, fixed_item_assignment, subscale_id)
     ),
 
+    # Subset testing data
+    tar_target(
+      testing_subset,
+      subset_by_scale(testing_data, fixed_item_assignment, subscale_id)
+    ),
+
     # Factor structure
     tar_target(
       factor_structure,
@@ -193,6 +199,10 @@ list(
       mvc_results,
       test_mvc(
         model_output = subtest_solution,
+        testing_subset = testing_subset,
+        mtmm = model_parameters$mtmm,
+        capacity = model_parameters$capacity,
+        objective = objective_function,
         n_cores = model_parameters$n_cores,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, #model_parameters$n_rep,
