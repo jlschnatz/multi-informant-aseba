@@ -100,8 +100,9 @@ make_mats <- function(
     factor.structure = fs,
     capacity = capacity,
     mtmm = mtmm,
+    n.random = 500,
     mtmm.invariance = mtmm_invariance,
-    ignore.errors = TRUE,
+    ignore.errors = FALSE,
     matrices = obj_info$mat$name
   )
 
@@ -115,7 +116,7 @@ make_mats <- function(
     obj_mat[[m]]$side[mat_ind] <- obj_info$mat$side[[m]]
   }
 
-  cli::cli_alert_success("Objective matrices prepared successfully.")
+  cli::cli_alert_success("Objective matrices successfully prepared.")
   return(obj_mat)
 }
 
@@ -196,20 +197,6 @@ get_empirical <- function(
       rs <- suppressMessages(do.call(stuart::randomsamples, rs_list))
     })
   )
-
-  #invisible(utils::capture.output({
-  #  rs <- suppressMessages(stuart::randomsamples(
-  #    data = data,
-  #    factor.structure = fs,
-  #    capacity = capacity,
-  #    mtmm = mtmm,
-  #    mtmm.invariance = mtmm_invariance,
-  #    objective = objective,
-  #    analysis.options = analysis_opts,
-  #    cores = cores,
-  #    n = n_random
-  #  ))
-  #}))
 
   # Extract Results for Vector Criteria
   obj_nms <- obj_info$vec

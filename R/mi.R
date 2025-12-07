@@ -1,17 +1,21 @@
 #' Fit Invariance Models
-#' @param x An object of class `stuartOutput`
+#' @param model_output An object of class `stuartOutput`
 #' @param capacity The capacity for the factor structure.
 #' @param mtmm A list specifying the MTMM structure.
 #' @param mtmm_invariance A string specifying the level of invariance to be tested.
-fit_mi <- function(x, capacity, mtmm, mtmm_invariance) {
-  data <- as.data.frame(lavaan::lavInspect(x$final, "data"))
-  fs <- x$subtests
+fit_mi <- function(model_output, capacity, mtmm, mtmm_invariance) {
+  data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
+  fs <- model_output$subtests
   bf_list <- list(
     data = data,
     factor.structure = fs,
     capacity = capacity,
     mtmm = mtmm,
-    mtmm.invariance = mtmm_invariance
+    mtmm.invariance = mtmm_invariance,
+    analysis.options = list(
+      estimator = "MLR",
+      missing = "FIML"
+    )
   )
   bf <- suppressMessages(do.call(
     stuart::bruteforce,
@@ -27,17 +31,17 @@ fit_mi <- function(x, capacity, mtmm, mtmm_invariance) {
 }
 
 #' Compare Invariance Models Using Information Criteria and LRT
-#' @param x An object of class `stuartOutput`
+#' @param model_output An object of class `stuartOutput`
 #' @param capacity The capacity for the factor structure.
 #' @param mtmm A list specifying the MTMM structure.
 #' @return A list containing the fitted models, comparison table, LRT results, and overview of decisions.
-test_invariance <- function(x, capacity, mtmm, alpha) {
+test_invariance <- function(model_output, capacity, mtmm, alpha_level) {
   invariance_levels <- c("configural", "weak", "strong", "strict")
   fits <- lapply(
     invariance_levels,
     function(level) {
       fit_mi(
-        x = x,
+        model_output = model_output,
         capacity = capacity,
         mtmm = mtmm,
         mtmm_invariance = level
@@ -88,7 +92,7 @@ test_invariance <- function(x, capacity, mtmm, alpha) {
     if (!agreement[i]) {
       which_used[i] <- "lrt"
       pval <- subset(lrt, term == names(agreement)[i])$p
-      if (pval < alpha) {
+      if (pval < alpha_level) {
         decision[i] <- "reject"
         if (i == length(agreement)) {
           break
@@ -133,14 +137,3 @@ test_invariance <- function(x, capacity, mtmm, alpha) {
 
   return(out)
 }
-
-#test_invariance(
-#  x = solution_TP,
-#  capacity = 2,
-#  mtmm =  list(
-#        CI = c("CIC", "CIP"),
-#        ISC = "ISC",
-#        ISP = "ISP"
-#      ),
-#  alpha = .05
-#) -> res

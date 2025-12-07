@@ -1,59 +1,22 @@
-# Created by use_targets().
-# Follow the comments below to fill in this target script.
-# Then follow the manual to check and run the pipeline:
-#   https://books.ropensci.org/targets/walkthrough.html#inspect-the-pipeline
-
-# Load packages required to define the pipeline:
+# Load required packages
 library(targets)
 library(tarchetypes)
 
-# Set target options:
+# Set target options
 tar_option_set(
   error = "null",
-  #packages = c("tibble"), # Packages that your targets need for their tasks.
-  format = "qs", # Optionally set the default storage format. qs is fast.
-  seed = 250925192132 %% .Machine$integer.max
-  #
-  # Pipelines that take a long time to run may benefit from
-  # optional distributed computing. To use this capability
-  # in tar_make(), supply a {crew} controller
-  # as discussed at https://books.ropensci.org/targets/crew.html.
-  # Choose a controller that suits your needs. For example, the following
-  # sets a controller that scales up to a maximum of two workers
-  # which run as local R processes. Each worker launches when there is work
-  # to do and exits if 60 seconds pass with no tasks to run.
-  #
-  #   controller = crew::crew_controller_local(workers = 2, seconds_idle = 60)
-  #
-  # Alternatively, if you want workers to run on a high-performance computing
-  # cluster, select a controller from the {crew.cluster} package.
-  # For the cloud, see plugin packages like {crew.aws.batch}.
-  # The following example is a controller for Sun Grid Engine (SGE).
-  #
-  #   controller = crew.cluster::crew_controller_sge(
-  #     # Number of workers that the pipeline can scale up to:
-  #     workers = 10,
-  #     # It is recommended to set an idle time so workers can shut themselves
-  #     # down if they are not running tasks.
-  #     seconds_idle = 120,
-  #     # Many clusters install R as an environment module, and you can load it
-  #     # with the script_lines argument. To select a specific verison of R,
-  #     # you may need to include a version string, e.g. "module load R/4.3.2".
-  #     # Check with your system administrator if you are unsure.
-  #     script_lines = "module load R"
-  #   )
-  #
-  # Set other options as needed.
+  format = "qs",
+  seed = 250925
 )
 
-# Run the R scripts in the R/ folder with your custom functions:
+# Source R scripts with custom functions
 tar_source()
-# tar_source("other_functions.R") # Source other scripts as needed.
 
-# Replace the target list below with your own:
+# Define pipeline
 list(
+  # Model arguments
   tar_target(
-    model_args,
+    model_parameters,
     list(
       mtmm = list(
         CI = c("CIC", "CIP"),
@@ -66,9 +29,9 @@ list(
         estimator = "MLR",
         missing = "FIML"
       ),
-      n_random = 500,
+      n_random = 1000, # should be 5000 on the server
       p_top = 0.9,
-      cores = 4,
+      n_cores = 8, # should be higher on the server
       obj_info = list(
         vec = c("rmsea.robust", "srmr", "rel"),
         mat = list(
@@ -78,25 +41,30 @@ list(
         ),
         lower_tail = c(FALSE, FALSE, TRUE, TRUE, FALSE),
         weights = c(1 / 6, 1 / 6, 1 / 3, 1 / 6, 1 / 6)
-      )
+      ),
+      alpha_level = .05
     )
   ),
-  # Reliability and Agreement CSV files
+
+  # Reliability and agreement CSV files
   tar_file(
-    rel_file,
+    rel_data_file,
     "data/processed/aseba_rel.csv"
   ),
   tar_file(
-    agr_file,
+    agreement_data_file,
     "data/processed/aseba_agr.csv"
   ),
+
+  # Generate cutoff reference
   tar_target(
-    data_cutoff,
-    create_cutoff(rel_file, agr_file, capacity = 2),
+    cutoff_reference,
+    create_cutoff(rel_data_file, agreement_data_file, capacity = 2)
   ),
-  # SAV-files of raw data
+
+  # Raw data files
   tar_files(
-    sav_files,
+    raw_sav_files,
     list.files(
       "data/raw",
       full.names = TRUE,
@@ -105,125 +73,152 @@ list(
     ),
     format = "file"
   ),
-  # Create merged safechild datase
+
+  # Create merged SAFEchild dataset
   tar_target(
-    data_safe,
-    create_safechild(sav_files)
+    data_safechild,
+    create_safechild(raw_sav_files)
   ),
-  # Generate variable dictionary
+
+  # Variable dictionary
   tar_target(
-    dict,
-    create_dictionary(data_safe)
+    variable_dictionary,
+    create_dictionary(data_safechild)
   ),
-  # Find attrition
+
+  # Attrition
   tar_target(
-    dropout,
-    handle_attrition(data_safe)
+    attrition_info,
+    handle_attrition(data_safechild)
   ),
-  # Prepare ASEBA data
+
+  # ASEBA data preparation
   tar_target(
     data_aseba,
-    create_aseba(data_safe, dropout)
+    create_aseba(data_safechild, attrition_info)
   ),
+
   # Train-test split
   tar_target(
-    split_list,
+    data_split,
     split_data(data_aseba)
   ),
   tar_target(
-    training_set,
-    extract_datasets(split_list, which = "training")
+    training_data,
+    extract_datasets(data_split, which = "training")
   ),
   tar_target(
-    test_set,
-    extract_datasets(split_list, which = "testing")
+    testing_data,
+    extract_datasets(data_split, which = "testing")
   ),
-  # Read in ASEBA metadata (manual from 2001)
-  tar_file(file_meta_aseba, "data/meta/aseba_man_2001.xlsx"),
+
+  # ASEBA metadata
+  tar_file(
+    aseba_metadata_file,
+    "data/meta/aseba_man_2001_public.xlsx"
+  ),
   tar_target(
     meta_cbcl,
-    read_meta_aseba(file_meta_aseba, sheet = "cbcl")
+    read_meta_aseba(aseba_metadata_file, sheet = "cbcl")
   ),
   tar_target(
     meta_ysr,
-    read_meta_aseba(file_meta_aseba, sheet = "ysr")
+    read_meta_aseba(aseba_metadata_file, sheet = "ysr")
   ),
-  # Create item assignment
+
+  # Item assignment
   tar_target(
     item_assignment,
     create_item_assignment(meta_ysr, meta_cbcl)
   ),
   tar_target(
-    missing_items,
-    check_item_assignment(item_assignment, training_set)
+    missing_item_info,
+    check_item_assignment(item_assignment, training_data)
   ),
   tar_target(
-    item_assignment_fixed,
-    fix_item_assignment(item_assignment, missing_items)
+    fixed_item_assignment,
+    fix_item_assignment(item_assignment, missing_item_info)
   ),
-  # Map over all clinical subscales
+
+  # Map over clinical subscales
   tar_map(
     values = tibble::tibble(
-      scale_id = c("AB", "AD", "AP", "RB", "SC", "SP", "TP", "WD")
+      subscale_id = c("AB", "AD", "AP", "RB", "SC", "SP", "TP", "WD")
     ),
-    names = "scale_id",
-    # Subset training data to required columns
+    names = "subscale_id",
+
+    # Subset training data
     tar_target(
       training_subset,
-      subset_by_scale(training_set, item_assignment_fixed, scale_id)
+      subset_by_scale(training_data, fixed_item_assignment, subscale_id)
     ),
-    # Create factor structure for each clinical scale
+
+    # Factor structure
     tar_target(
-      fs,
+      factor_structure,
       create_factor_strucure(training_subset)
     ),
-    # Build objective function for search
+
+    # Objective function
     tar_target(
-      objective_fun,
+      objective_function,
       build_obj(
         data = training_subset,
-        fs = fs,
-        capacity = 2,
-        mtmm = model_args$mtmm,
-        mtmm_invariance = model_args$mtmm_invariance,
-        analysis_opts = model_args$analysis_opts,
-        n_random = model_args$n_random,
-        p_top = model_args$p_top,
-        cores = 4,
-        obj_info = model_args$obj_info
+        fs = factor_structure,
+        capacity = model_parameters$capacity,
+        mtmm = model_parameters$mtmm,
+        mtmm_invariance = model_parameters$mtmm_invariance,
+        analysis_opts = model_parameters$analysis_opts,
+        n_random = model_parameters$n_random,
+        p_top = model_parameters$p_top,
+        cores = model_parameters$n_cores,
+        obj_info = model_parameters$obj_info
       )
     ),
+
+    # Construct subtest solution
     tar_target(
-      solution,
-      construct_subtest(training_subset, objective_fun)
+      subtest_solution,
+      construct_subtest(
+        training_subset,
+        objective_function,
+        n_cores = model_parameters$n_cores,
+        capacity = model_parameters$capacity
+      )
     ),
+
+    # Evaluate MVC
     tar_target(
-      h2,
+      mvc_results,
+      test_mvc(
+        model_output = subtest_solution,
+        n_cores = model_parameters$n_cores,
+        alpha_level = model_parameters$alpha_level,
+        n_rep = 10, #model_parameters$n_rep,
+        cutoff_reference = cutoff_reference,
+        subscale_id = subscale_id
+      )
+    ),
+
+    # Test invariance
+    tar_target(
+      invariance_results,
       test_invariance(
-        x = solution,
-        capacity = model_args$capacity,
-        mtmm = model_args$mtmm,
-        alpha = .05
+        model_output = subtest_solution,
+        capacity = model_parameters$capacity,
+        mtmm = model_parameters$mtmm,
+        alpha_level = model_parameters$alpha_level
       )
     ),
-    # Generate MVC cutoffs
+
+    # Test informant specificness
     tar_target(
-      cutoffs,
-      generate_cutoffs(
-        x = solution,
-        cores = 4,
-        alpha_level = .05,
-        data_cutoff = data_cutoff,
-        scale_id = scale_id
-      )
-    ),
-    tar_target(
-      h3,
+      informant_specificness_results,
       test_informant_specificness(
-        x = solution,
-        scale_id = scale_id,
-        alpha = .05,
-        n_rep = 10,
+        model_output = subtest_solution,
+        subscale_id = subscale_id,
+        alpha_level = model_parameters$alpha_level,
+        n_rep = 10, # model_parameters$n_rep
         verbose = FALSE
       )
     )

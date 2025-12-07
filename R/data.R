@@ -195,17 +195,17 @@ fix_item_assignment <- function(item_assignment, missing_items) {
 #'
 #' @param data A dataframe (your training_set).
 #' @param assignments A named nested list (your item_assignment_fixed).
-#' @param scale_id A character string representing the scale to extract (e.g., "AB").
+#' @param subscale_id A character string representing the scale to extract (e.g., "AB").
 #'
 #' @return A dataframe containing only the columns relevant to the scale.
-subset_by_scale <- function(data, assignments, scale_id) {
-  if (!scale_id %in% names(assignments)) {
+subset_by_scale <- function(data, assignments, subscale_id) {
+  if (!subscale_id %in% names(assignments)) {
     cli::cli_abort(
-      "Error: Scale ID '{scale_id}' was expected but not found in the assignment list."
+      "Error: Scale ID '{subscale_id}' was expected but not found in the assignment list."
     )
   }
 
-  scale_items <- assignments[[scale_id]]
+  scale_items <- assignments[[subscale_id]]
   target_columns <- c(scale_items$CBCL, scale_items$YSR)
   subset_df <- subset(data, select = target_columns)
   return(subset_df)
@@ -224,46 +224,4 @@ create_factor_strucure <- function(data) {
     ISP = cbcl_items
   )
   return(fs)
-}
-
-#' Fit MTMM Model (Stuart)
-#'
-#' Fits the model using the stuart package logic you provided.
-#'
-#' @param data The subsetted dataframe.
-#' @param scale_id Included for error context (optional but recommended).
-construct_subtest <- function(data, objective) {
-  if (!is.data.frame(data)) {
-    cli::cli_abort("Input must be a dataframe")
-  }
-
-  cbcl_items <- grep("^CBCL", names(data), value = TRUE)
-  ysr_items <- grep("^YSR", names(data), value = TRUE)
-
-  fs <- list(
-    CIC = ysr_items,
-    CIP = cbcl_items,
-    ISC = ysr_items,
-    ISP = cbcl_items
-  )
-
-  mtmm <- list(
-    CI = c("CIC", "CIP"),
-    ISC = "ISC",
-    ISP = "ISP"
-  )
-
-  # 4. Run Model
-  do.call(
-    suppressMessages(stuart::randomsamples),
-    args = list(
-      data = data,
-      factor.structure = fs,
-      capacity = 2,
-      mtmm = mtmm,
-      n = 100,
-      cores = 8,
-      objective = objective$obj_fun
-    )
-  )
 }

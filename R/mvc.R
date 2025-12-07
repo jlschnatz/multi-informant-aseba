@@ -1,55 +1,114 @@
-#### Hypothesis 1: MVC
-
-#library(ezCutoffs)
-generate_cutoffs <- function(
-  x,
-  cores = 4,
+#' @title Evaluate Minimum Viable Criteria (MVC)
+#' @param model_output A stuartOutput object
+#' @param n_cores The number of cores used to run ezCutoffs()
+#' @param alpha_level Type-I error rate (defaults to 0.05)
+#' @param n_rep The number of replications in ezCutoffs()
+#' @param cutoff_reference A dataframe containing cutoffs for gamma, phi, omega
+#' @param subscale_id Character scalar identifying the clinical subscale
+#' @return A list containing: `criterion_table`, `criteria_met`,
+#'   `all_criteria_met`, and `cutoff_simulation`
+test_mvc <- function(
+  model_output,
+  n_cores,
   alpha_level = .05,
-  data_cutoff,
-  scale_id
+  n_rep = 100,
+  cutoff_reference,
+  subscale_id
 ) {
-  model <- suppressMessages(semPlot::semSyntax(x$final))
-  data <- as.data.frame(lavaan::lavInspect(x$final, "data"))
-  ezc <- ezCutoffs::ezCutoffs(
-    model = model,
-    data = data,
-    normality = "empirical",
-    fit_indices = c("rmsea", "srmr"),
-    n_rep = 100,
-    missing_data = TRUE,
-    n_cores = cores,
-    alpha_level = alpha_level
+  cutoff_results <- compute_cutoffs(
+    model_output = model_output,
+    n_cores = n_cores,
+    alpha_level = alpha_level,
+    n_rep = n_rep,
+    cutoff_reference = cutoff_reference,
+    subscale_id = subscale_id
   )
 
-  modelfit_cutoff <- ezc$summary[c("rmsea", "srmr"), "Cutoff (alpha = 0.05)"]
-  names(modelfit_cutoff) <- c("rmsea", "srmr")
-  df_cutoff <- subset(data_cutoff, id == scale_id)
-  df_cutoff
-  vec_cutoff <- with(df_cutoff, c(agreement, rep(alpha_star, times = 2)))
-  names(vec_cutoff) <- c(
-    "gamma",
-    "phi",
-    "omega_cip",
-    "omega_cic",
-    "omega_isp",
-    "omega_isc"
+  actual_values <- extract_actual_values(model_output)
+
+  comparison_results <- compare_to_cutoffs(
+    actual = actual_values,
+    cutoffs = cutoff_results$cutoffs
   )
-  cutoff <- c(modelfit_cutoff, vec_cutoff)
-  return(list(cutoff = cutoff, ezcutoffs_object = ezc))
+
+  comparison_results$cutoff_simulation <- cutoff_results$cutoff_simulation
+
+  return(comparison_results)
 }
 
 
-#cuts <- generate_cutoffs(
-#  x = rs,
-#  cores = 4,
-#  alpha_level = .05,
-#  clinical_subscale = "Aggressive Behavior"
-#)
+#' @title Compute Cutoffs for MVC Criteria
+#' @param model_output A stuartOutput object
+#' @param n_cores Number of cores for ezCutoffs()
+#' @param alpha_level Type-I error rate
+#' @param n_rep The number of replications in ezCutoffs()
+#' @param cutoff_reference Dataframe with cutoff values for gamma, phi, omega
+#' @param subscale_id ID of subscale (from tar_map)
+#' @return List containing `cutoffs` (named numeric vector)
+#'   and `cutoff_simulation` (the ezCutoffs object)
+compute_cutoffs <- function(
+  model_output,
+  n_cores = 4,
+  alpha_level = .05,
+  n_rep = 100,
+  cutoff_reference,
+  subscale_id
+) {
+  if (!inherits(model_output, "stuartOutput")) {
+    cli::cli_abort(
+      "Argument {.arg model_output} must be of class {.field stuartOutput}."
+    )
+  }
 
-get_actual <- function(stuartOutput) {
-  last_log <- tail(na.omit(stuartOutput$log), n = 1)
-  actual_vec <- last_log[, c(-c(1, 2))]
-  names(actual_vec) <- c(
+  model_syntax <- quiet(semPlot::semSyntax(model_output$final))
+  model_data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
+
+  cutoff_simulation <- quiet(
+    ezCutoffs::ezCutoffs(
+      model = model_syntax,
+      data = model_data,
+      normality = "empirical",
+      fit_indices = c("rmsea", "srmr"),
+      n_rep = n_rep,
+      missing_data = TRUE,
+      n_cores = n_cores,
+      alpha_level = alpha_level,
+      missing = "FIML",
+      estimator = "MLR"
+    )
+  )
+
+  # RMSEA/SRMR cutoffs
+  cutoffs_fit <- sapply(cutoff_simulation$fitDistributions, function(dist) {
+    quantile(dist, 1 - alpha_level, names = FALSE, na.rm = TRUE)
+  })
+
+  # Gamma / Phi cutoffs
+  ref_row <- subset(cutoff_reference, id == subscale_id)
+  cutoffs_gamma_phi <- ref_row$agreement
+  names(cutoffs_gamma_phi) <- c("gamma", "phi")
+
+  # Omega cutoffs
+  cutoffs_omega <- rep(ref_row$alpha_star, times = 2)
+  names(cutoffs_omega) <- paste0("omega_", c("cip", "cic", "isp", "isc"))
+
+  cutoffs <- c(cutoffs_gamma_phi, cutoffs_fit, cutoffs_omega)
+
+  return(list(
+    cutoffs = cutoffs,
+    cutoff_simulation = cutoff_simulation
+  ))
+}
+
+
+#' @title Extract Actual Values for MVC Criteria
+#' @param model_output A stuartOutput object
+#' @return Named numeric vector of actual values
+extract_actual_values <- function(model_output) {
+  last_log <- tail(na.omit(model_output$log), n = 1)
+
+  actual_fit_indices <- last_log[, -c(1, 2)]
+  names(actual_fit_indices) <- c(
     "rmsea",
     "srmr",
     "omega_cic",
@@ -57,111 +116,50 @@ get_actual <- function(stuartOutput) {
     "omega_isc",
     "omega_isp"
   )
-  df_param <- parameterestimates(stuartOutput$final, standardized = TRUE)
-  actual_mat <- filter(
-    .data = df_param,
-    (lhs == "CIP" & op == "~" & rhs == "CIC") |
+
+  df_params <- lavaan::parameterestimates(
+    model_output$final,
+    standardized = TRUE
+  )
+
+  actual_relations <- subset(
+    x = df_params,
+    subset = (lhs == "CIP" & op == "~" & rhs == "CIC") |
       (lhs == "ISC" & op == "~~" & rhs == "ISP")
   )$std.all
-  names(actual_mat) <- c("gamma", "phi")
-  actual <- c(unlist(actual_vec), actual_mat)
+
+  names(actual_relations) <- c("gamma", "phi")
+
+  actual <- c(actual_relations, unlist(actual_fit_indices))
+
   return(actual)
 }
 
-evaluate_mvc <- function(actual, cutoff) {
-  df_results <- tibble(
-    criterion = names(cutoff),
-    direction = c(
-      "lower",
-      "lower",
-      "higher",
-      "lower",
-      "higher",
-      "higher",
-      "higher",
-      "higher"
-    )
-  ) |>
-    mutate(
+
+#' @title Compare Actual Values to MVC Cutoffs
+#' @param actual Named numeric vector of observed values
+#' @param cutoffs Named numeric vector of cutoff thresholds
+#' @return List with results table, logical vector, and boolean summary
+compare_to_cutoffs <- function(actual, cutoffs) {
+  criterion_table <- tibble::tibble(criterion = names(cutoffs)) |>
+    dplyr::mutate(
+      direction = dplyr::case_when(
+        criterion %in% c("phi", "srmr", "rmsea") ~ "lower",
+        criterion == "gamma" ~ "higher",
+        stringr::str_starts(criterion, "omega") ~ "higher",
+        TRUE ~ NA_character_
+      ),
       actual = actual,
-      cutoff = cutoff,
+      cutoff = cutoffs,
       meets = ifelse(direction == "higher", actual > cutoff, actual < cutoff)
     )
 
-  results_vec <- df_results |>
-    select(criterion, meets) |>
-    tidyr::pivot_wider(names_from = criterion, values_from = meets) |>
-    unlist()
+  criteria_met <- criterion_table$meets
+  names(criteria_met) <- criterion_table$criterion
 
-  # Initial decision based on model fit criteria
-  decision <- "proceed"
-
-  # Check model fit criteria first
-  if (!results_vec["srmr"]) {
-    if (!results_vec["rmsea"]) {
-      cli::cli_alert_danger(
-        "Both model fit criteria (RMSEA and SRMR) failed to meet the cutoff."
-      )
-      cli::cli_alert("Drop clinical subscale.")
-      decision <- "drop_subscale"
-      return(list(results = df_results, decision = decision))
-    }
-  } else if (!results_vec["rmsea"]) {
-    cli::cli_alert_warning(
-      "RMSEA failed to meet the cutoff, but SRMR met the cutoff."
-    )
-    cli::cli_alert("Model likely overparametrized. Checking gamma and phi.")
-  }
-
-  if (!results_vec["phi"]) {
-    cli::cli_alert_danger(
-      "Latent correlation (phi) between ISC and ISP is too low."
-    )
-    cli::cli_alert("Consider dropping the informant-specific component.")
-    decision <- "drop_is"
-  }
-
-  if (!results_vec["gamma"]) {
-    cli::cli_alert_warning(
-      "Regression coefficient (gamma) between CIP and CIC is too low."
-    )
-    cli::cli_alert("Consider dropping the cross-informant component.")
-    decision <- if (decision == "drop_is") "drop_subscale" else "drop_ci"
-  }
-
-  omega_ci <- results_vec[c("omega_cic", "omega_cip")]
-  omega_is <- results_vec[c("omega_isc", "omega_isp")]
-
-  if (any(!omega_ci) & any(!omega_is)) {
-    cli::cli_alert_danger(
-      "Reliabilities for both the cross-informant components (CIC, CIP) and the informant-specific components (ISC, ISP) are below the cutoff."
-    )
-    cli::cli_alert("Drop clinical subscale.")
-    decision <- "drop_subscale"
-  } else if (any(!omega_ci)) {
-    cli::cli_alert_danger(
-      "One or more of the reliabilities for the cross-informant components (CIC, CIP) is below the cutoff."
-    )
-    cli::cli_alert("Consider dropping the cross-informant component.")
-    decision <- if (decision == "drop_is") "drop_subscale" else "drop_ci"
-  } else if (any(!omega_is)) {
-    cli::cli_alert_danger(
-      "One or more of the reliabilities for the informant-specific components (ISC, ISP) is below the cutoff."
-    )
-    which_fails <- names(omega_is[which(!omega_is)])
-    switch(
-      which_fails,
-      omega_isc = cli::cli_alert("Consider dropping the ISC component."),
-      omega_isp = cli::cli_alert("Consider dropping the ISP component.")
-    )
-    if (which_fails == "omega_isc") {
-      decision <- "drop_isc"
-    } else {
-      decision <- "drop_isp"
-    }
-    return(list(results = df_results, decision = decision))
-  } else {
-    cli::cli_alert_success("All reliability criteria met.")
-    return(list(results = df_results, decision = decision))
-  }
+  return(list(
+    criterion_table = criterion_table,
+    criteria_met = criteria_met,
+    all_criteria_met = all(criteria_met)
+  ))
 }
