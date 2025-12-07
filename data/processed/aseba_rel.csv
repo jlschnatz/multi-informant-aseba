@@ -1,0 +1,9 @@
+id,scale,n_cbcl,n_ysr,alpha_cbcl,alpha_ysr 
+AB,Aggressive Behavior,18,17,0.94,0.9
+AD,Anxious/Depressed,13,13,0.84,0.84
+AP,Attention Problems,10,9,0.86,0.79
+RB,Rule-Breaking Behavior,17,15,0.85,0.81
+SP,Social Problems,11,11,0.82,0.74
+SC,Somatic Complaints,11,10,0.78,0.8
+TP,Thought Problems,15,12,0.78,0.78
+WD,Withdrawn/Depressed,8,8,0.8,0.71

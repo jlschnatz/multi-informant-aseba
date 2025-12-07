@@ -1,0 +1,9 @@
+id, scale, agreement
+AB,Aggressive Behavior,0.52 
+AD,Anxious/Depressed,0.45
+AP,Attention Problems,0.48
+RB,Rule-Breaking Behavior,0.55
+SP,Social Problems,0.49
+SC,Somatic Complaints,0.40
+TP,Thought Problems,0.37
+WD,Withdrawn/Depressed,0.40

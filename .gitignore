@@ -1,5 +1,4 @@
-data/meta/
-data/processed/
+data/meta/secret/
 data/raw/
 data/*.pdf
 materials/*.pdf
