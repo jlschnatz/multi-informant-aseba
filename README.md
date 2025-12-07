@@ -8,30 +8,85 @@
 
 ## General Information
 
-<table style="width:100%;">
-<colgroup>
-<col style="width: 96%" />
-<col style="width: 0%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-</colgroup>
-<tbody>
+<table>
+
 <tr>
-<td><h5 id="project-title">Project Title</h5></td>
-<td><h5 id="student">Student</h5></td>
-<td><h5 id="coordination">Coordination</h5></td>
-<td><h5 id="semester">Semester</h5></td>
+
+<td>
+
+<h5>
+
+Project Title
+</h5>
+
+</td>
+
+<td>
+
+<h5>
+
+Student
+</h5>
+
+</td>
+
+<td>
+
+<h5>
+
+Coordination
+</h5>
+
+</td>
+
+<td>
+
+<h5>
+
+Semester
+</h5>
+
+</td>
+
 </tr>
+
 <tr>
-<td>Using Automatic Item Selection in Multi-Informant Assessment of
-Child Mental Health</td>
-<td>Luca Schnatz</td>
-<td>Prof. Martin Schultze</td>
-<td>SS25 + WS25/26</td>
+
+<td>
+
+Using Automatic Item Selection in Multi-Informant Assessment of Child
+Mental Health
+</td>
+
+<td>
+
+Luca Schnatz
+</td>
+
+<td>
+
+Prof. Martin Schultze
+</td>
+
+<td>
+
+SS25 + WS25/26
+</td>
+
 </tr>
+
 <tr>
-<td><h5 id="abstract">Abstract</h5>
-<p>Comprehensive clinical assessment of mental health in children and
+
+<td colspan="4">
+
+<h5>
+
+Abstract
+</h5>
+
+<p>
+
+Comprehensive clinical assessment of mental health in children and
 adolescents often relies on multiple informants, such as parents,
 teachers and children themselves. However, discrepancies in reports from
 different raters are common, leading to challenges in interpreting the
@@ -54,12 +109,119 @@ Child Behavior Checklist (CBCL/6-18) and Youth Self Report (YSR/11-18)
 from the SAFE children study (Tolan et al., 2016), a longitudinal
 randomized controlled trial with N = 424 children and their primary
 caregivers that participated in a family-centered preventive
-intervention program.</p></td>
-<td></td>
-<td></td>
-<td></td>
+intervention program.
+</p>
+
+</td>
+
 </tr>
-</tbody>
+
+<tr>
+
+<td>
+
+<h5>
+
+Project Title
+</h5>
+
+</td>
+
+<td>
+
+<h5>
+
+Student
+</h5>
+
+</td>
+
+<td>
+
+<h5>
+
+Coordination
+</h5>
+
+</td>
+
+<td>
+
+<h5>
+
+Semester
+</h5>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Using Automatic Item Selection in Multi-Informant Assessment of Child
+Mental Health
+</td>
+
+<td>
+
+Luca Schnatz
+</td>
+
+<td>
+
+Prof. Martin Schultze
+</td>
+
+<td>
+
+SS25 + WS25/26
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="4">
+
+<h5>
+
+Abstract
+</h5>
+
+<p>
+
+Comprehensive clinical assessment of mental health in children and
+adolescents often relies on multiple informants, such as parents,
+teachers and children themselves. However, discrepancies in reports from
+different raters are common, leading to challenges in interpreting the
+results of assessment procedures. These discrepancies may arise because
+some items capture behaviors that are commonly observed across
+informants, while others reflect informant-specific perspectives unique
+to each rater. At the same time, there is a need for economic
+instruments that reduce burden for respondents and clinicians while
+maintaining reliability and validity. To address these challenges the
+present study aims to develop a subtest containing 32 items of the
+commonly employed multi-informant assessment instrument Achenbach System
+of Empirically Based Assessment (ASEBA) that balances shared and
+informant-specific perspectives while retaining a manageable number of
+items for economic administration in clinical settings. This will be
+achieved within a structural equation modeling framework leveraging an
+automatic item selection approach to identify an item set that optimally
+satisfies a predefined set of construction criteria. The present study
+will use two waves of data of parent and child ratings on the ASEBA
+Child Behavior Checklist (CBCL/6-18) and Youth Self Report (YSR/11-18)
+from the SAFE children study (Tolan et al., 2016), a longitudinal
+randomized controlled trial with N = 424 children and their primary
+caregivers that participated in a family-centered preventive
+intervention program.
+</p>
+
+</td>
+
+</tr>
+
 </table>
 
 ## License
