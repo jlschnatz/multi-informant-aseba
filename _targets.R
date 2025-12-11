@@ -29,7 +29,7 @@ list(
         estimator = "MLR",
         missing = "FIML"
       ),
-      n_random = 5000,
+      n_random = 5000, # 5000
       p_top = 0.9,
       n_cores = 8, # should be higher on the server
       obj_info = list(
@@ -199,7 +199,7 @@ list(
       mvc_testing,
       test_mvc(
         model_output = subtest_solution,
-        testing_subset = testing_data, # use testing data to test h1
+        testing_subset = testing_subset, # use testing data to test h1
         mtmm = model_parameters$mtmm,
         capacity = model_parameters$capacity,
         objective = objective_function,
@@ -216,7 +216,7 @@ list(
       invariance_testing,
       test_invariance(
         model_output = subtest_solution,
-        testing_data = testing_data, # if I use testing_data almost all models fail
+        testing_data = testing_subset, # if I use testing_data almost all models fail
         capacity = model_parameters$capacity,
         mtmm = model_parameters$mtmm,
         alpha_level = model_parameters$alpha_level,
@@ -230,7 +230,7 @@ list(
       informant_specificity_testing,
       test_informant_specificness(
         model_output = subtest_solution,
-        testing_data = testing_data,
+        testing_data = testing_subset,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, # model_parameters$n_rep
@@ -262,7 +262,7 @@ list(
       invariance_training,
       test_invariance(
         model_output = subtest_solution,
-        testing_data = training_data, # if I use testing_data almost all models fail
+        testing_data = training_subset, # if I use testing_data almost all models fail
         capacity = model_parameters$capacity,
         mtmm = model_parameters$mtmm,
         alpha_level = model_parameters$alpha_level,
@@ -276,7 +276,7 @@ list(
       informant_specificity_training,
       test_informant_specificness(
         model_output = subtest_solution,
-        testing_data = training_data,
+        testing_data = training_subset,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, # model_parameters$n_rep
