@@ -22,6 +22,7 @@ test_mvc <- function(
   cutoff_reference,
   subscale_id
 ) {
+  testing_subset <- as.data.frame(testing_subset)
   cutoff_results <- compute_cutoffs(
     model_output = model_output,
     testing_subset = testing_subset,
@@ -84,7 +85,7 @@ compute_cutoffs <- function(
       model = model_syntax,
       data = model_data,
       normality = "empirical",
-      fit_indices = c("rmsea", "srmr"),
+      fit_indices = c("rmsea.robust", "srmr"),
       n_rep = n_rep,
       missing_data = TRUE,
       n_cores = n_cores,

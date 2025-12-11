@@ -15,6 +15,8 @@ construct_subtest <- function(
     cli::cli_abort("Input must be a dataframe")
   }
 
+  data <- as.data.frame(data)
+
   cbcl_items <- grep("^CBCL", names(data), value = TRUE)
   ysr_items <- grep("^YSR", names(data), value = TRUE)
 
@@ -31,8 +33,19 @@ construct_subtest <- function(
     ISP = "ISP"
   )
 
+  args <- list(
+    data = data,
+    factor.structure = fs,
+    capacity = capacity,
+    mtmm = mtmm,
+    cores = n_cores,
+    objective = objective$obj_fun,
+    analysis.options = list(estimator = "MLR", missing = "FIML")
+  )
+
   if (testing) {
     f <- function(...) quiet(stuart::randomsamples(...))
+    args$n <- 100
   } else {
     cli::cli_alert_info("Running bruteforce to find subtest.")
     f <- function(...) quiet(stuart::bruteforce(...))
@@ -41,15 +54,6 @@ construct_subtest <- function(
   # 4. Run Model
   do.call(
     f,
-    args = list(
-      data = data,
-      factor.structure = fs,
-      capacity = capacity,
-      mtmm = mtmm,
-      n = 100,
-      cores = n_cores,
-      objective = objective$obj_fun,
-      analysis.options = list(estimator = "MLR", missing = "FIML")
-    )
+    args = args
   )
 }

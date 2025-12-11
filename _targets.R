@@ -29,7 +29,7 @@ list(
         estimator = "MLR",
         missing = "FIML"
       ),
-      n_random = 5000, # should be 5000 on the server
+      n_random = 5000,
       p_top = 0.9,
       n_cores = 8, # should be higher on the server
       obj_info = list(
@@ -186,7 +186,7 @@ list(
     tar_target(
       subtest_solution,
       construct_subtest(
-        training_subset,
+        training_subset, # use training data for subset construction
         objective_function,
         n_cores = model_parameters$n_cores,
         capacity = model_parameters$capacity,
@@ -194,12 +194,12 @@ list(
       )
     ),
 
-    # Evaluate MVC
+    # Evaluate MVC on Testing Subset
     tar_target(
-      mvc_results,
+      mvc_testing,
       test_mvc(
         model_output = subtest_solution,
-        testing_subset = testing_subset,
+        testing_subset = testing_data, # use testing data to test h1
         mtmm = model_parameters$mtmm,
         capacity = model_parameters$capacity,
         objective = objective_function,
@@ -213,26 +213,76 @@ list(
 
     # Test invariance
     tar_target(
-      invariance_results,
+      invariance_testing,
       test_invariance(
         model_output = subtest_solution,
+        testing_data = testing_data, # if I use testing_data almost all models fail
         capacity = model_parameters$capacity,
         mtmm = model_parameters$mtmm,
         alpha_level = model_parameters$alpha_level,
-        mvc_results = mvc_results
+        mvc_results = mvc_testing,
+        test_conditionally = FALSE # also test h2 if h1 is not met
       )
     ),
 
     # Test informant specificness
     tar_target(
-      informant_specificness_results,
+      informant_specificity_testing,
       test_informant_specificness(
         model_output = subtest_solution,
+        testing_data = testing_data,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, # model_parameters$n_rep
         verbose = FALSE,
-        mvc_results = mvc_results
+        mvc_results = mvc_testing,
+        test_conditionally = FALSE
+      )
+    ),
+
+    # Evaluate MVC on Traaining Subset
+    tar_target(
+      mvc_training,
+      test_mvc(
+        model_output = subtest_solution,
+        testing_subset = training_subset,
+        mtmm = model_parameters$mtmm,
+        capacity = model_parameters$capacity,
+        objective = objective_function,
+        n_cores = model_parameters$n_cores,
+        alpha_level = model_parameters$alpha_level,
+        n_rep = 10, #model_parameters$n_rep,
+        cutoff_reference = cutoff_reference,
+        subscale_id = subscale_id
+      )
+    ),
+
+    # Test invariance on training subset
+    tar_target(
+      invariance_training,
+      test_invariance(
+        model_output = subtest_solution,
+        testing_data = training_data, # if I use testing_data almost all models fail
+        capacity = model_parameters$capacity,
+        mtmm = model_parameters$mtmm,
+        alpha_level = model_parameters$alpha_level,
+        mvc_results = mvc_training,
+        test_conditionally = FALSE # also test h2 if h1 is not met
+      )
+    ),
+
+    # Test informant specificness
+    tar_target(
+      informant_specificity_training,
+      test_informant_specificness(
+        model_output = subtest_solution,
+        testing_data = training_data,
+        subscale_id = subscale_id,
+        alpha_level = model_parameters$alpha_level,
+        n_rep = 10, # model_parameters$n_rep
+        verbose = FALSE,
+        mvc_results = mvc_training,
+        test_conditionally = FALSE
       )
     )
   )

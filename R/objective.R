@@ -33,6 +33,8 @@ build_obj <- function(
 ) {
   t1 <- proc.time()
 
+  data <- as.data.frame(data)
+
   obj_mat <- make_mats(
     data,
     fs,
