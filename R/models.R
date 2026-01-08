@@ -43,7 +43,8 @@ construct_subtest <- function(
     mtmm = mtmm,
     cores = n_cores,
     objective = objective$obj_fun,
-    analysis.options = analysis_opts
+    analysis.options = analysis_opts,
+    request.override = 1e8
   )
 
   # if testing = FALSE, use bruteforce approach (for server run)
@@ -52,7 +53,7 @@ construct_subtest <- function(
     args$n <- 100
   } else {
     cli::cli_alert_info("Running bruteforce to find subtest.")
-    subtest_fn <- function(...) quiet(stuart::bruteforce(...))
+    subtest_fn <- function(...) stuart::bruteforce(...)
   }
 
   # Run Model

@@ -31,7 +31,7 @@ list(
       ),
       n_random = 5000,
       p_top = 0.9,
-      n_cores = 2**5,
+      n_cores = 2**6,
       obj_info = list(
         vec = c("rmsea.robust", "srmr", "rel"),
         mat = list(
