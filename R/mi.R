@@ -1,18 +1,18 @@
 #' Fit Invariance Models
 #' @param model_output An object of class `stuartOutput`
-#' @param testing_data A dataframe of the testing dats.
+#' @param data A dataframe of the testing dats.
 #' @param capacity The capacity for the factor structure.
 #' @param mtmm A list specifying the MTMM structure.
 #' @param mtmm_invariance A string specifying the level of invariance to be tested.
 fit_mi <- function(
   model_output,
-  testing_data,
+  data,
   capacity,
   mtmm,
   mtmm_invariance
 ) {
   #data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
-  data <- as.data.frame(testing_data)
+  data <- as.data.frame(data)
   fs <- model_output$subtests
   bf_list <- list(
     data = data,
@@ -40,7 +40,7 @@ fit_mi <- function(
 
 #' Compare Invariance Models Using Information Criteria and LRT
 #' @param model_output An object of class `stuartOutput`
-#' @param testing_data A dataframe of the testing dats.
+#' @param data A dataframe of the testing dats.
 #' @param capacity The capacity for the factor structure.
 #' @param mtmm A list specifying the MTMM structure.
 #' @param alpha_level The type-1 error rate
@@ -49,7 +49,7 @@ fit_mi <- function(
 #' @return A list containing the fitted models, comparison table, LRT results, and overview of decisions.
 test_invariance <- function(
   model_output,
-  testing_data,
+  data,
   capacity,
   mtmm,
   alpha_level,
@@ -65,7 +65,7 @@ test_invariance <- function(
     function(level) {
       fit_mi(
         model_output = model_output,
-        testing_data = testing_data,
+        data = data,
         capacity = capacity,
         mtmm = mtmm,
         mtmm_invariance = level

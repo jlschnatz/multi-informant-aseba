@@ -3,7 +3,7 @@
 #' @description Tests whether factor structure is specific to informants
 #'   (child vs parent) using empirical fit indices and information criteria.
 #' @param model_output A stuartOutput object
-#' @param testing_data A dataframe of the testing dats.
+#' @param data A dataframe of the testing dats.
 #' @param subscale_id Character scalar identifying the subscale
 #' @param alpha_level Type-I error rate (default 0.05)
 #' @param n_rep Number of repetitions for ezCutoffs
@@ -18,7 +18,7 @@
 #'   - `cutoff_simulation`: ezCutoffs object
 test_informant_specificness <- function(
   model_output,
-  testing_data,
+  data,
   subscale_id,
   alpha_level = 0.05,
   n_rep,
@@ -41,7 +41,7 @@ test_informant_specificness <- function(
     cli::cli_ol()
   }
 
-  testing_data <- as.data.frame(testing_data)
+  data <- as.data.frame(data)
 
   # Extract item names for child and parent factors
   items_child <- unlist(
@@ -61,7 +61,7 @@ test_informant_specificness <- function(
 
   # Extract observed data
   #model_data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
-  model_data <- testing_data
+  model_data <- data
 
   # Prepare bruteforce modeling arguments
   bf_args <- list(

@@ -2,5 +2,6 @@ data/meta/secret/
 data/raw/
 data/*.pdf
 materials/*.pdf
-
+.lintr
+.devcontainer/
 /.quarto/

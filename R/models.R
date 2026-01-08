@@ -3,12 +3,21 @@
 #' Fits the model using the stuart package logic you provided.
 #'
 #' @param data The subsetted dataframe.
-#' @param subscale_id Character scalar identifying the subscale
+#' @param objective A list containing the objective function details.
+#' @param n_cores Number of cores to use for parallel processing.
+#' @param capacity Integer scalar indicating the capacity of the subtest.
+#' @param mtmm Character scalar indicating the MTMM design.
+#' @param subscale_id Character scalar identifying the subscale.
+#' @param analysis_opts A list of additional analysis options.
+#' @param testing Logical scalar indicating whether to use random sampling (TRUE) or bruteforce (FALSE).
+#' @return The fitted model object.
 construct_subtest <- function(
   data,
   objective,
   n_cores = 4,
   capacity = 2,
+  mtmm,
+  analysis_opts,
   testing = TRUE
 ) {
   if (!is.data.frame(data)) {
@@ -27,12 +36,6 @@ construct_subtest <- function(
     ISP = cbcl_items
   )
 
-  mtmm <- list(
-    CI = c("CIC", "CIP"),
-    ISC = "ISC",
-    ISP = "ISP"
-  )
-
   args <- list(
     data = data,
     factor.structure = fs,
@@ -40,20 +43,21 @@ construct_subtest <- function(
     mtmm = mtmm,
     cores = n_cores,
     objective = objective$obj_fun,
-    analysis.options = list(estimator = "MLR", missing = "FIML")
+    analysis.options = analysis_opts
   )
 
+  # if testing = FALSE, use bruteforce approach (for server run)
   if (testing) {
-    f <- function(...) quiet(stuart::randomsamples(...))
+    subtest_fn <- function(...) quiet(stuart::randomsamples(...))
     args$n <- 100
   } else {
     cli::cli_alert_info("Running bruteforce to find subtest.")
-    f <- function(...) quiet(stuart::bruteforce(...))
+    subtest_fn <- function(...) quiet(stuart::bruteforce(...))
   }
 
-  # 4. Run Model
+  # Run Model
   do.call(
-    f,
+    subtest_fn,
     args = args
   )
 }

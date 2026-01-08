@@ -29,9 +29,9 @@ list(
         estimator = "MLR",
         missing = "FIML"
       ),
-      n_random = 5000, # 5000
+      n_random = 5000,
       p_top = 0.9,
-      n_cores = 8, # should be higher on the server
+      n_cores = 2**5,
       obj_info = list(
         vec = c("rmsea.robust", "srmr", "rel"),
         mat = list(
@@ -144,7 +144,17 @@ list(
   tar_map(
     values = tibble::tibble(
       subscale_id = c("AB", "AD", "AP", "RB", "SC", "SP", "TP", "WD")
+      # AB = Aggressive Behavior
+      # AD = Anxious/Depressed
+      # AP = Attention Problems
+      # RB = Rule-Breaking Behavior
+      # SC = Social Problems
+      # SP = Somatic Problems
+      # TP = Thought Problems
+      # WD = Withdrawn/Depressed
     ),
+
+    # Target names will be suffixed with subscale_id
     names = "subscale_id",
 
     # Subset training data
@@ -190,7 +200,9 @@ list(
         objective_function,
         n_cores = model_parameters$n_cores,
         capacity = model_parameters$capacity,
-        testing = TRUE # set this to false to run bruteforce approach instead of randomsamples
+        mtmm = model_parameters$mtmm,
+        analysis_opts = model_parameters$analysis_opts,
+        testing = FALSE # set this to false to run bruteforce approach instead of randomsamples
       )
     ),
 
@@ -199,7 +211,7 @@ list(
       mvc_testing,
       test_mvc(
         model_output = subtest_solution,
-        testing_subset = testing_subset, # use testing data to test h1
+        data = testing_subset, # use testing data to test h1
         mtmm = model_parameters$mtmm,
         capacity = model_parameters$capacity,
         objective = objective_function,
@@ -216,7 +228,7 @@ list(
       invariance_testing,
       test_invariance(
         model_output = subtest_solution,
-        testing_data = testing_subset, # if I use testing_data almost all models fail
+        data = testing_subset,
         capacity = model_parameters$capacity,
         mtmm = model_parameters$mtmm,
         alpha_level = model_parameters$alpha_level,
@@ -230,7 +242,7 @@ list(
       informant_specificity_testing,
       test_informant_specificness(
         model_output = subtest_solution,
-        testing_data = testing_subset,
+        data = testing_subset,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, # model_parameters$n_rep
@@ -245,7 +257,7 @@ list(
       mvc_training,
       test_mvc(
         model_output = subtest_solution,
-        testing_subset = training_subset,
+        data = training_subset,
         mtmm = model_parameters$mtmm,
         capacity = model_parameters$capacity,
         objective = objective_function,
@@ -262,7 +274,7 @@ list(
       invariance_training,
       test_invariance(
         model_output = subtest_solution,
-        testing_data = training_subset, # if I use testing_data almost all models fail
+        data = training_subset, # if I use testing_data almost all models fail
         capacity = model_parameters$capacity,
         mtmm = model_parameters$mtmm,
         alpha_level = model_parameters$alpha_level,
@@ -276,7 +288,7 @@ list(
       informant_specificity_training,
       test_informant_specificness(
         model_output = subtest_solution,
-        testing_data = training_subset,
+        data = training_subset,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
         n_rep = 10, # model_parameters$n_rep

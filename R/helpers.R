@@ -30,11 +30,13 @@ spearman_brown <- function(r, n1, n2) {
     return(rstar)
 }
 
-
 # Source - https://stackoverflow.com/a
 # Posted by Ben
 # Retrieved 2025-12-05, License - CC BY-SA 4.0
-
+#' @title Suppress output, messages, and warnings
+#' @description Evaluates an expression while suppressing all output, messages, and warnings.
+#' @param x An expression to evaluate.
+#' @return The result of the evaluated expression, invisibly.
 quiet <- function(x) {
     sink(tempfile())
     on.exit(sink())

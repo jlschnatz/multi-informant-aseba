@@ -1,6 +1,6 @@
 #' @title Evaluate Minimum Viable Criteria (MVC)
 #' @param model_output A stuartOutput object
-#' @param testing_subset The testing data subset used to test the hypothesis
+#' @param data The testing data subset used to test the hypothesis
 #' @param mtmm
 #' @param capacity
 #' @param n_cores The number of cores used to run ezCutoffs()
@@ -12,7 +12,7 @@
 #'   `all_criteria_met`, and `cutoff_simulation`
 test_mvc <- function(
   model_output,
-  testing_subset,
+  data,
   mtmm,
   capacity,
   objective,
@@ -22,10 +22,10 @@ test_mvc <- function(
   cutoff_reference,
   subscale_id
 ) {
-  testing_subset <- as.data.frame(testing_subset)
+  data <- as.data.frame(data)
   cutoff_results <- compute_cutoffs(
     model_output = model_output,
-    testing_subset = testing_subset,
+    data = data,
     n_cores = n_cores,
     alpha_level = alpha_level,
     n_rep = n_rep,
@@ -35,7 +35,7 @@ test_mvc <- function(
 
   actual_values <- extract_actual_values(
     model_output,
-    testing_subset,
+    data,
     mtmm,
     capacity,
     objective
@@ -53,7 +53,7 @@ test_mvc <- function(
 
 #' @title Compute Cutoffs for MVC Criteria
 #' @param model_output A stuartOutput object
-#' @param testing_subset The testing data subset used to test the hypothesis
+#' @param data The testing data subset used to test the hypothesis
 #' @param n_cores Number of cores for ezCutoffs()
 #' @param alpha_level Type-I error rate
 #' @param n_rep The number of replications in ezCutoffs()
@@ -63,7 +63,7 @@ test_mvc <- function(
 #'   and `cutoff_simulation` (the ezCutoffs object)
 compute_cutoffs <- function(
   model_output,
-  testing_subset,
+  data,
   n_cores = 4,
   alpha_level = .05,
   n_rep = 100,
@@ -78,7 +78,7 @@ compute_cutoffs <- function(
 
   model_syntax <- quiet(semPlot::semSyntax(model_output$final))
   #model_data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
-  model_data <- testing_subset
+  model_data <- data
 
   cutoff_simulation <- quiet(
     ezCutoffs::ezCutoffs(
@@ -120,20 +120,20 @@ compute_cutoffs <- function(
 
 #' @title Extract Actual Values for MVC Criteria
 #' @param model_output A stuartOutput object
-#' @param testing_subset The testing data subset used to test the hypothesis
+#' @param data The testing data subset used to test the hypothesis
 #' @mtmm
 #' @capacity
 #' @return Named numeric vector of actual values
 extract_actual_values <- function(
   model_output,
-  testing_subset,
+  data,
   mtmm,
   capacity,
   objective
 ) {
   # refit model using testing data:
   args_list <- list(
-    data = testing_subset,
+    data = data,
     factor.structure = model_output$subtests,
     mtmm = mtmm,
     ignore.errors = TRUE,
@@ -151,7 +151,7 @@ extract_actual_values <- function(
 
   actual_fit_indices <- last_log[, -c(1, 2)]
   names(actual_fit_indices) <- c(
-    "rmsea",
+    "rmsea.robust",
     "srmr",
     "omega_cic",
     "omega_cip",
@@ -186,7 +186,7 @@ compare_to_cutoffs <- function(actual, cutoffs) {
   criterion_table <- tibble::tibble(criterion = names(cutoffs)) |>
     dplyr::mutate(
       direction = dplyr::case_when(
-        criterion %in% c("phi", "srmr", "rmsea") ~ "lower",
+        criterion %in% c("phi", "srmr", "rmsea.robust") ~ "lower",
         criterion == "gamma" ~ "higher",
         stringr::str_starts(criterion, "omega") ~ "higher",
         TRUE ~ NA_character_
