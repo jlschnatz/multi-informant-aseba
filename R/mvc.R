@@ -80,7 +80,7 @@ compute_cutoffs <- function(
   #model_data <- as.data.frame(lavaan::lavInspect(model_output$final, "data"))
   model_data <- data
 
-  cutoff_simulation <- quiet(
+  cutoff_simulation <- 
     ezCutoffs::ezCutoffs(
       model = model_syntax,
       data = model_data,
@@ -93,7 +93,7 @@ compute_cutoffs <- function(
       missing = "FIML",
       estimator = "MLR"
     )
-  )
+  
 
   # RMSEA/SRMR cutoffs
   cutoffs_fit <- sapply(cutoff_simulation$fitDistributions, function(dist) {

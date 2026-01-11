@@ -14,6 +14,11 @@ tar_source()
 
 # Define pipeline
 list(
+  # Cores
+  tar_target(
+    n_cores,
+    determine_cores(n_max = 128, buffer = 25)
+  ),
   # Model arguments
   tar_target(
     model_parameters,
@@ -31,7 +36,7 @@ list(
       ),
       n_random = 5000,
       p_top = 0.9,
-      n_cores = 2**6,
+      n_cores = n_cores,
       obj_info = list(
         vec = c("rmsea.robust", "srmr", "rel"),
         mat = list(
@@ -63,15 +68,14 @@ list(
   ),
 
   # Raw data files
-  tar_files(
+  tar_file(
     raw_sav_files,
     list.files(
       "data/raw",
       full.names = TRUE,
       recursive = TRUE,
       pattern = "\\.sav$"
-    ),
-    format = "file"
+    )
   ),
 
   # Create merged SAFEchild dataset
@@ -187,9 +191,10 @@ list(
         analysis_opts = model_parameters$analysis_opts,
         n_random = model_parameters$n_random,
         p_top = model_parameters$p_top,
-        cores = model_parameters$n_cores,
+        cores = 16,
         obj_info = model_parameters$obj_info
-      )
+      ),
+      cue = tar_cue(depend = FALSE)
     ),
 
     # Construct subtest solution
@@ -203,7 +208,8 @@ list(
         mtmm = model_parameters$mtmm,
         analysis_opts = model_parameters$analysis_opts,
         testing = FALSE # set this to false to run bruteforce approach instead of randomsamples
-      )
+      ),
+      cue = tar_cue(depend = FALSE)
     ),
 
     # Evaluate MVC on Testing Subset
@@ -217,7 +223,7 @@ list(
         objective = objective_function,
         n_cores = model_parameters$n_cores,
         alpha_level = model_parameters$alpha_level,
-        n_rep = 10, #model_parameters$n_rep,
+        n_rep = 5000,
         cutoff_reference = cutoff_reference,
         subscale_id = subscale_id
       )
@@ -245,8 +251,8 @@ list(
         data = testing_subset,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
-        n_rep = 10, # model_parameters$n_rep
-        verbose = FALSE,
+        n_rep = 5000,
+        verbose = TRUE,
         mvc_results = mvc_testing,
         test_conditionally = FALSE
       )
@@ -263,7 +269,7 @@ list(
         objective = objective_function,
         n_cores = model_parameters$n_cores,
         alpha_level = model_parameters$alpha_level,
-        n_rep = 10, #model_parameters$n_rep,
+        n_rep = 5000,
         cutoff_reference = cutoff_reference,
         subscale_id = subscale_id
       )
@@ -291,8 +297,8 @@ list(
         data = training_subset,
         subscale_id = subscale_id,
         alpha_level = model_parameters$alpha_level,
-        n_rep = 10, # model_parameters$n_rep
-        verbose = FALSE,
+        n_rep = 5000,
+        verbose = TRUE,
         mvc_results = mvc_training,
         test_conditionally = FALSE
       )

@@ -42,3 +42,12 @@ quiet <- function(x) {
     on.exit(sink())
     invisible(force(suppressWarnings(suppressMessages(x))))
 }
+
+determine_cores <- function(n_max, buffer) {
+    stopifnot(is.numeric(n_max), is.numeric(buffer))
+    stopifnot(n_max > buffer)
+    usable <- n_max - buffer
+    worker_ram_gb <- 3
+    floor(usable / worker_ram_gb)
+}
+

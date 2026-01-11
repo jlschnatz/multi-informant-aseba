@@ -10,6 +10,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
+    broom (>= 1.0.11),
     cli (>= 3.6.5),
     contributoR (>= 0.4.0),
     dockerfiler (>= 0.2.5),
