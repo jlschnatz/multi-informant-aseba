@@ -22,6 +22,7 @@ test_informant_specificness <- function(
   subscale_id,
   alpha_level = 0.05,
   n_rep,
+  n_cores = 16,
   verbose = FALSE,
   mvc_results,
   test_conditionally = TRUE
@@ -102,7 +103,8 @@ test_informant_specificness <- function(
       normality = "empirical",
       missing_data = TRUE,
       estimator = "MLR",
-      missing = "FIML"
+      missing = "FIML",
+      n_cores = n_cores
     )
   )
 
