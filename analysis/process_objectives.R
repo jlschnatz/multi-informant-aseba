@@ -94,3 +94,21 @@ saveRDS(comb_best, "data/processed/objective_criteria_best.rds")
 saveRDS(comb_meta, "data/processed/objective_criteria_meta.rds")
 saveRDS(comb_log, "data/processed/objective_criteria_log.rds")
 
+
+# Objective Function Parameter Data
+tar_load(starts_with("objective_function"))
+subscale_ids <- c("AB", "AD", "AP", "RB", "SC", "SP", "TP", "WD")
+data_objfun <- mapply(
+  FUN = function(x, y) {
+    obj_dat <- x$obj_dat
+    obj_dat$subscale_id <- y
+    return(obj_dat)
+  },
+  SIMPLIFY = FALSE,
+  x = mget(ls(pattern = "objective_function_..")),
+  y = subscale_ids
+) |>
+  do.call(rbind, args = _) |>
+  tibble::as_tibble()
+
+saveRDS(data_objfun, "data/processed/objective_function_param.rds")

@@ -4,7 +4,7 @@ comb_log <- readRDS("data/processed/objective_criteria_log.rds")
 
 comb_best_pdata <- comb_best |>
   tidyr::pivot_longer(
-    -c(subscale_id, run, pheromone),
+    -c(subscale_id, run),
     names_to = "criterion",
     values_to = "best_value"
   ) |>
@@ -19,9 +19,11 @@ comb_best_pdata <- comb_best |>
         "omega_isc" ~ "&omega;<sub>ISC<sub>",
         "omega_isp" ~ "&omega;<sub>ISP<sub>",
         "rmsea.robust" ~ "RMSEA",
-        "srmr" ~ "SRMR"
+        "srmr" ~ "SRMR",
+        "pheromone" ~ "Pheromone"
       ),
       levels = c(
+        "Pheromone",
         "RMSEA",
         "SRMR",
         "&beta;",
@@ -38,7 +40,7 @@ comb_best_pdata <- comb_best |>
 
 comb_log |>
   tidyr::pivot_longer(
-    -c(subscale_id, run, pheromone),
+    -c(subscale_id, run),
     names_to = "criterion",
     values_to = "value"
   ) |>
@@ -53,9 +55,11 @@ comb_log |>
         "omega_isc" ~ "&omega;<sub>ISC<sub>",
         "omega_isp" ~ "&omega;<sub>ISP<sub>",
         "rmsea.robust" ~ "RMSEA",
-        "srmr" ~ "SRMR"
+        "srmr" ~ "SRMR",
+        "pheromone" ~ "Pheromone"
       ),
       levels = c(
+        "Pheromone",
         "RMSEA",
         "SRMR",
         "&beta;",
@@ -93,6 +97,11 @@ comb_log |>
   ) +
   ggh4x::facetted_pos_scales(
     x = list(
+      criterion == "Pheromone" ~ ggplot2::scale_x_continuous(
+        limits = c(0, 1),
+        expand = ggplot2::expansion(),
+        breaks = seq(0, 1, 0.2)
+      ),
       criterion == "&beta;" ~ ggplot2::scale_x_continuous(
         limits = c(0, 5),
         expand = ggplot2::expansion(),
