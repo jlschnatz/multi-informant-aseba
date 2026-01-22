@@ -36,4 +36,3 @@ logdata |>
   filter(rmsea_ok & srmr_ok) |>
   filter(pheromone == max(pheromone)) |>
   View()
-

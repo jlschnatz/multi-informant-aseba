@@ -4,9 +4,9 @@
 #' @param p A numeric value between 0 and 1 indicating the percentile to consider.
 #' @return A numeric vector containing the values that are above the p-th quantile.
 top_frac <- function(x, p = 0.95) {
-    x <- unclass(na.omit(x))
-    q <- quantile(x, probs = p)
-    return(x[x >= q])
+  x <- unclass(na.omit(x))
+  q <- quantile(x, probs = p)
+  return(x[x >= q])
 }
 
 #' @title Get mean and standard deviation of a numeric vector
@@ -15,7 +15,7 @@ top_frac <- function(x, p = 0.95) {
 #' @param ... Additional arguments passed to the mean and sd functions.
 #' @return A named numeric vector containing the mean and standard deviation.
 get_m_sd <- function(x, ...) {
-    c(mean = mean(x, ...), sd = sd(x, ...))
+  c(mean = mean(x, ...), sd = sd(x, ...))
 }
 
 #' @title Spearman-Brown correction
@@ -25,9 +25,9 @@ get_m_sd <- function(x, ...) {
 #' @param n2 The new number of items.
 #' @return A numeric value representing the corrected correlation.
 spearman_brown <- function(r, n1, n2) {
-    n <- n2 / n1
-    rstar <- (n * r) / (1 + (n - 1) * r)
-    return(rstar)
+  n <- n2 / n1
+  rstar <- (n * r) / (1 + (n - 1) * r)
+  return(rstar)
 }
 
 # Source - https://stackoverflow.com/a
@@ -38,16 +38,15 @@ spearman_brown <- function(r, n1, n2) {
 #' @param x An expression to evaluate.
 #' @return The result of the evaluated expression, invisibly.
 quiet <- function(x) {
-    sink(tempfile())
-    on.exit(sink())
-    invisible(force(suppressWarnings(suppressMessages(x))))
+  sink(tempfile())
+  on.exit(sink())
+  invisible(force(suppressWarnings(suppressMessages(x))))
 }
 
 determine_cores <- function(n_max, buffer) {
-    stopifnot(is.numeric(n_max), is.numeric(buffer))
-    stopifnot(n_max > buffer)
-    usable <- n_max - buffer
-    worker_ram_gb <- 3
-    floor(usable / worker_ram_gb)
+  stopifnot(is.numeric(n_max), is.numeric(buffer))
+  stopifnot(n_max > buffer)
+  usable <- n_max - buffer
+  worker_ram_gb <- 3
+  floor(usable / worker_ram_gb)
 }
-

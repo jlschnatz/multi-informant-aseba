@@ -1,0 +1,316 @@
+```{=typst}
+
+#set par(justify: true)
+#show link: it => text(fill: black)[#it]
+
+```
+
+```{r}
+pacman::p_load(readr, dplyr, tidyr, tinytable, knitr, apa7, flextable, targets, purrr, tibble, sjlabelled, here)
+
+```
+```{r}
+#| label: setup
+#| include: false
+
+logmeta <- read_rds(here("data/processed/objective_criteria_meta.rds"))
+logbest <- read_rds(here("data/processed/objective_criteria_best.rds"))
+objfun_param <- read_rds(here("data/processed/objective_function_param.rds"))
+source(here("R/table.R"))
+
+
+```
+
+Evidence-based clinical assessment in children and adolescents often relies on multiple informants, such as parents, teachers, and children themselves, to obtain a comprehensive understanding of child’s mental health [@hunsley2007; @mash2005]. This typically involves using parallel standardized questionnaires such as the widely used Achenbach System of Empirically Based Assessment (ASEBA) that includes self-report, parent-report, and teacher-report forms [@achenbach2001a].
+
+However, extensive meta-analytical empirical evidence has shown that discrepancies in reports from different informants (*informant discrepancies*) are common in these instruments [@delosreyes2015; @achenbach1987; @jungersen2023], leading to challenges in understanding and interpreting the results of the assessment procedures.
+
+Historically, informant discrepancies have been conceived as measurement error, treating them as interchangeable and informant-specific variance as nuisance [@delosreyes2023a]. This line of interpretation stems from the seminal work of @campbell1959a on multi-trait multi-method analysis, which has shaped both theoretical and empirical efforts to emphasize common variance across informants [@delosreyes2023].
+
+More recent theoretical advances concerning the *Operations Triad Model* [@delosreyes2013] have shifted the focus towards a more nuanced understanding of multi-informant assessment. Specifically, *converging operations* in this model refer to measurement conditions in which informants' reports align, leading to similar conclusions. The Operations Triad Model distinguishes among informant discrepancies based on their underlying sources. *Diverging* operations capture instances where informants offer distinct yet domain-relevant perspectives, whereas *compensating* operations reflect discrepancies that stem from measurement-related confounds, such as random error or rater biases [@delosreyes2023]. This shift in perspective has led to a growing body of literature that emphasizes the importance of informant-specific perspectives in multi-informant assessment[@delosreyes2011; @delosreyes2023a].
+
+This reconceptualization has contributed to a paradigm shift in measurement, highlighting the need to account for both common variance and meaningful informant-specific variance [@delosreyes2023]. However, because most existing instruments were developed with an emphasis on common variance, they may lack sensitivity to detect domain-relevant informant discrepancies, highlighting the need to refine current measures or develop new tools that explicitly integrate both shared and informant-specific item content [@delosreyes2023].
+
+In addition to the need for instruments that capture both shared and informant-specific perspectives, there is also a growing demand for shortened tests that are feasible to implement in time-limited clinical settings [@goetz2013]. For example, within the widely used ASEBA system introduced above, the Brief Problem Monitor (BPM) has been developed as a shortened test for the economical assessment of emotional and behavioral problems [@achenbach2011]. However, the BPM uses the same items across all informants, which may not be optimal for capturing meaningful informant-specific perspectives. This highlights the need for instruments that can effectively balance shared and informant-specific perspectives while also being economical for use in clinical settings.
+
+## Objectives and Research Questions
+
+The primary objective of this study is to develop a multi-informant subtest of the Achenbach System of Empirically Based Assessment (ASEBA) that balances shared and informant-specific perspectives, while also retaining a manageable number of items for economic administration in clinical settings.
+
+Specifically, we aim to identify a combination of items that function invariantly across informants (capturing common variance) and items that exhibit informant-specific functioning (capturing unique variance relevant to each informant). As part of our construction goal, we will attempt to ensure that all ASEBA clinical subscales are reflected in the final item set to additionally support the content validity of the subtest. To achieve this objective, we will leverage the combinatorial nature of item selection [@schultze2017] using an automatic item selection approach to identify item sets that optimally satisfy a predefined set of construction criteria.
+
+## Hypotheses
+
+The following hypotheses will be tested in the current study:
+
+1.  $H_1$: The model fit of the developed subtest will meet a predefined set of Minimum Viable Criteria (MVC) (see section #link(<mvc>)\[Minimum Viable Criteria (MVC)\] for details relating to their definition).
+
+2.  $H_2$: The subset of items intended to reflect the shared cross-informant perspective will demonstrate measurement invariance across different informants (child and parent).
+
+3.  $H_3$: The subset of items intended to reflect the informant-specific perspectives will demonstrate informant-specific functioning, indicating that these items capture unique variance relevant to each informant's perspective.
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-test
+#| tbl-cap: Maximum Pheromone, Convergence and Number of Combinations of the Brute-Force Search
+#| tt.align: left
+#| apa-note: 
+#|   - This is the first paragraph.
+#|   - This is a second paragraph. 
+
+tab1 <- logbest |>
+  select(subscale_id, pheromone) |>
+  inner_join(logmeta, by = join_by(subscale_id)) |>
+  mutate(convergence = convergence * 100) |>
+  mutate(across(c(pheromone, convergence), \(x) round(x, digits = 2))) 
+
+nice_table(tab1, col_names = c("Subscale", "$max(phi)$", "Convergence (%)", "$N$"))
+
+```
+
+
+
+
+
+# Methods
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-tab3
+#| tbl-cap: "Cross-Informant Agreement and Reliability Estimates for all ASEBA Subscales"
+#| apa-note:
+#|    - Test
+
+withr::with_dir(here::here(), {
+tar_load(cutoff_reference)
+})
+tab3 <- cutoff_reference |>
+  pivot_wider(names_from = instrument, values_from = c(alpha, alpha_star, n, agreement)) |> 
+  select(id, ends_with("cbcl"), ends_with("ysr")) |>
+  select(-agreement_cbcl)  |> 
+  rename(agreement = agreement_ysr) |> 
+  relocate(agreement, .after = id) |> 
+  tt(width = 0.9) |> 
+  style_tt(align = "c") |>
+  style_tt(j = 1, i = 1:nrow(x), align = "l") |> 
+  group_tt(
+    j = list("CBCL" = 3:5, "YSR" = 6:8)
+  )
+
+colnames(tab3) <- c("Subscale", "Agreement", rep(c("$alpha$", "$alpha^*$", "_N_"), 2))
+
+tab3
+
+```
+
+## Sample
+
+```{r}
+#| echo: false
+#| warnings: false
+#| label: tbl-sample1
+#| tbl-align: center
+#| tbl-cap: Test
+#| apa-note: "0: Not true, 1: Somwhat or somtimes true, 2: Very true or often true. Values before parentheses indicate the mean proportion across all items belonging to the subscale for each eacher. Values in parentheses indicates the respective standard deviations. WD: Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. CBCL: Child Behavior Checklist, YSR: Youth Self Report."
+
+withr::with_dir(here::here(), {
+tar_load(testing_data)
+tar_load(training_data)
+tar_load(fixed_item_assignment)
+})
+
+
+analyze_counts <- function(data, items) {
+  data |>
+    select(all_of(items)) |>
+    mutate(across(everything(), ~unlabel(.x))) |> 
+    pivot_longer(everything(), names_to = "item") |>
+    count(item, value) |>
+    arrange(item) |>
+    mutate(pct = n / n(), .by = item) |>
+    summarise(
+      m_pct = mean(pct, na.rm = TRUE),
+      sd_pct = sd(pct, na.rm = TRUE),
+      .by = value
+    ) |>
+    mutate(value = as.factor(as.numeric(value))) |>
+    drop_na()
+}
+
+enframe(
+  x = fixed_item_assignment,
+  name = "subscale",
+  value = "instrument"
+) |>
+  unnest_longer(instrument) |>
+  rename(instrument = instrument_id, item = instrument) |>
+  mutate(
+    training = map(item, ~ analyze_counts(testing_data, .x)),
+    testing = map(item, ~ analyze_counts(training_data, .x))
+  ) |>
+  select(subscale, instrument, testing, training) |>
+  pivot_longer(
+    cols = c(training, testing),
+    names_to = "sample",
+    values_to = "stats"
+  ) |>
+  unnest(stats) |>
+  mutate(across(c(m_pct, sd_pct), ~ round(.x, digits = 1))) |>
+  mutate(comb = sprintf("%s (%s)", m_pct, sd_pct)) |>
+  select(subscale, instrument, sample, value, comb) |>
+  pivot_wider(
+    names_from = value,
+    values_from = comb,
+    names_prefix = "val"
+  ) |>
+  pivot_wider(
+    names_from = sample,
+    values_from = c(val0, val1, val2)
+  ) |>
+  arrange(instrument) |>
+  select(subscale, ends_with("training"), ends_with("testing")) |>
+  tt() |> 
+  group_tt(
+    i = list("CBCL" = 1, "YSR" = 9), 
+    j = list("Training" = 2:4, "Testing" = 5:7)
+  )  |> 
+  style_tt(align = "c") |>
+  style_tt(j = 1, i = 1:nrow(x), align = "l") |> 
+  style_tt(i = c(1, 10), align = "c", bold = TRUE) -> tab
+
+colnames(tab) <- c("Subscale", rep(c("0", "1", "2"), times = 2))
+
+tab
+
+```
+
+## Objective Function
+
+### Criteria
+
+To select a set of items that meets the construction goal, an objective function will be defined, consisting of the following criteria:
+
+#### Model Fit
+
+Two model fit indices will be included as criteria for the objective function: The sample-corrected robust Root Mean Square Error of Approximation [@li2006].
+
+$$
+\mathrm{RMSEA} = \sqrt{ \max \left\{ 0,\; \frac{\hat{F}_{\mathrm{ML}}}{df} - \frac{\hat{c}}{n - 1} \right\} }
+$$
+
+where $\hat{c}$ is correction constant, $\hat{F}_{\mathrm{ML}}$ is the value of the minimized fit function, $df$ are the degrees of freedom and $n$ is the sample size [@brosseau-liard2012]. This corresponds to the "rmsea.robust" fit measure in the _lavaan_ package [@rosseel2012]. 
+
+Additionaly, the Standardized Root Mean Square Residual [@bentler1995] will be included as a second model fit criterion
+
+$$
+\mathrm{SRMR}=\sqrt{\frac{2}{p(p+1)}\sum_{u=1}^{p}\sum_{v=1}^{p}\left(\frac{s_{uv}-\hat{\sigma}_{uv}}{s_{uu}\,s_{vv}}\right)^2}
+$$
+
+where $p$ is the number of manifest variables in the model $s_{uv}$ is the sample covariance between manifest variables $u$ and $v$ and $\hat{\sigma}_{uv}$ is their estimated covariance . This corresponds to the "srmr" criterion in the _lavaan_ pacakge [@rosseel2012].
+
+#### Reliability
+We will additionally include a criterion for the average reliability across the four latent factors, given by
+
+$$
+\overline{\omega}=\frac{1}{l}\sum_{j=1}^{l}\left[\frac{\left(\sum_{i=1}^{p}\lambda_{ijkl}\right)^2}{\left(\sum_{i=1}^{p}\lambda_{ijkl}\right)^2+\sum_{i=1}^{p}\theta_{ijkl}}\right]
+$$
+
+where $l$ is the number of latent factors (in this case $l = 4$), $\lambda_{ijkl}$ is the factor loading of item $i$ ($i = 1, \dots, I_j$) within the $j$-th clinical subscale ($j = 1, \dots, J$) for the $k$-th information ($k \in \{1, 2\}$) loading on the $l$-th latent factor ($l \in \{\mathrm{CI-C, CI-P, IS-C, IS-P}\}$), and $\theta_{ijkl}$ is the corresponding error variance of that item.
+
+#### Cross-Informant Regression 
+
+Highlighted in orange in the model in @fig-model, the regression coefficient $\gamma$ from the cross-informant parent factor (CI-P) to the cross-informant child factor (CI-C) will be included as
+a criterion in the objective function. This coefficient reflects the extent item selected for these factors are answered consistently across both informants.
+
+#### Informant-Specific Correlation
+
+Finally, the latent correlation $\upvarphi$ highlighted in blue in @fig-model between the informant-specific factors (IS-C and IS-P) will be included as a criterion in the objective function. This correlation reflects the extent to which the items selected for these factors capture informant-specific perspectives by aiming for a low correlation between the two factors.
+
+### Combintation of the Criteria
+
+Each criterion will be transformed onto a common scale using the cumulative distribution function of the normal distribution $\Phi(x_q; \hat{\mu}_{x_q}, \hat{\sigma}_{q_w})$, with parameters corresponding to difficulty $\hat{\mu}_{x_q}$ (point of maximum discrimination) and discrimination $\hat{\sigma}_{q_w}$ (slope). These parameters will be empirically estimated from $k$ = 5000 random solutions sampled from the search space of all
+possible item combinations from the model specified in @fig-model [@schultze2022; @schultze2021]. The mean and standard deviation of the top 10% of valid solutions will be used for the transformation.
+
+The combined empirical objective function $f$ is then given by a weighted sum of the set of transformed criteria $\mathcal{X}: \{ \mathrm{RMSEA}, \mathrm{SRMR}, \hat{\omega}, \upvarphi, \gamma \}$:
+
+$$
+f = \sum_{q = 1}^r w_q \cdot \Phi(x_q; \hat{\mu}_{x_q}, \hat{\sigma}_{q_w})
+$$
+
+with weights $\mathcal{W}$ set as $w_{\mathrm{RMSEA}} = w_{\mathrm{SRMR}} = w_{\gamma} = w_{\upvarphi} = \frac{1}{6}$  and $w_{\hat{\omega}} = \frac{1}{3}$. This means that objective function balances equally between model fit criteria, criteria relating to the multi-informant quality of the instrument, and reliability.
+
+
+```{r}
+#| label: fig-model
+#| fig-cap: Hypothesized CTC(M-1) Strucural Equation Model of a Single Clinical Subscale of ASEBA
+#| apa-note: "Subscripts $X_{ijk}$ denote the item $i$, clinical subscale $j$ and rater $k$. Double-headed arrows represent covariances, single-headed arrows represent regression. Round $\\delta$ nodes are error variables of each item. CI-C: Cross-Informant Child factor. CI-P: Cross-Informant Parent factor, IS-C: Informant-Specific Child factor, IS-P: Informant-Specific Parent factor. $\\upvarphi$: latent correlation between the informant-specific factors. $\\gamma$: latent regression parameter of the cross-informant factors. Figure generated using the typst package _fletcher_ [@wilson2026]."
+
+
+include_graphics(here("figures/model.svg"))
+
+```
+
+
+$$
+\rho^* = \frac{(r \rho)}{(1 + (r - 1) \rho)}
+$$
+
+
+# Results
+
+```{r}
+#| echo: false
+#| label: tbl-m-sd-objective
+#| tbl-cap: Estimated Means and Standard Deviations of Random Solutions for Objective Function Parameters
+#| apa-note:
+#|    - "Values before parentheses indicate mean, values in parentheses standard deviation. WD: Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. RMSEA: Root Mean Squared Error of Approximation, SRMR: Standardized Root Mean Residual, $\\omega$: Reliability,  $\\upvarphi$: latent correlation between the informant-specific factors of the child and parent informants, $\\gamma$: regression weight of the cross-informant factors between the child and parent informants. These values are determined based on the top 10% of $k$ = 5000 random solution"
+
+
+tab2 <- objfun_param |>
+  mutate(across(c(mean, sd), function(x) sprintf("%.2f", round(x, 2)))) |>
+  mutate(stat = sprintf("%s (%s)", mean, sd)) |>
+  select(subscale_id, criteria, stat) |>
+  pivot_wider(names_from = criteria, values_from = stat) |>
+  nice_table(
+    col_names = c("Subscale", "RMSEA", "SRMR", "$omega$", "$gamma$", "$phi$")
+    )
+
+
+tab2
+
+
+```
+
+```{r}
+#| label: fig-obj-crit
+#| fig-cap: Distribution of Empirical Pheromone and Objective Function Criteria Across Clinical Subscales
+#| apa-note: "WD: Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. RMSEA: Root Mean Squared Error of Approximation, SRMR: Standardized Root Mean Residual, $\\omega$: Reliability of the latent factors cross-informant and informant specific child and parent factors, $\\gamma$: Regression weight of the cross-informant factors between the child and parent informants, $\\phi$: latent correlation between the informant-specific factors of the child and parent informants. Black bar indicates criterion value, where the specific item combination yields the maximum pheromone values."
+
+include_graphics(here("figures/obj_criteria_dist.svg"), rel_path = TRUE)
+
+```
+
+
+```{r}
+#| label: fig-mvc
+#| fig-cap: Brute-Force Identified Criteria Reject Cutoffs Across Subscales in Training and Testing Samples
+#| apa-note: "WD: Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. RMSEA: Root Mean Squared Error of Approximation, SRMR: Standardized Root Mean Residual, $\\omega$: Reliability of the latent factors cross-informant and informant specific child and parent factors, $\\gamma$: Regression weight of the cross-informant factors between the child and parent informants, $\\phi$: latent correlation between the informant-specific factors of the child and parent informants. Black bars represent the predefined cutoff values for each criterion. Blue and orange symbols indicate the decision outcome (accept vs. reject), with color saturation differentiating the sample type (darker for training, lighter for testing). No testing-sample results are reported for the SC and AP subscales due to model nonconvergence. For the SP subscale, the $\\beta$ parameter is omitted because of negative estimated latent factor variances."
+
+include_graphics(here("figures/mvc_combined.svg"), rel_path = TRUE)
+
+```
+
+
+# Discussion
+
+```{=typst}
+#pagebreak()
+```
+# References
+
+<!-- References will auto-populate in the refs div below -->
+
+::: {#refs}
+:::

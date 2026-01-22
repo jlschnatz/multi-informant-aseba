@@ -1,7 +1,10 @@
 # debug mvc_training_SP (which failed to evaluate)
 library(targets)
 
-dplyr::filter(tar_meta(fields = "error", complete_only = TRUE), name == "mvc_training_SP")$error
+dplyr::filter(
+  tar_meta(fields = "error", complete_only = TRUE),
+  name == "mvc_training_SP"
+)$error
 
 tar_load(subtest_solution_SP)
 subtest_solution <- subtest_solution_SP

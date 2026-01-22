@@ -5,3 +5,5 @@ materials/*.pdf
 .lintr
 .devcontainer/
 /.quarto/
+/.luarc.json
+**/*.quarto_ipynb
