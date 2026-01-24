@@ -97,7 +97,7 @@ data_descr <- data_safechild |>
     p11_currentliving = P11SBK677,
     p10_nschoolattent = P10SBK888,
     p11_nschoolattent = P11SBK888,
-  ) |>
+  ) 
   mutate(across(
     -c(
       ends_with("age"),

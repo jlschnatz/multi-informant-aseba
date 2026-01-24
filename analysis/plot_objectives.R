@@ -2,6 +2,19 @@ pacman::p_load(dplyr, tidyr, ggplot2, ggdist, ggh4x, systemfonts, ggtext)
 comb_best <- readRDS("data/processed/objective_criteria_best.rds")
 comb_log <- readRDS("data/processed/objective_criteria_log.rds")
 
+
+criteria_level <- c(
+  "&tau; \U2192",
+  "\U2190 RMSEA",
+  "\U2190 SRMR",
+  "&gamma; \U2192",
+  "\U2192 &phi; \U2190",
+  "&omega;<sub>CIC</sub> \U2192",
+  "&omega;<sub>CIP</sub> \U2192",
+  "&omega;<sub>ISC</sub> \U2192",
+  "&omega;<sub>ISP</sub> \U2192"
+)
+
 comb_best_pdata <- comb_best |>
   tidyr::pivot_longer(
     -c(subscale_id, run),
@@ -12,27 +25,17 @@ comb_best_pdata <- comb_best |>
     criterion = factor(
       dplyr::case_match(
         criterion,
-        "beta" ~ "&beta;",
-        "lvcor" ~ "&phi;",
-        "omega_cic" ~ "&omega;<sub>CIC<sub>",
-        "omega_cip" ~ "&omega;<sub>CIP<sub>",
-        "omega_isc" ~ "&omega;<sub>ISC<sub>",
-        "omega_isp" ~ "&omega;<sub>ISP<sub>",
-        "rmsea.robust" ~ "RMSEA",
-        "srmr" ~ "SRMR",
-        "pheromone" ~ "Pheromone"
+        "beta" ~ "&gamma; \U2192",
+        "lvcor" ~ "\U2192 &phi; \U2190",
+        "omega_cic" ~ "&omega;<sub>CIC</sub> \U2192",
+        "omega_cip" ~ "&omega;<sub>CIP</sub> \U2192",
+        "omega_isc" ~ "&omega;<sub>ISC</sub> \U2192",
+        "omega_isp" ~ "&omega;<sub>ISP</sub> \U2192",
+        "rmsea.robust" ~ "\U2190 RMSEA",
+        "srmr" ~ "\U2190 SRMR",
+        "pheromone" ~ "&tau; \U2192"
       ),
-      levels = c(
-        "Pheromone",
-        "RMSEA",
-        "SRMR",
-        "&beta;",
-        "&phi;",
-        "&omega;<sub>CIC<sub>",
-        "&omega;<sub>CIP<sub>",
-        "&omega;<sub>ISC<sub>",
-        "&omega;<sub>ISP<sub>"
-      )
+      levels = criteria_level
     )
   ) |>
   dplyr::select(subscale_id, criterion, best_value)
@@ -48,32 +51,22 @@ comb_log |>
     criterion = factor(
       dplyr::case_match(
         criterion,
-        "beta" ~ "&beta;",
-        "lvcor" ~ "&phi;",
-        "omega_cic" ~ "&omega;<sub>CIC<sub>",
-        "omega_cip" ~ "&omega;<sub>CIP<sub>",
-        "omega_isc" ~ "&omega;<sub>ISC<sub>",
-        "omega_isp" ~ "&omega;<sub>ISP<sub>",
-        "rmsea.robust" ~ "RMSEA",
-        "srmr" ~ "SRMR",
-        "pheromone" ~ "Pheromone"
+        "beta" ~ "&gamma; \U2192",
+        "lvcor" ~ "\U2192 &phi; \U2190",
+        "omega_cic" ~ "&omega;<sub>CIC</sub> \U2192",
+        "omega_cip" ~ "&omega;<sub>CIP</sub> \U2192",
+        "omega_isc" ~ "&omega;<sub>ISC</sub> \U2192",
+        "omega_isp" ~ "&omega;<sub>ISP</sub> \U2192",
+        "rmsea.robust" ~ "\U2190 RMSEA",
+        "srmr" ~ "\U2190 SRMR",
+        "pheromone" ~ "&tau; \U2192"
       ),
-      levels = c(
-        "Pheromone",
-        "RMSEA",
-        "SRMR",
-        "&beta;",
-        "&phi;",
-        "&omega;<sub>CIC<sub>",
-        "&omega;<sub>CIP<sub>",
-        "&omega;<sub>ISC<sub>",
-        "&omega;<sub>ISP<sub>"
-      )
+      levels = criteria_level
     )
   ) |>
   dplyr::mutate(
-    q01 = quantile(value, 0.01),
-    q99 = quantile(value, 0.99),
+    q01 = quantile(value, 0.005),
+    q99 = quantile(value, 0.995),
     .by = c(criterion, subscale_id)
   ) |>
   dplyr::filter(dplyr::between(value, q01, q99)) |>
@@ -97,48 +90,48 @@ comb_log |>
   ) +
   ggh4x::facetted_pos_scales(
     x = list(
-      criterion == "Pheromone" ~ ggplot2::scale_x_continuous(
+      criterion == "&tau; \U2192" ~ ggplot2::scale_x_continuous(
         limits = c(0, 1),
         expand = ggplot2::expansion(),
         breaks = seq(0, 1, 0.2)
       ),
-      criterion == "&beta;" ~ ggplot2::scale_x_continuous(
-        limits = c(0, 5),
+      criterion == "&gamma; \U2192" ~ ggplot2::scale_x_continuous(
+        limits = c(0, 10),
         expand = ggplot2::expansion(),
-        breaks = seq(0, 5)
+        breaks = seq(0, 10, 2)
       ),
-      criterion == "&omega;<sub>CIC<sub>" ~ ggplot2::scale_x_continuous(
+      criterion == "&omega;<sub>CIC</sub> \U2192" ~ ggplot2::scale_x_continuous(
         limits = c(0, 1),
         expand = ggplot2::expansion(),
         breaks = seq(0, 1, 0.2)
       ),
-      criterion == "&omega;<sub>CIP<sub>" ~ ggplot2::scale_x_continuous(
+      criterion == "&omega;<sub>CIP</sub> \U2192" ~ ggplot2::scale_x_continuous(
         limits = c(0, 1),
         expand = ggplot2::expansion(),
         breaks = seq(0, 1, 0.2)
       ),
-      criterion == "&omega;<sub>ISC<sub>" ~ ggplot2::scale_x_continuous(
+      criterion == "&omega;<sub>ISC</sub> \U2192" ~ ggplot2::scale_x_continuous(
         limits = c(0, 1),
         expand = ggplot2::expansion(),
         breaks = seq(0, 1, 0.2)
       ),
-      criterion == "&omega;<sub>ISP<sub>" ~ ggplot2::scale_x_continuous(
+      criterion == "&omega;<sub>ISP</sub> \U2192" ~ ggplot2::scale_x_continuous(
         limits = c(0, 1),
         expand = ggplot2::expansion(),
         breaks = seq(0, 1, 0.2)
       ),
-      criterion == "&phi;" ~ ggplot2::scale_x_continuous(
-        limits = c(-.6, 1),
+      criterion == "\U2192 &phi; \U2190" ~ ggplot2::scale_x_continuous(
+        limits = c(-1, 1),
         expand = ggplot2::expansion(),
-        breaks = seq(-0.6, 1, 0.4),
+        breaks = seq(-1, 1, .5),
         labels = scales::label_number()
       ),
-      criterion == "RMSEA" ~ ggplot2::scale_x_continuous(
+      criterion == "\U2190 RMSEA" ~ ggplot2::scale_x_continuous(
         limits = c(0, 0.2),
         expand = expansion(),
         breaks = seq(0, 0.2, 0.05)
       ),
-      criterion == "SRMR" ~ ggplot2::scale_x_continuous(
+      criterion == "\U2190 SRMR" ~ ggplot2::scale_x_continuous(
         limits = c(0, 0.2),
         expand = ggplot2::expansion(),
         breaks = seq(0, 0.2, 0.05)

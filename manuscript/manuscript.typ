@@ -507,111 +507,6 @@ The following hypotheses will be tested in the current study:
 
 + $H_3$: The subset of items intended to reflect the informant-specific perspectives will demonstrate informant-specific functioning, indicating that these items capture unique variance relevant to each informant's perspective.
 
-#figure([
-#show figure: set block(breakable: true)
-
-#block[ // start block
-
-  #let style-dict = (
-    // tinytable style-dict after
-    "0_0": 0, "0_1": 0, "1_1": 0, "2_1": 0, "3_1": 0, "4_1": 0, "5_1": 0, "6_1": 0, "7_1": 0, "8_1": 0, "0_2": 0, "1_2": 0, "2_2": 0, "3_2": 0, "4_2": 0, "5_2": 0, "6_2": 0, "7_2": 0, "8_2": 0, "0_3": 0, "1_3": 0, "2_3": 0, "3_3": 0, "4_3": 0, "5_3": 0, "6_3": 0, "7_3": 0, "8_3": 0, "1_0": 1, "2_0": 1, "3_0": 1, "4_0": 1, "5_0": 1, "6_0": 1, "7_0": 1, "8_0": 1
-  )
-
-  #let style-array = ( 
-    // tinytable cell style after
-    (align: center,),
-    (align: left,),
-  )
-
-  // Helper function to get cell style
-  #let get-style(x, y) = {
-    let key = str(y) + "_" + str(x)
-    if key in style-dict { style-array.at(style-dict.at(key)) } else { none }
-  }
-
-  // tinytable align-default-array before
-  #let align-default-array = ( left, left, left, left, ) // tinytable align-default-array here
-  #show table.cell: it => {
-    if style-array.len() == 0 { return it }
-    
-    let style = get-style(it.x, it.y)
-    if style == none { return it }
-    
-    let tmp = it
-    if ("fontsize" in style) { tmp = text(size: style.fontsize, tmp) }
-    if ("color" in style) { tmp = text(fill: style.color, tmp) }
-    if ("indent" in style) { tmp = pad(left: style.indent, tmp) }
-    if ("underline" in style) { tmp = underline(tmp) }
-    if ("italic" in style) { tmp = emph(tmp) }
-    if ("bold" in style) { tmp = strong(tmp) }
-    if ("mono" in style) { tmp = math.mono(tmp) }
-    if ("strikeout" in style) { tmp = strike(tmp) }
-    if ("smallcaps" in style) { tmp = smallcaps(tmp) }
-    tmp
-  }
-
-  #align(center, [
-
-  #table( // tinytable table start
-    columns: (25.00%, 25.00%, 25.00%, 25.00%),
-    stroke: none,
-    rows: auto,
-    align: (x, y) => {
-      let style = get-style(x, y)
-      if style != none and "align" in style { style.align } else { left }
-    },
-    fill: (x, y) => {
-      let style = get-style(x, y)
-      if style != none and "background" in style { style.background }
-    },
- table.hline(y: 1, start: 0, end: 4, stroke: 0.05em + black),
- table.hline(y: 9, start: 0, end: 4, stroke: 0.1em + black),
- table.hline(y: 0, start: 0, end: 4, stroke: 0.1em + black),
-    // tinytable lines before
-
-    // tinytable header start
-    table.header(
-      repeat: true,
-[Subscale], [$max(phi)$], [Convergence (%)], [$N$],
-    ),
-    // tinytable header end
-
-    // tinytable cell content after
-[AB], [0.85], [8.23], [2829888],
-[AD], [0.88], [11.58], [474552],
-[AP], [0.83], [6.47], [58320],
-[RB], [0.87], [3.20], [1499400],
-[SC], [0.89], [5.02], [111375],
-[SP], [0.95], [4.60], [166375],
-[TP], [0.86], [3.30], [317625],
-[WD], [0.82], [3.30], [21952],
-
-    // tinytable footer after
-
-  ) // end table
-
-  ]) // end align
-
-] // end block
-], caption: figure.caption(
-position: top, 
-[
-Maximum Pheromone, Convergence and Number of Combinations of the Brute-Force Search
-]), 
-kind: "quarto-float-tbl", 
-supplement: "Table", 
-)
-<tbl-test>
-
-
-#block[
-#block[
-#emph[Note];. This~is the first paragraph.
-]
-#block[
-This is a second paragraph.
-]
-]
 = Methods
 <methods>
 #figure([
@@ -824,7 +719,7 @@ table.cell(colspan: 7)[YSR],
 ], caption: figure.caption(
 position: top, 
 [
-Test
+Descriptive Statistics of the Category Levels for the CBCL and YSR in Both Samples
 ]), 
 kind: "quarto-float-tbl", 
 supplement: "Table", 
@@ -949,12 +844,110 @@ supplement: "Figure",
 #emph[Note];. Subscripts~$X_(i j k)$ denote the item $i$, clinical subscale $j$ and rater $k$. Double-headed arrows represent covariances, single-headed arrows represent regression. Round $delta$ nodes are error variables of each item. CI-C: Cross-Informant Child factor. CI-P: Cross-Informant Parent factor, IS-C: Informant-Specific Child factor, IS-P: Informant-Specific Parent factor. $phi$: latent correlation between the informant-specific factors. $gamma$: latent regression parameter of the cross-informant factors. Figure generated using the typst package #emph[fletcher] (#link(<ref-wilson2026>)[Wilson, 2026];).
 ]
 ]
-#par()[#text(size:0.5em)[#h(0.0em)]]
-#v(-18pt)
-$ rho^(\*) = (r rho) / (1 + (r - 1) rho) $
-
 = Results
 <results>
+#figure([
+#show figure: set block(breakable: true)
+
+#block[ // start block
+
+  #let style-dict = (
+    // tinytable style-dict after
+    "0_0": 0, "0_1": 0, "1_1": 0, "2_1": 0, "3_1": 0, "4_1": 0, "5_1": 0, "6_1": 0, "7_1": 0, "8_1": 0, "0_2": 0, "1_2": 0, "2_2": 0, "3_2": 0, "4_2": 0, "5_2": 0, "6_2": 0, "7_2": 0, "8_2": 0, "0_3": 0, "1_3": 0, "2_3": 0, "3_3": 0, "4_3": 0, "5_3": 0, "6_3": 0, "7_3": 0, "8_3": 0, "1_0": 1, "2_0": 1, "3_0": 1, "4_0": 1, "5_0": 1, "6_0": 1, "7_0": 1, "8_0": 1
+  )
+
+  #let style-array = ( 
+    // tinytable cell style after
+    (align: center,),
+    (align: left,),
+  )
+
+  // Helper function to get cell style
+  #let get-style(x, y) = {
+    let key = str(y) + "_" + str(x)
+    if key in style-dict { style-array.at(style-dict.at(key)) } else { none }
+  }
+
+  // tinytable align-default-array before
+  #let align-default-array = ( left, left, left, left, ) // tinytable align-default-array here
+  #show table.cell: it => {
+    if style-array.len() == 0 { return it }
+    
+    let style = get-style(it.x, it.y)
+    if style == none { return it }
+    
+    let tmp = it
+    if ("fontsize" in style) { tmp = text(size: style.fontsize, tmp) }
+    if ("color" in style) { tmp = text(fill: style.color, tmp) }
+    if ("indent" in style) { tmp = pad(left: style.indent, tmp) }
+    if ("underline" in style) { tmp = underline(tmp) }
+    if ("italic" in style) { tmp = emph(tmp) }
+    if ("bold" in style) { tmp = strong(tmp) }
+    if ("mono" in style) { tmp = math.mono(tmp) }
+    if ("strikeout" in style) { tmp = strike(tmp) }
+    if ("smallcaps" in style) { tmp = smallcaps(tmp) }
+    tmp
+  }
+
+  #align(center, [
+
+  #table( // tinytable table start
+    columns: (25.00%, 25.00%, 25.00%, 25.00%),
+    stroke: none,
+    rows: auto,
+    align: (x, y) => {
+      let style = get-style(x, y)
+      if style != none and "align" in style { style.align } else { left }
+    },
+    fill: (x, y) => {
+      let style = get-style(x, y)
+      if style != none and "background" in style { style.background }
+    },
+ table.hline(y: 1, start: 0, end: 4, stroke: 0.05em + black),
+ table.hline(y: 9, start: 0, end: 4, stroke: 0.1em + black),
+ table.hline(y: 0, start: 0, end: 4, stroke: 0.1em + black),
+    // tinytable lines before
+
+    // tinytable header start
+    table.header(
+      repeat: true,
+[Subscale], [$max(phi)$], [Viable Solutions (%)], [$N$],
+    ),
+    // tinytable header end
+
+    // tinytable cell content after
+[AB], [0.85], [8.23], [2829888],
+[AD], [0.88], [11.58], [474552],
+[AP], [0.83], [6.47], [58320],
+[RB], [0.87], [3.20], [1499400],
+[SC], [0.89], [5.02], [111375],
+[SP], [0.95], [4.60], [166375],
+[TP], [0.86], [3.30], [317625],
+[WD], [0.82], [3.30], [21952],
+
+    // tinytable footer after
+
+  ) // end table
+
+  ]) // end align
+
+] // end block
+], caption: figure.caption(
+position: top, 
+[
+Maximum Pheromone, Convergence and Number of Combinations of the Brute-Force Search
+]), 
+kind: "quarto-float-tbl", 
+supplement: "Table", 
+)
+<tbl-test>
+
+
+#block[
+#block[
+#emph[Note];. WD:~Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. RMSEA: Root Mean Squared Error of Approximation
+]
+]
 #figure([
 #show figure: set block(breakable: true)
 

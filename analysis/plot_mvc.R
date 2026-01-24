@@ -155,22 +155,6 @@ plot_mvc <- function(x) {
 p1 <- plot_mvc(mvc_testing)
 p2 <- plot_mvc(mvc_training)
 
-ggplot2::ggsave(
-  "figures/mvc_testing.svg",
-  plot = p1,
-  dpi = 300,
-  width = 9,
-  height = 6
-)
-ggplot2::ggsave(
-  "figures/mvc_training.svg",
-  plot = p2,
-  dpi = 300,
-  width = 9,
-  height = 6
-)
-
-
 # Combine training and testing results into one plot
 
 bind_rows(
@@ -230,8 +214,6 @@ custom_pal <- c(
   "2-2" = colorspace::lighten("#6BAED6", 0.1) # high x, high y
 )
 
-
-
 custom_pal <- c(
   "1-1" = colorspace::darken("#cc004b", 0.1), # low x, low y
   "2-1" = colorspace::darken("#1F5AA6", 0.1), # high x, low y
@@ -240,7 +222,10 @@ custom_pal <- c(
 )
 
 
+colvec <- c("#C8102EFF", "#0C2340FF", "#C8C9C7FF", "#ffc02cff")
+colvec <- c("#B80043", "#0C2340FF", "#C8C9C7FF", "#ffc02cff")
 
+colorspace::demoplot(colvec, "spine")
 
 pt1 <- test |>
   ggplot(aes(x = criterion, group = type)) +

@@ -49,28 +49,6 @@ The following hypotheses will be tested in the current study:
 
 3.  $H_3$: The subset of items intended to reflect the informant-specific perspectives will demonstrate informant-specific functioning, indicating that these items capture unique variance relevant to each informant's perspective.
 
-```{r}
-#| echo: false
-#| warning: false
-#| label: tbl-test
-#| tbl-cap: Maximum Pheromone, Convergence and Number of Combinations of the Brute-Force Search
-#| tt.align: left
-#| apa-note: 
-#|   - This is the first paragraph.
-#|   - This is a second paragraph. 
-
-tab1 <- logbest |>
-  select(subscale_id, pheromone) |>
-  inner_join(logmeta, by = join_by(subscale_id)) |>
-  mutate(convergence = convergence * 100) |>
-  mutate(across(c(pheromone, convergence), \(x) round(x, digits = 2))) 
-
-nice_table(tab1, col_names = c("Subscale", "$max(phi)$", "Convergence (%)", "$N$"))
-
-```
-
-
-
 
 
 # Methods
@@ -112,7 +90,7 @@ tab3
 #| warnings: false
 #| label: tbl-sample1
 #| tbl-align: center
-#| tbl-cap: Test
+#| tbl-cap: Descriptive Statistics of the Category Levels for the CBCL and YSR in Both Samples
 #| apa-note: "0: Not true, 1: Somwhat or somtimes true, 2: Very true or often true. Values before parentheses indicate the mean proportion across all items belonging to the subscale for each eacher. Values in parentheses indicates the respective standard deviations. WD: Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. CBCL: Child Behavior Checklist, YSR: Youth Self Report."
 
 withr::with_dir(here::here(), {
@@ -253,12 +231,25 @@ include_graphics(here("figures/model.svg"))
 ```
 
 
-$$
-\rho^* = \frac{(r \rho)}{(1 + (r - 1) \rho)}
-$$
-
-
 # Results
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: tbl-test
+#| tbl-cap: Maximum Pheromone, Convergence and Number of Combinations of the Brute-Force Search
+#| apa-note: "WD: Withdrawn/Depressed, TP: Thought Problems, SP: Social Problems, SC: Somatic Complaints, RB: Rule-breaking Beahavior, AP: Attention Problems, AD: Anxious/Depressed, AB: Aggressive Behavior. RMSEA: Root Mean Squared Error of Approximation"
+
+
+tab1 <- logbest |>
+  select(subscale_id, pheromone) |>
+  inner_join(logmeta, by = join_by(subscale_id)) |>
+  mutate(convergence = convergence * 100) |>
+  mutate(across(c(pheromone, convergence), \(x) round(x, digits = 2))) 
+
+nice_table(tab1, col_names = c("Subscale", "$max(phi)$", "Viable Solutions (%)", "$N$"))
+
+```
 
 ```{r}
 #| echo: false
